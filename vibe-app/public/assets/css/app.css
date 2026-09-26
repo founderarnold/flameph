@@ -1,0 +1,125 @@
+:root {
+    --flame-blue: #0047ba;
+    --flame-navy: #07142d;
+    --flame-red: #e01a22;
+    --flame-amber: #f6b21a;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: "DM Sans", sans-serif;
+}
+
+.text-slate-650 {
+    color: #526176;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.flame-mark {
+    display: inline-flex;
+    width: 2.75rem;
+    height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.9rem;
+    background:
+        radial-gradient(circle at 66% 24%, rgba(246, 178, 26, 0.95) 0 18%, transparent 19%),
+        linear-gradient(135deg, var(--flame-blue), #063076 54%, var(--flame-red));
+    color: white;
+    font-weight: 900;
+    box-shadow: 0 16px 35px rgba(0, 71, 186, 0.22);
+}
+
+.hero-grid {
+    position: relative;
+}
+
+.hero-grid::before,
+.hero-grid::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    border-radius: 999px;
+    filter: blur(14px);
+    opacity: 0.55;
+}
+
+.hero-grid::before {
+    width: 19rem;
+    height: 19rem;
+    right: -7rem;
+    top: 8rem;
+    background: rgba(0, 71, 186, 0.12);
+}
+
+.hero-grid::after {
+    width: 16rem;
+    height: 16rem;
+    left: -6rem;
+    bottom: 2rem;
+    background: rgba(224, 26, 34, 0.1);
+}
+
+.hero-grid > div {
+    position: relative;
+    z-index: 1;
+}
+
+.guide-chip {
+    border-radius: 999px;
+    border: 1px solid #d9e0ee;
+    background: white;
+    padding: 0.7rem 0.9rem;
+    color: #263248;
+    font-size: 0.9rem;
+    font-weight: 800;
+    transition: border-color 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.guide-chip:hover,
+.guide-chip.is-active {
+    border-color: var(--flame-blue);
+    background: var(--flame-blue);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.membership-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 1.5rem;
+    background: white;
+    padding: 1.5rem;
+    color: #0f172a;
+    box-shadow: 0 12px 36px rgba(15, 23, 42, 0.06);
+}
+
+.membership-card-featured {
+    border-color: rgba(0, 71, 186, 0.3);
+    background: linear-gradient(180deg, #ffffff 0%, #f4f7ff 100%);
+    box-shadow: 0 22px 55px rgba(0, 71, 186, 0.16);
+}
+
+@media (max-width: 640px) {
+    .flame-mark {
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 0.75rem;
+    }
+
+    .hero-grid::before,
+    .hero-grid::after {
+        opacity: 0.35;
+    }
+}
