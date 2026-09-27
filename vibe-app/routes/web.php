@@ -22,6 +22,16 @@ Route::get('/sitemap.xml', function () {
         ->header('Content-Type', 'application/xml; charset=UTF-8');
 })->name('sitemap');
 
+Route::get('/favicon.png', function () {
+    $iconPath = public_path('favicon.png');
+    abort_unless(is_file($iconPath), 404);
+
+    return response()->file($iconPath, [
+        'Content-Type' => 'image/png',
+        'Cache-Control' => 'public, max-age=604800',
+    ]);
+})->name('favicon');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/learn', [HomeController::class, 'learn'])->name('learn');
 Route::redirect('/community', '/directory', 301)->name('community');
