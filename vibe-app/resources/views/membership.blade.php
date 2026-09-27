@@ -169,11 +169,14 @@
 <div class="mb-6 rounded-xl bg-green-50 border border-green-200 p-4 text-sm text-green-900" role="status">
 <p class="font-bold">{{ session('registration_success') }}</p>
 <p class="mt-1">Check the next-step instructions beside this form for what happens now.</p>
+@if (session('membership_application.account_status') === 'active')
+<a class="mt-4 inline-flex items-center justify-center gap-2 rounded-xl bg-secondary px-5 py-3 font-label text-sm font-bold text-white shadow-sm transition hover:bg-secondary-dark" href="{{ route('membership.profile') }}">Proceed to Next Step <span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_forward</span></a>
+@endif
 </div>
 @endif
 @if (session('google_error'))
 <div class="mb-6 rounded-xl bg-amber-50 border border-amber-200 p-4 text-sm text-amber-900" role="alert">
-<p class="font-bold">Google registration is not available yet</p>
+<p class="font-bold">Google sign-in could not be completed</p>
 <p class="mt-1">{{ session('google_error') }}</p>
 </div>
 @endif
@@ -183,29 +186,48 @@
 <p class="mt-1">{{ session('facebook_error') }}</p>
 </div>
 @endif
-@if ($errors->has('mobile_number') || $errors->has('mobile_consent'))
+@if ($errors->hasAny(['provider', 'membership_terms_accepted', 'marketing_consent']))
+<div class="mb-6 rounded-xl bg-red-50 border border-red-200 p-4 text-sm text-red-800" role="alert"><p class="font-bold">Please review your membership consent.</p><ul class="mt-1 list-disc pl-5">@foreach (['provider', 'membership_terms_accepted', 'marketing_consent'] as $field) @error($field)<li>{{ $message }}</li>@enderror @endforeach</ul></div>
+@endif
+@if ($errors->hasAny(['mobile_number', 'mobile_consent', 'membership_terms_accepted']))
 <div class="mb-6 rounded-xl bg-red-50 border border-red-200 p-4 text-sm text-red-800" role="alert">
 <p class="font-bold">Please check your mobile registration details</p>
-<ul class="mt-1 list-disc pl-5">@foreach ($errors->get('mobile_number') as $error)<li>{{ $error }}</li>@endforeach @foreach ($errors->get('mobile_consent') as $error)<li>{{ $error }}</li>@endforeach</ul>
+<ul class="mt-1 list-disc pl-5">@foreach (['mobile_number', 'mobile_consent', 'membership_terms_accepted'] as $field) @error($field)<li>{{ $message }}</li>@enderror @endforeach</ul>
 </div>
 @endif
-<div class="mb-7 rounded-2xl border border-primary/20 bg-primary/[0.04] p-5" data-google-quick-start>
+<div class="mb-7 space-y-3">
+<details name="membership-registration-choice" data-google-quick-start class="group rounded-2xl border border-primary/20 bg-primary/[0.04] open:bg-primary/[0.04]" @if ($errors->has('provider')) open @endif>
+<summary class="flex cursor-pointer list-none items-center justify-between gap-4 rounded-2xl p-5 font-label text-sm font-bold text-on-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"><span><span class="mr-2 inline-grid h-7 w-7 place-items-center rounded-full bg-white text-primary">1</span>Continue with Google or Facebook</span><span class="material-symbols-outlined transition-transform group-open:rotate-180" aria-hidden="true">expand_more</span></summary>
+<div class="px-5 pb-5">
+<form id="membership-quickstart" action="{{ route('membership.start') }}" method="POST" class="space-y-4">
+@csrf
 <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 <div>
 <p class="font-label text-sm font-bold text-on-surface">Quick start for Free Community</p>
-<p class="mt-1 text-xs leading-relaxed text-on-surface-variant">Use Google, Facebook, or your mobile number now. Business details can be completed with the FLAME PH team later.</p>
+<p class="mt-1 text-xs leading-relaxed text-on-surface-variant">Use your Google or Facebook account to start. You can add business details later.</p>
 </div>
 <div class="flex w-full shrink-0 flex-col gap-2 sm:w-auto sm:flex-row">
-<a class="inline-flex items-center justify-center gap-2 rounded-xl border border-outline-variant/60 bg-white px-4 py-3 font-label text-sm font-bold text-on-surface shadow-sm transition hover:border-primary hover:text-primary" href="{{ route('membership.google.redirect') }}">
+<button class="inline-flex items-center justify-center gap-2 rounded-xl border border-outline-variant/60 bg-white px-4 py-3 font-label text-sm font-bold text-on-surface shadow-sm transition hover:border-primary hover:text-primary" type="submit" name="provider" value="google">
 <span class="grid h-5 w-5 place-items-center rounded-full bg-white text-sm font-bold text-primary shadow-[0_0_0_1px_#d8dee9]">G</span>
 Google
-</a>
-<a class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#1877f2] px-4 py-3 font-label text-sm font-bold text-white shadow-sm transition hover:bg-[#166fe5]" href="{{ route('membership.facebook.redirect') }}">
+ </button>
+<button class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#1877f2] px-4 py-3 font-label text-sm font-bold text-white shadow-sm transition hover:bg-[#166fe5]" type="submit" formaction="{{ route('membership.start') }}" name="provider" value="facebook">
 <span class="grid h-5 w-5 place-items-center rounded-full bg-white text-sm font-bold text-[#1877f2]">f</span>
 Facebook
-</a>
+</button>
 </div>
 </div>
+</form>
+<div class="mt-4 rounded-xl border border-outline-variant/30 bg-white p-4 text-xs leading-5 text-on-surface-variant">
+<label class="flex items-start gap-2"><input class="mt-1" form="membership-quickstart" name="membership_terms_accepted" required type="checkbox" value="1"><span>I have read and agree to the <a class="font-bold text-primary underline" href="{{ route('membership.terms') }}" target="_blank" rel="noopener">FLAME PH Membership Terms and Conditions</a>. I understand membership conduct rules and how my information may be used as described there.</span></label>
+<label class="mt-3 flex items-start gap-2"><input class="mt-1" form="membership-quickstart" name="marketing_consent" type="checkbox" value="1"><span><strong>Optional:</strong> I agree to receive FLAME PH and partner MSME/brand newsletters and marketing updates by email, SMS, and Facebook Messenger, and invitations to Google Meet/Zoom meetings and webinars. I can withdraw this marketing consent at any time.</span></label>
+<a class="mt-3 inline-flex font-bold text-primary underline" href="{{ route('membership.terms') }}">See details of T&amp;C of FLAME PH membership</a>
+</div>
+</div>
+</details>
+<details name="membership-registration-choice" class="group rounded-2xl border border-primary/20 bg-primary/[0.04]" @if ($errors->hasAny(['mobile_number', 'mobile_consent'])) open @endif>
+<summary class="flex cursor-pointer list-none items-center justify-between gap-4 rounded-2xl p-5 font-label text-sm font-bold text-on-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"><span><span class="mr-2 inline-grid h-7 w-7 place-items-center rounded-full bg-white text-primary">2</span>Continue with a mobile number</span><span class="material-symbols-outlined transition-transform group-open:rotate-180" aria-hidden="true">expand_more</span></summary>
+<div class="px-5 pb-5">
 <form action="{{ route('membership.register.mobile') }}" class="mt-4 grid gap-3 border-t border-primary/10 pt-4 sm:grid-cols-[1fr_auto] sm:items-end" method="POST">
 @csrf
 <label class="font-label text-xs font-bold text-on-surface">Or register with your mobile number
@@ -213,10 +235,14 @@ Facebook
 </label>
 <button class="inline-flex items-center justify-center gap-2 rounded-xl bg-on-surface px-4 py-3 font-label text-sm font-bold text-white shadow-sm transition hover:bg-primary" type="submit"><span class="material-symbols-outlined text-[18px]">phone_iphone</span>Use mobile number</button>
 <label class="flex items-start gap-2 text-[11px] font-normal text-on-surface-variant sm:col-span-2"><input class="mt-0.5" name="mobile_consent" required type="checkbox" value="1"><span>I agree to be contacted on this number about my free membership. Mobile verification and remaining profile details may be completed later by the FLAME PH team.</span></label>
+<label class="flex items-start gap-2 text-[11px] font-normal text-on-surface-variant sm:col-span-2"><input class="mt-0.5" name="membership_terms_accepted" required type="checkbox" value="1"><span>I have read and agree to the <a class="font-bold text-primary underline" href="{{ route('membership.terms') }}" target="_blank" rel="noopener">FLAME PH Membership Terms and Conditions</a>.</span></label>
+<label class="flex items-start gap-2 text-[11px] font-normal text-on-surface-variant sm:col-span-2"><input class="mt-0.5" name="marketing_consent" type="checkbox" value="1"><span>Optional: I agree to receive the FLAME PH and partner marketing communications described in the Terms. I may withdraw this consent later.</span></label>
 </form>
-<p class="mt-3 text-[11px] text-on-surface-variant">Free Community only • No payment details required • Google and Facebook provide account identity; mobile registration starts with your number.</p>
 </div>
-<div class="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-on-surface-variant"><span class="h-px flex-1 bg-outline-variant/40"></span><span>Or complete the form</span><span class="h-px flex-1 bg-outline-variant/40"></span></div>
+ </details>
+<details name="membership-registration-choice" class="group rounded-2xl border border-primary/20 bg-primary/[0.04]" @if ($errors->hasAny(['name', 'email', 'business_name', 'plan', 'billing', 'payment_method', 'consent'])) open @endif>
+<summary class="flex cursor-pointer list-none items-center justify-between gap-4 rounded-2xl p-5 font-label text-sm font-bold text-on-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"><span><span class="mr-2 inline-grid h-7 w-7 place-items-center rounded-full bg-white text-primary">3</span>Complete the membership form</span><span class="material-symbols-outlined transition-transform group-open:rotate-180" aria-hidden="true">expand_more</span></summary>
+<div class="px-5 pb-5">
 <form action="{{ route('membership.register') }}" class="grid grid-cols-1 md:grid-cols-2 gap-4" method="POST">
 @csrf
 <label class="font-label text-sm font-bold text-on-surface">Full name<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="name" required value="{{ old('name') }}" type="text" autocomplete="name"></label>
@@ -226,16 +252,19 @@ Facebook
 <label class="font-label text-sm font-bold text-on-surface">Billing cycle<select class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5 bg-white" name="billing" required><option value="monthly">Monthly</option><option value="annual">Annual — save 17%</option></select></label>
 <fieldset class="md:col-span-2"><legend class="font-label text-sm font-bold text-on-surface mb-2">Payment handoff <span class="font-normal text-on-surface-variant">(no card details collected)</span></legend><div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm"><label class="flex items-center gap-2 rounded-lg border border-outline-variant/40 p-3"><input checked name="payment_method" type="radio" value="none"> I’m joining the free community</label><label class="flex items-center gap-2 rounded-lg border border-outline-variant/40 p-3"><input name="payment_method" type="radio" value="gcash"> GCash instructions</label><label class="flex items-center gap-2 rounded-lg border border-outline-variant/40 p-3"><input name="payment_method" type="radio" value="maya"> Maya instructions</label><label class="flex items-center gap-2 rounded-lg border border-outline-variant/40 p-3"><input name="payment_method" type="radio" value="bank_transfer"> Bank transfer instructions</label></div></fieldset>
 <label class="md:col-span-2 flex items-start gap-2 text-xs text-on-surface-variant"><input class="mt-0.5" name="consent" required type="checkbox" value="1"><span>I agree to be contacted about my membership request and understand this prototype will send payment instructions rather than collect payment here.</span></label>
+<label class="md:col-span-2 flex items-start gap-2 text-xs text-on-surface-variant"><input class="mt-0.5" name="membership_terms_accepted" required type="checkbox" value="1"><span>I have read and agree to the <a class="font-bold text-primary underline" href="{{ route('membership.terms') }}" target="_blank" rel="noopener">FLAME PH Membership Terms and Conditions</a>.</span></label>
+<label class="md:col-span-2 flex items-start gap-2 text-xs text-on-surface-variant"><input class="mt-0.5" name="marketing_consent" type="checkbox" value="1"><span>Optional: I agree to receive the FLAME PH and partner marketing communications described in the Terms. I may withdraw this consent later.</span></label>
 @if ($errors->any())<div class="md:col-span-2 rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-800"><ul class="list-disc pl-5">@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
 <button class="md:col-span-2 inline-flex items-center justify-center gap-2 rounded-xl bg-secondary px-6 py-3.5 font-label text-sm font-bold text-white shadow-md hover:bg-secondary-dark" type="submit">Continue to next step <span class="material-symbols-outlined text-[18px]">arrow_forward</span></button>
 </form>
 </div>
+</details>
 <div class="space-y-7">
 <div class="rounded-2xl bg-primary p-7 text-white shadow-lg" id="next-steps">
-<span class="font-label text-xs font-bold uppercase tracking-wider text-amber-300">Step 2 • What happens next</span>
-<h2 class="font-headline text-2xl font-extrabold mt-2 mb-3">A clear handoff after registration</h2>
-<ol class="space-y-3 text-sm text-white/90"><li><strong class="text-white">1.</strong> We confirm your profile and selected tier using your chosen contact.</li><li><strong class="text-white">2.</strong> Free members receive community access instructions.</li><li><strong class="text-white">3.</strong> Paid members receive secure GCash, Maya, or bank-transfer instructions from the FLAME PH team.</li></ol>
-<p class="mt-5 border-t border-white/20 pt-4 text-xs text-white/75">This is a prototype: payment is not collected on this page, and no card or wallet credentials are stored.</p>
+<span class="font-label text-xs font-bold uppercase tracking-wider text-amber-300">Free Community • Your next steps</span>
+<h2 class="font-headline text-2xl font-extrabold mt-2 mb-3">Turn your idea into a practical plan</h2>
+<ol class="space-y-3 text-sm text-white/90"><li><strong class="text-white">1.</strong> Continue to Step 2 and tell us where you are in your business journey.</li><li><strong class="text-white">2.</strong> Choose one small goal, such as checking demand or making your first sale.</li><li><strong class="text-white">3.</strong> Explore learning resources, events, and community connections that can help.</li></ol>
+<p class="mt-5 border-t border-white/20 pt-4 text-xs text-white/75">You can start with an idea and fill in more details as your business develops.</p>
 </div>
 <div class="rounded-2xl bg-white p-7 shadow-sm border border-outline-variant/40" id="login">
 <span class="font-label text-xs font-bold text-primary uppercase tracking-wider">Already registered?</span>
