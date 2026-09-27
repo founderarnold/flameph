@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activate your FLAME PH account</title>
+    <title>Complete your FLAME PH Free Community registration</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
         <div class="mx-auto max-w-2xl">
             <div class="mb-8 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-[#003289]">
                 <span class="grid h-8 w-8 place-items-center rounded-full bg-[#dbe1ff]">1</span>
-                <span>Google verified</span>
+                <span>{{ ucfirst($application['auth_provider']) }} connected</span>
                 <span class="h-px flex-1 bg-[#c3c6d6]"></span>
                 <span class="grid h-8 w-8 place-items-center rounded-full bg-[#003289] text-white">2</span>
                 <span class="hidden sm:inline">Activate account</span>
@@ -30,13 +30,13 @@
                 <div class="mb-8">
                     <p class="mb-2 text-sm font-bold uppercase tracking-wider text-[#bc000c]">Welcome to FLAME PH</p>
                     <h1 class="font-['Plus_Jakarta_Sans'] text-3xl font-extrabold tracking-tight sm:text-4xl">Activate your Free Community account</h1>
-                    <p class="mt-3 leading-7 text-[#434653]">Your Google account is connected securely. Confirm the details below so we can prepare your FLAME PH member profile.</p>
+                    <p class="mt-3 leading-7 text-[#434653]">Your {{ ucfirst($application['auth_provider']) }} account is connected. Confirm the details below to create your FLAME PH Free Community membership.</p>
                 </div>
 
                 <div class="mb-7 flex items-center gap-3 rounded-2xl bg-[#f2f3ff] p-4">
-                    <span class="grid h-10 w-10 place-items-center rounded-full bg-white text-lg font-bold text-[#003289] shadow-sm">G</span>
+                    <span class="grid h-10 w-10 place-items-center rounded-full bg-white text-lg font-bold {{ $application['auth_provider'] === 'facebook' ? 'text-[#1877f2]' : 'text-[#003289]' }} shadow-sm">{{ $application['auth_provider'] === 'facebook' ? 'f' : 'G' }}</span>
                     <div class="min-w-0">
-                        <p class="text-sm font-bold text-[#131b2e]">Google account verified</p>
+                        <p class="text-sm font-bold text-[#131b2e]">{{ ucfirst($application['auth_provider']) }} account connected</p>
                         <p class="truncate text-sm text-[#434653]">{{ $application['email'] }}</p>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                     <button type="submit" class="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-[#bc000c] px-5 py-3.5 font-bold text-white shadow-sm transition hover:bg-[#930007]">Activate my FLAME PH account <span aria-hidden="true">→</span></button>
                 </form>
 
-                <p class="mt-6 border-t border-[#e2e7ff] pt-5 text-xs leading-5 text-[#737685]">FLAME PH only receives the Google profile name and email needed for registration. No Google password is shared with FLAME PH.</p>
+                <p class="mt-6 border-t border-[#e2e7ff] pt-5 text-xs leading-5 text-[#737685]">FLAME PH receives only the profile name and email provided by {{ ucfirst($application['auth_provider']) }} for registration. Your {{ ucfirst($application['auth_provider']) }} password is never shared with FLAME PH.</p>
             </section>
             <p class="mt-6 text-center text-sm text-[#434653]"><a href="{{ route('membership') }}#registration" class="font-bold text-[#003289] hover:underline">Back to registration options</a></p>
         </div>

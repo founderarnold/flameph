@@ -164,7 +164,7 @@
 <span class="font-label text-xs font-bold text-secondary uppercase tracking-wider">Step 1 of 2 • Create your FLAME profile</span>
 </div>
 <h2 class="font-headline text-2xl md:text-3xl font-extrabold text-on-surface mb-2">Start your membership</h2>
-<p class="font-body text-sm text-on-surface-variant mb-7">Free members can start with Google in seconds. You can also complete the short form now; the FLAME PH team can help finish the remaining profile details later.</p>
+<p class="font-body text-sm text-on-surface-variant mb-7">Free members can start with Google or Facebook. You can also use mobile-number or form registration if preferred.</p>
 @if (session('registration_success'))
 <div class="mb-6 rounded-xl bg-green-50 border border-green-200 p-4 text-sm text-green-900" role="status">
 <p class="font-bold">{{ session('registration_success') }}</p>
@@ -182,7 +182,7 @@
 @endif
 @if (session('facebook_error'))
 <div class="mb-6 rounded-xl bg-amber-50 border border-amber-200 p-4 text-sm text-amber-900" role="alert">
-<p class="font-bold">Facebook registration is not available yet</p>
+<p class="font-bold">Facebook sign-in could not be completed</p>
 <p class="mt-1">{{ session('facebook_error') }}</p>
 </div>
 @endif

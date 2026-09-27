@@ -70,9 +70,9 @@ class HomeController extends Controller
     {
         $application = $request->session()->get('membership_application');
 
-        if (!$application || ($application['auth_provider'] ?? null) !== 'google') {
+        if (!$application || !in_array($application['auth_provider'] ?? null, ['google', 'facebook'], true)) {
             return redirect()->to(route('membership') . '#registration')
-                ->with('google_error', 'Start with Google first so FLAME PH can prepare your activation profile.');
+                ->with('google_error', 'Start with Google or Facebook first so FLAME PH can prepare your activation profile.');
         }
 
         return view('activation', compact('application'));
@@ -82,9 +82,9 @@ class HomeController extends Controller
     {
         $application = $request->session()->get('membership_application');
 
-        if (!$application || ($application['auth_provider'] ?? null) !== 'google') {
+        if (!$application || !in_array($application['auth_provider'] ?? null, ['google', 'facebook'], true)) {
             return redirect()->to(route('membership') . '#registration')
-                ->with('google_error', 'Your Google activation session has expired. Please try again.');
+                ->with('google_error', 'Your social sign-in session has expired. Please try again.');
         }
 
         $validated = $request->validate([
@@ -514,9 +514,11 @@ class HomeController extends Controller
 
         $clientId = config('services.facebook.client_id');
 
-        if (!$clientId) {
+        $clientSecret = config('services.facebook.client_secret');
+
+        if (!$clientId || !$clientSecret) {
             return redirect()->to(route('membership') . '#registration')
-                ->with('facebook_error', 'Facebook registration is being connected by the FLAME PH team. You can use the short form below for now.');
+                ->with('facebook_error', 'Facebook sign-in is not configured yet. Please use mobile-number or form registration for now.');
         }
 
         $state = bin2hex(random_bytes(16));
@@ -548,33 +550,52 @@ class HomeController extends Controller
         }
         $graphBase = 'https://graph.facebook.com/' . config('services.facebook.graph_version');
 
-        $tokenResponse = Http::get($graphBase . '/oauth/access_token', [
-            'client_id' => config('services.facebook.client_id'),
-            'client_secret' => config('services.facebook.client_secret'),
-            'redirect_uri' => $redirectUri,
-            'code' => $request->string('code'),
-        ]);
+        try {
+            $tokenResponse = Http::timeout(20)->get($graphBase . '/oauth/access_token', [
+                'client_id' => config('services.facebook.client_id'),
+                'client_secret' => config('services.facebook.client_secret'),
+                'redirect_uri' => $redirectUri,
+                'code' => $request->string('code'),
+            ]);
+        } catch (ConnectionException $exception) {
+            report($exception);
 
-        if (!$tokenResponse->successful() || !$tokenResponse->json('access_token')) {
             return redirect()->to(route('membership') . '#registration')
-                ->with('facebook_error', 'Facebook could not complete registration. Please use the short form below.');
+                ->with('facebook_error', 'We could not connect securely to Facebook. Please try again.');
         }
 
-        $profileResponse = Http::get($graphBase . '/me', [
-            'fields' => 'id,name,email',
-            'access_token' => $tokenResponse->json('access_token'),
-        ]);
+        if (!$tokenResponse->successful() || !$tokenResponse->json('access_token')) {
+            Log::warning('Facebook OAuth token exchange was rejected.', [
+                'status' => $tokenResponse->status(),
+                'provider_error' => $tokenResponse->json('error', 'unknown_error'),
+            ]);
+
+            return redirect()->to(route('membership') . '#registration')
+                ->with('facebook_error', 'Facebook could not complete sign-in. Please try again or use another registration option.');
+        }
+
+        try {
+            $profileResponse = Http::timeout(20)->get($graphBase . '/me', [
+                'fields' => 'id,name,email',
+                'access_token' => $tokenResponse->json('access_token'),
+            ]);
+        } catch (ConnectionException $exception) {
+            report($exception);
+
+            return redirect()->to(route('membership') . '#registration')
+                ->with('facebook_error', 'We could not securely retrieve your Facebook profile. Please try again.');
+        }
 
         if (!$profileResponse->successful() || !$profileResponse->json('email')) {
             return redirect()->to(route('membership') . '#registration')
-                ->with('facebook_error', 'Facebook did not provide an email address. Please use the short form below.');
+                ->with('facebook_error', 'Facebook did not provide an email address. Please choose an account with an email or use another registration option.');
         }
 
         $profile = $profileResponse->json();
         session([
             'membership_application' => [
-                'name' => $profile['name'] ?? $profile['email'],
-                'email' => $profile['email'],
+                'name' => $profile['name'] ?? trim($profile['email']),
+                'email' => strtolower(trim($profile['email'])),
                 'business_name' => null,
                 'plan' => 'free',
                 'billing' => 'monthly',
@@ -588,8 +609,7 @@ class HomeController extends Controller
             ],
         ]);
 
-        return redirect()->to(route('membership') . '#next-steps')
-            ->with('registration_success', 'Your free FLAME PH profile was started with Facebook. The FLAME PH team can help complete the remaining details.');
+        return redirect()->route('membership.activate');
     }
 
     public function login(Request $request)
