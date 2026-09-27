@@ -904,8 +904,8 @@ Facebook
 <span class="material-symbols-outlined text-[32px] text-amber-300">handshake</span>
 </div>
 <div>
-<div class="font-headline text-2xl font-extrabold leading-none text-amber-300">₱120M+</div>
-<p class="font-body text-sm text-white/85 mt-1">Facilitated transactions on B2B Bayanihan matching</p>
+<div class="font-headline text-2xl font-extrabold leading-none text-amber-300">{{ number_format($membershipStats['chapter_locations']) }}</div>
+<p class="font-body text-sm text-white/85 mt-1">City/Municipal Chapters — based on membership database count</p>
 </div>
 </div>
 </div>

@@ -28,9 +28,9 @@ class HomeController extends Controller
         return view('learn');
     }
 
-    public function membership(): View
+    public function membership(MembershipStatistics $statistics): View
     {
-        return view('membership');
+        return view('membership', ['membershipStats' => $statistics->summary()]);
     }
 
     public function membershipTerms(): View

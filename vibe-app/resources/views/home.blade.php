@@ -382,7 +382,7 @@ FLAME PH encourages aspiring Filipino entrepreneurs to explore business ownershi
 </div>
 <span class="font-headline-md sm:text-[34px] text-secondary font-bold tracking-tight">{{ number_format($membershipStats['chapter_locations']) }}</span>
 <span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Recorded provincial chapter locations</span>
-<span class="font-body-sm text-on-surface-variant">{{ number_format($membershipStats['represented_provinces']) }} {{ $membershipStats['represented_provinces'] === 1 ? 'province' : 'provinces' }} from member city/municipality records</span>
+<span class="font-body-sm text-on-surface-variant">based on membership database count</span>
 </div>
 <!-- Metric 3 -->
 <div class="p-5 sm:p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm flex flex-col gap-2">

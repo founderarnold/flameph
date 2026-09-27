@@ -64,10 +64,11 @@
 </div>
 <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col gap-1">
 <div class="flex items-center gap-2 text-secondary">
-<span class="material-symbols-outlined text-[22px]">payments</span>
-<span class="font-headline-sm text-headline-sm font-black text-on-surface">₱120M+</span>
+<span class="material-symbols-outlined text-[22px]">location_city</span>
+<span class="font-headline-sm text-headline-sm font-black text-on-surface">{{ number_format($membershipStats['chapter_locations']) }}</span>
 </div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">B2B Cooperative Trade Facilitated</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">City/Municipal Chapters</p>
+<p class="font-body-sm text-body-sm text-outline">based on membership database count</p>
 </div>
 </div>
 </div>

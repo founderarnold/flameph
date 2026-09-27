@@ -28,12 +28,12 @@
 <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
 <span class="font-headline-lg text-headline-lg text-secondary font-extrabold tracking-tight">{{ number_format($membershipStats['chapter_locations']) }}</span>
 <span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Provincial chapter locations</span>
-<span class="font-body-sm text-body-sm text-outline mt-1">{{ number_format($membershipStats['represented_provinces']) }} provinces; based on member city/municipality</span>
+<span class="font-body-sm text-body-sm text-outline mt-1">based on membership database count</span>
 </div>
 <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
-<span class="font-headline-lg text-headline-lg text-tertiary-container font-extrabold tracking-tight">₱120M+</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Facilitated Commerce</span>
-<span class="font-body-sm text-body-sm text-outline mt-1">Zero-Commission B2B Trade</span>
+<span class="font-headline-lg text-headline-lg text-tertiary-container font-extrabold tracking-tight">{{ number_format($membershipStats['chapter_locations']) }}</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">City/Municipal Chapters</span>
+<span class="font-body-sm text-body-sm text-outline mt-1">based on membership database count</span>
 </div>
 <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
 <span class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">100%</span>
