@@ -12,7 +12,12 @@ class AdminAccount extends Model
 
     protected function casts(): array
     {
-        return ['password' => 'hashed', 'active' => 'boolean', 'hired_at' => 'date'];
+        return [
+            'password' => 'hashed',
+            'active' => 'boolean',
+            'hired_at' => 'date',
+            'last_login_at' => 'datetime',
+        ];
     }
 
     public const ROLES = [
