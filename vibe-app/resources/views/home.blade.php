@@ -371,16 +371,18 @@ FLAME PH encourages aspiring Filipino entrepreneurs to explore business ownershi
 <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
 <span class="material-symbols-outlined text-[24px]">groups</span>
 </div>
-<span class="font-headline-md sm:text-[34px] text-primary font-bold tracking-tight">Update Soon</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Verified member count</span>
+<span class="font-headline-md sm:text-[34px] text-primary font-bold tracking-tight">{{ number_format($membershipStats['registered_members']) }}</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Registered FLAME PH members</span>
+<span class="font-body-sm text-on-surface-variant">Current membership database count</span>
 </div>
 <!-- Metric 2 -->
 <div class="p-5 sm:p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm flex flex-col gap-2">
 <div class="w-10 h-10 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center">
 <span class="material-symbols-outlined text-[24px]">map</span>
 </div>
-<span class="font-headline-md sm:text-[34px] text-secondary font-bold tracking-tight">81</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Provinces Reached</span>
+<span class="font-headline-md sm:text-[34px] text-secondary font-bold tracking-tight">{{ number_format($membershipStats['chapter_locations']) }}</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Recorded provincial chapter locations</span>
+<span class="font-body-sm text-on-surface-variant">{{ number_format($membershipStats['represented_provinces']) }} {{ $membershipStats['represented_provinces'] === 1 ? 'province' : 'provinces' }} from member city/municipality records</span>
 </div>
 <!-- Metric 3 -->
 <div class="p-5 sm:p-6 rounded-2xl bg-surface-container-lowest border border-outline-variant/30 shadow-sm flex flex-col gap-2">
