@@ -200,8 +200,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
     color: #131b2e;
   }
   header[data-site-header] [data-site-login],
-  header[data-site-header] [data-site-join],
-  header[data-site-header] [data-site-menu-toggle] { display: none !important; }
+  header[data-site-header] [data-site-join] { display: none !important; }
   header[data-site-header] [data-site-mobile-menu] {
     position: absolute;
     top: 100%;
