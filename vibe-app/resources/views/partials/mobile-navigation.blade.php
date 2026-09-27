@@ -178,20 +178,23 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important; }
   header[data-site-header] [data-site-announcement] { min-height: 38px; padding: 5px 10px; }
   header[data-site-header] [data-site-announcement] a { font-size: 11px; line-height: 16px; }
-  header[data-site-header] [data-site-row] { height: 64px; padding: 0 12px; gap: 8px; }
-  header[data-site-header] [data-site-brand-nav] { flex: 1 1 auto; }
-  header[data-site-header] [data-site-logo-link], header[data-site-header] [data-site-logo] { width: 112px; }
-  header[data-site-header] [data-site-logo-link] { flex-basis: 112px; }
-  header[data-site-header] [data-site-logo] { height: 42px; }
+  header[data-site-header] [data-site-row] { position: relative; display: grid; grid-template-columns: minmax(88px, 1fr) auto; align-items: start; height: 112px; padding: 10px 12px 48px; gap: 6px; }
+  header[data-site-header] [data-site-brand-nav] { min-width: 0; }
+  header[data-site-header] [data-site-logo-link], header[data-site-header] [data-site-logo] { width: 104px; }
+  header[data-site-header] [data-site-logo-link] { flex-basis: 104px; }
+  header[data-site-header] [data-site-logo] { height: 40px; }
   header[data-site-header] [data-site-primary-nav] { display: none; }
-  header[data-site-header] [data-site-actions] { gap: 6px; }
-  header[data-site-header] [data-site-login] { min-height: 38px; padding: 0 6px; font-size: 14px; }
-  header[data-site-header] [data-site-join] { min-height: 42px; padding: 0 14px; font-size: 14px; }
+  header[data-site-header] [data-site-actions] { display: flex; align-items: center; gap: 4px; }
+  header[data-site-header] [data-site-search] { position: absolute; right: 12px; bottom: 7px; left: 12px; display: flex; width: auto; height: 36px; }
+  header[data-site-header] [data-site-login] { width: 36px; min-height: 38px; padding: 0; border-radius: 9px; background: #f2f3ff; }
+  header[data-site-header] [data-site-login] [data-login-label] { display: none; }
+  header[data-site-header] [data-site-login] [data-login-icon] { display: inline-block; font-size: 22px; }
+  header[data-site-header] [data-site-join] { min-height: 38px; padding: 0 9px; font-size: 12px; }
   header[data-site-header] [data-site-join] .material-symbols-outlined { display: none; }
   header[data-site-header] [data-site-menu-toggle] {
     display: inline-flex;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 38px;
     align-items: center;
     justify-content: center;
     border: 0;
@@ -199,8 +202,6 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
     background: transparent;
     color: #131b2e;
   }
-  header[data-site-header] [data-site-login],
-  header[data-site-header] [data-site-join] { display: none !important; }
   header[data-site-header] [data-site-mobile-menu] {
     position: absolute;
     top: 100%;
@@ -299,7 +300,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
       </div>
       <div data-site-actions>
         <label data-site-search><span class="material-symbols-outlined">search</span><input type="search" placeholder="Search FLAME PH" aria-label="Search FLAME PH"></label>
-        <a data-site-login href="/membership#login">Log In</a>
+        <a data-site-login href="/membership#login" aria-label="Log in"><span data-login-icon class="material-symbols-outlined" aria-hidden="true">login</span><span data-login-label>Log In</span></a>
         <a data-site-join href="/membership#registration">Join Free <span class="material-symbols-outlined">arrow_forward</span></a>
         <button data-site-menu-toggle type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-mobile-menu"><span class="material-symbols-outlined" data-site-menu-icon>menu</span></button>
       </div>
