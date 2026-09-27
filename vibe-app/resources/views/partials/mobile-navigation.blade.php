@@ -305,7 +305,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
         <button data-site-menu-toggle type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-mobile-menu"><span class="material-symbols-outlined" data-site-menu-icon>menu</span></button>
       </div>
     </div>
-    <nav data-site-mobile-menu id="site-mobile-menu" aria-label="Tablet navigation">${mobilePages.map((page) => navLink(page, true)).join('')}</nav>
+    <nav data-site-mobile-menu id="site-mobile-menu" aria-label="Main navigation menu">${pages.map((page) => navLink(page, true)).join('')}</nav>
   `;
   previousHeader.replaceWith(header);
 
