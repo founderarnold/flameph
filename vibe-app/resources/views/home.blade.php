@@ -211,7 +211,7 @@ FLAME PH encourages aspiring Filipino entrepreneurs to explore business ownershi
 <span class="text-outline-variant hidden xs:inline">•</span>
 <span class="hidden xs:flex items-center gap-1.5 text-on-surface-variant">
 <span class="material-symbols-outlined text-[17px] text-secondary">people</span>
-<span>{{ number_format($membershipStats['registered_members']) }} registered members</span>
+<span>{{ number_format($membershipStats['registered_members']) }} registered {{ $membershipStats['registered_members'] === 1 ? 'member' : 'members' }}</span>
 </span>
 </div>
 </div>
@@ -809,7 +809,7 @@ Walang credit card na kailangan • 2 minuto lang ang pag-sign up
 <img alt="Official FLAME PH logo" class="h-16 w-56 object-cover object-[center_36%]" src="/assets/images/flameph-logo.png"/>
 </a>
 <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed max-w-xs">Build Ecosystem. Fuel Leaders. Empower Entrepreneurs.</p>
-<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed max-w-xs">Federation of Leaders Advancing MSME Ecosystem in the Philippines. Championing grassroots enterprise modernization, digital adoption, and market linkage. Members recorded in {{ number_format($membershipStats['represented_provinces']) }} provinces across {{ number_format($membershipStats['chapter_locations']) }} cities and municipalities.</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed max-w-xs">Federation of Leaders Advancing MSME Ecosystem in the Philippines. Championing grassroots enterprise modernization, digital adoption, and market linkage. Members recorded in {{ number_format($membershipStats['represented_provinces']) }} {{ $membershipStats['represented_provinces'] === 1 ? 'province' : 'provinces' }} across {{ number_format($membershipStats['chapter_locations']) }} {{ $membershipStats['chapter_locations'] === 1 ? 'city or municipality' : 'cities and municipalities' }}.</p>
 <div class="flex items-center gap-5 text-on-surface">
 <a aria-label="Share FLAME PH" class="hover:text-primary transition-colors" href="/about#contact"><span class="material-symbols-outlined">share</span></a>
 <a aria-label="Email FLAME PH" class="hover:text-primary transition-colors" href="mailto:hello@flameph.org"><span class="material-symbols-outlined">mail</span></a>
