@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', function () {
@@ -45,4 +46,21 @@ Route::post('/membership/login', [HomeController::class, 'login'])->name('member
 Route::get('/directory', [HomeController::class, 'directory'])->name('directory');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/legal', [HomeController::class, 'legal'])->name('legal');
+Route::get('/admin/login', fn () => redirect()->to('/about#admin-access'))->name('admin.login.form');
+Route::post('/admin/login', [AdminController::class, 'login'])->middleware('throttle:5,1')->name('admin.login');
+Route::middleware('admin.session')->prefix('admin')->name('admin.')->group(function () {
+    Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
+    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
+    Route::middleware('admin.role:founder,super_admin,regular_admin')->group(function () {
+        Route::get('/members', [AdminController::class, 'members'])->name('members');
+        Route::patch('/members/{membership}', [AdminController::class, 'updateMember'])->name('members.update');
+    });
+    Route::middleware('admin.role:founder,super_admin')->group(function () {
+        Route::get('/accounts', [AdminController::class, 'accounts'])->name('accounts');
+        Route::post('/accounts', [AdminController::class, 'createAccount'])->name('accounts.create');
+        Route::patch('/accounts/{account}', [AdminController::class, 'updateAccount'])->name('accounts.update');
+        Route::delete('/accounts/{account}', [AdminController::class, 'deleteAccount'])->name('accounts.delete');
+    });
+});
 Route::post('/generate', [HomeController::class, 'generate'])->name('generate');

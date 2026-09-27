@@ -616,9 +616,14 @@ class HomeController extends Controller
         return view('directory');
     }
 
-    public function about(): View
+    public function about(Request $request): View
     {
-        return view('about');
+        $adminAccount = null;
+        if ($adminId = $request->session()->get('admin_account_id')) {
+            $adminAccount = \App\Models\AdminAccount::query()->whereKey($adminId)->where('active', true)->first();
+        }
+
+        return view('about', compact('adminAccount'));
     }
 
     public function legal(): View

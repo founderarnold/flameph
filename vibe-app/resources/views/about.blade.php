@@ -566,7 +566,27 @@
 </div>
 </div>
 </section>
-</div></main><footer id="footer" class="w-full bg-surface-container-lowest text-on-surface pt-14 sm:pt-16 pb-8 border-t border-surface-container">
+</div>
+<section id="admin-access" class="w-full bg-surface-container-low border-t border-outline-variant/30 py-12 sm:py-16" aria-labelledby="admin-access-title">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+<div class="max-w-3xl mx-auto rounded-2xl bg-white border border-outline-variant/40 p-6 sm:p-8 shadow-sm">
+<p class="font-label-sm text-label-sm uppercase tracking-widest font-bold text-secondary">FLAME PH • STAFF ONLY</p>
+<h2 id="admin-access-title" class="font-headline-md text-headline-md font-extrabold text-on-surface mt-2">Admin access</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Authorized FLAME PH administrators can securely sign in to view membership reports and manage member records according to their assigned role.</p>
+@if(session('admin_login_notice'))<p role="status" class="mt-4 rounded-lg bg-surface-container-low px-4 py-3 text-sm text-primary">{{ session('admin_login_notice') }}</p>@endif
+@if($adminAccount)
+<div class="mt-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between"><p class="font-label-md text-label-md font-bold text-primary">Signed in as {{ $adminAccount->name }} ({{ \App\Models\AdminAccount::ROLES[$adminAccount->role] ?? $adminAccount->role }})</p><div class="flex gap-3"><a class="inline-flex justify-center rounded-lg bg-primary px-5 py-3 font-bold text-white" href="{{ route('admin.dashboard') }}">Open admin workspace</a><form method="POST" action="{{ route('admin.logout') }}">@csrf<button class="rounded-lg border border-outline-variant px-5 py-3 font-bold text-primary">Log out</button></form></div></div>
+@else
+<form method="POST" action="{{ route('admin.login') }}" class="mt-6 grid gap-4 sm:grid-cols-2">@csrf
+<div class="grid gap-1.5"><label for="admin-email" class="font-label-md text-label-md font-bold">Admin email</label><input id="admin-email" name="email" type="email" autocomplete="username" required value="{{ old('email') }}" class="min-h-12 rounded-lg border border-outline-variant px-3 text-base"></div>
+<div class="grid gap-1.5"><label for="admin-password" class="font-label-md text-label-md font-bold">Password</label><input id="admin-password" name="password" type="password" autocomplete="current-password" required class="min-h-12 rounded-lg border border-outline-variant px-3 text-base"></div>
+<div class="sm:col-span-2">@error('admin_login')<p role="alert" class="mb-3 text-sm font-semibold text-secondary">{{ $message }}</p>@enderror<button type="submit" class="inline-flex min-h-12 w-full sm:w-auto items-center justify-center rounded-lg bg-primary px-6 font-bold text-white hover:bg-primary-container">Log in to admin workspace</button></div>
+</form>
+<p class="mt-4 text-xs leading-5 text-on-surface-variant">Admin accounts are issued by FLAME PH and are separate from public member accounts. If you need access, contact the founder. Do not use a member’s account here.</p>
+@endif
+</div></div>
+</section>
+</main><footer id="footer" class="w-full bg-surface-container-lowest text-on-surface pt-14 sm:pt-16 pb-8 border-t border-surface-container">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-14 pb-12">
 <div class="flex flex-col gap-5">
