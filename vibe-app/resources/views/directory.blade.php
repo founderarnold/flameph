@@ -43,9 +43,10 @@
 <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col gap-1">
 <div class="flex items-center gap-2 text-primary">
 <span class="material-symbols-outlined text-[22px]">domain</span>
-<span class="font-headline-sm text-headline-sm font-black text-on-surface">Update Soon</span>
+<span class="font-headline-sm text-headline-sm font-black text-on-surface">{{ number_format($membershipStats['registered_members']) }}</span>
 </div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Verified MSMEs and province coverage</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Registered FLAME PH members</p>
+<p class="font-body-sm text-body-sm text-outline">{{ number_format($membershipStats['represented_provinces']) }} provinces • {{ number_format($membershipStats['chapter_locations']) }} city/municipality locations</p>
 </div>
 <div class="bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col gap-1">
 <div class="flex items-center gap-2 text-primary">

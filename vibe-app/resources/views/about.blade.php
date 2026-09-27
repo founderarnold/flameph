@@ -21,14 +21,14 @@
 <!-- Trust Metrics Strip -->
 <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-space-md mt-space-xl">
 <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
-<span class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">Update Soon</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Verified member MSMEs</span>
-<span class="font-body-sm text-body-sm text-outline mt-1">Count and validation source: Update Soon</span>
+<span class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">{{ number_format($membershipStats['registered_members']) }}</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Registered FLAME PH members</span>
+<span class="font-body-sm text-body-sm text-outline mt-1">Current membership database count</span>
 </div>
 <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
-<span class="font-headline-lg text-headline-lg text-secondary font-extrabold tracking-tight">Update Soon</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Provincial Chapters</span>
-<span class="font-body-sm text-body-sm text-outline mt-1">Luzon, Visayas &amp; Mindanao</span>
+<span class="font-headline-lg text-headline-lg text-secondary font-extrabold tracking-tight">{{ number_format($membershipStats['chapter_locations']) }}</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Provincial chapter locations</span>
+<span class="font-body-sm text-body-sm text-outline mt-1">{{ number_format($membershipStats['represented_provinces']) }} provinces; based on member city/municipality</span>
 </div>
 <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
 <span class="font-headline-lg text-headline-lg text-tertiary-container font-extrabold tracking-tight">₱120M+</span>
@@ -547,7 +547,7 @@
             Be Part of the National Movement. Build Together.
           </h2>
 <p class="font-body-lg text-body-md lg:text-body-lg text-surface-container-high leading-relaxed">
-            Whether you are a budding sari-sari store owner, an artisanal craft cooperative, or an established regional distributor, there is a place for you in FLAME PH. Our verified member total and national reach will be published with supporting documentation: Update Soon.
+            Whether you are a budding sari-sari store owner, an artisanal craft cooperative, or an established regional distributor, there is a place for you in FLAME PH. The live registry currently records {{ number_format($membershipStats['registered_members']) }} member accounts and {{ number_format($membershipStats['chapter_locations']) }} city/municipality locations across {{ number_format($membershipStats['represented_provinces']) }} provinces.
           </p>
 <div class="flex flex-col sm:flex-row items-center gap-space-sm pt-space-sm">
 <a class="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs bg-secondary hover:bg-secondary-container text-on-secondary px-space-xl py-3.5 rounded-lg font-label-md text-label-md font-bold transition-all shadow-[0_4px_14px_rgba(188,0,12,0.35)] hover:shadow-lg" data-path="membership" href="/membership">
@@ -579,9 +579,23 @@
 @else
 <form method="POST" action="{{ route('admin.login') }}" class="mt-6 grid gap-4 sm:grid-cols-2">@csrf
 <div class="grid gap-1.5"><label for="admin-email" class="font-label-md text-label-md font-bold">Admin email</label><input id="admin-email" name="email" type="email" autocomplete="username" required value="{{ old('email') }}" class="min-h-12 rounded-lg border border-outline-variant px-3 text-base"></div>
-<div class="grid gap-1.5"><label for="admin-password" class="font-label-md text-label-md font-bold">Password</label><input id="admin-password" name="password" type="password" autocomplete="current-password" required class="min-h-12 rounded-lg border border-outline-variant px-3 text-base"></div>
+<div class="grid gap-1.5"><label for="admin-password" class="font-label-md text-label-md font-bold">Password</label><div class="relative"><input id="admin-password" name="password" type="password" autocomplete="current-password" required class="min-h-12 w-full rounded-lg border border-outline-variant px-3 pr-12 text-base"><button type="button" data-admin-password-toggle aria-label="Show password" aria-pressed="false" class="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-2 text-primary"><span class="material-symbols-outlined" aria-hidden="true">visibility</span></button></div></div>
 <div class="sm:col-span-2">@error('admin_login')<p role="alert" class="mb-3 text-sm font-semibold text-secondary">{{ $message }}</p>@enderror<button type="submit" class="inline-flex min-h-12 w-full sm:w-auto items-center justify-center rounded-lg bg-primary px-6 font-bold text-white hover:bg-primary-container">Log in to admin workspace</button></div>
 </form>
+<script>
+(() => {
+  const input = document.getElementById('admin-password');
+  const toggle = document.querySelector('[data-admin-password-toggle]');
+  if (!input || !toggle) return;
+  toggle.addEventListener('click', () => {
+    const reveal = input.type === 'password';
+    input.type = reveal ? 'text' : 'password';
+    toggle.setAttribute('aria-pressed', String(reveal));
+    toggle.setAttribute('aria-label', reveal ? 'Hide password' : 'Show password');
+    toggle.querySelector('span').textContent = reveal ? 'visibility_off' : 'visibility';
+  });
+})();
+</script>
 <p class="mt-4 text-xs leading-5 text-on-surface-variant">Admin accounts are issued by FLAME PH and are separate from public member accounts. If you need access, contact the founder. Do not use a member’s account here.</p>
 @endif
 </div></div>

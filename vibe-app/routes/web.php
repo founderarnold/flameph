@@ -52,6 +52,10 @@ Route::middleware('admin.session')->prefix('admin')->name('admin.')->group(funct
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
+    Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
+    Route::post('/profile', [AdminController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/profile/password', [AdminController::class, 'changeOwnPassword'])->middleware('throttle:5,1')->name('profile.password');
+    Route::get('/accounts/{account}/avatar', [AdminController::class, 'avatar'])->name('accounts.avatar');
     Route::middleware('admin.role:founder,super_admin,regular_admin')->group(function () {
         Route::get('/members', [AdminController::class, 'members'])->name('members');
         Route::patch('/members/{membership}', [AdminController::class, 'updateMember'])->name('members.update');
@@ -60,6 +64,7 @@ Route::middleware('admin.session')->prefix('admin')->name('admin.')->group(funct
         Route::get('/accounts', [AdminController::class, 'accounts'])->name('accounts');
         Route::post('/accounts', [AdminController::class, 'createAccount'])->name('accounts.create');
         Route::patch('/accounts/{account}', [AdminController::class, 'updateAccount'])->name('accounts.update');
+        Route::post('/accounts/{account}/password', [AdminController::class, 'resetAccountPassword'])->middleware('throttle:5,1')->name('accounts.password');
         Route::delete('/accounts/{account}', [AdminController::class, 'deleteAccount'])->name('accounts.delete');
     });
 });

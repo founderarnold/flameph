@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\AdminAccount;
 use App\Models\Membership;
+use App\Services\MembershipStatistics;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
@@ -41,22 +43,27 @@ class AdminController extends Controller
         return redirect()->to('/about#admin-access')->with('admin_login_notice', 'You have been signed out.');
     }
 
-    public function dashboard(Request $request): View
+    public function dashboard(Request $request, MembershipStatistics $statistics): View
     {
         $admin = $request->attributes->get('adminAccount');
+        $membershipStats = $statistics->summary();
 
         return view('admin.dashboard', [
             'admin' => $admin,
-            'memberCount' => Membership::count(),
-            'activeMemberCount' => Membership::where('status', 'active')->count(),
+            'memberCount' => $membershipStats['registered_members'],
+            'activeMemberCount' => $membershipStats['active_members'],
             'paidMemberCount' => Membership::where('plan', 'paid')->count(),
             'adminCount' => AdminAccount::count(),
+            'membershipStats' => $membershipStats,
         ]);
     }
 
-    public function reports(Request $request): View
+    public function reports(Request $request, MembershipStatistics $statistics): View
     {
-        return view('admin.reports', ['admin' => $request->attributes->get('adminAccount')]);
+        return view('admin.reports', [
+            'admin' => $request->attributes->get('adminAccount'),
+            'membershipStats' => $statistics->summary(),
+        ]);
     }
 
     public function members(Request $request): View
@@ -86,11 +93,96 @@ class AdminController extends Controller
 
     public function accounts(Request $request): View
     {
+        $accounts = AdminAccount::query()->orderBy('name')->get();
+        $accountEmails = $accounts->pluck('email')->map(fn ($email) => strtolower($email));
+        $memberSinceByEmail = Membership::query()
+            ->with('user:id,email')
+            ->whereHas('user', fn ($query) => $query->whereIn('email', $accountEmails))
+            ->get()
+            ->filter(fn ($membership) => $membership->user)
+            ->mapWithKeys(fn ($membership) => [strtolower($membership->user->email) => $membership->created_at]);
+
         return view('admin.accounts', [
             'admin' => $request->attributes->get('adminAccount'),
-            'accounts' => AdminAccount::query()->orderBy('name')->get(),
+            'accounts' => $accounts,
             'roles' => $this->assignableRoles($request->attributes->get('adminAccount')),
+            'memberSinceByEmail' => $memberSinceByEmail,
         ]);
+    }
+
+    public function profile(Request $request): View
+    {
+        $admin = $request->attributes->get('adminAccount');
+        $memberSince = Membership::query()->whereHas('user', fn ($query) => $query->where('email', $admin->email))->value('created_at');
+
+        return view('admin.profile', [
+            'admin' => $admin,
+            'memberSince' => $memberSince,
+            'rights' => $admin->rights(),
+        ]);
+    }
+
+    public function updateProfile(Request $request): RedirectResponse
+    {
+        $admin = $request->attributes->get('adminAccount');
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:120'],
+            'sponsored_by' => ['nullable', 'string', 'max:160'],
+            'invited_by' => ['nullable', 'string', 'max:160'],
+            'hired_by' => ['nullable', 'string', 'max:160'],
+            'hired_at' => ['nullable', 'date', 'before_or_equal:today'],
+            'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:3072'],
+        ]);
+
+        $admin->fill(collect($validated)->except('avatar')->all());
+        if ($request->hasFile('avatar')) {
+            $admin->avatar_path = $request->file('avatar')->store('admin-avatars', 'local');
+        }
+        $admin->save();
+
+        return back()->with('status', 'Your admin profile was updated.');
+    }
+
+    public function changeOwnPassword(Request $request): RedirectResponse
+    {
+        $admin = $request->attributes->get('adminAccount');
+        $validated = $request->validate([
+            'current_password' => ['required', 'string', 'max:200'],
+            'password' => ['required', 'string', 'min:12', 'max:200', 'confirmed'],
+        ]);
+
+        if (!Hash::check($validated['current_password'], $admin->password)) {
+            return back()->withErrors(['current_password' => 'Current password did not match.']);
+        }
+
+        $admin->password = $validated['password'];
+        $admin->save();
+
+        return back()->with('status', 'Password changed. Use the new password next time you sign in.');
+    }
+
+    public function resetAccountPassword(Request $request, AdminAccount $account): RedirectResponse
+    {
+        $admin = $request->attributes->get('adminAccount');
+        abort_unless($this->mayManage($admin, $account), 403);
+
+        $validated = $request->validate([
+            'password' => ['required', 'string', 'min:12', 'max:200', 'confirmed'],
+        ]);
+
+        $account->password = $validated['password'];
+        $account->save();
+
+        return back()->with('status', 'Account password reset. Notify the account holder through a secure channel.');
+    }
+
+    public function avatar(Request $request, AdminAccount $account)
+    {
+        $admin = $request->attributes->get('adminAccount');
+        abort_unless($account->is($admin) || $this->mayManage($admin, $account), 403);
+        abort_unless($account->avatar_path && Storage::disk('local')->exists($account->avatar_path), 404);
+
+        return Storage::disk('local')->response($account->avatar_path);
     }
 
     public function createAccount(Request $request): RedirectResponse
@@ -120,6 +212,11 @@ class AdminController extends Controller
             'email' => ['required', 'email', 'max:254', Rule::unique('admin_accounts', 'email')->ignore($account->id)],
             'role' => ['required', Rule::in(array_keys($roles))],
             'active' => ['required', 'boolean'],
+            'sponsored_by' => ['nullable', 'string', 'max:160'],
+            'invited_by' => ['nullable', 'string', 'max:160'],
+            'hired_by' => ['nullable', 'string', 'max:160'],
+            'hired_at' => ['nullable', 'date', 'before_or_equal:today'],
+            'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:3072'],
             'password' => ['nullable', 'string', 'min:12', 'max:200', 'confirmed'],
         ]);
 
@@ -137,9 +234,12 @@ class AdminController extends Controller
             abort_unless($admin->role === 'founder', 403);
         }
 
-        $account->fill(collect($validated)->except('password')->all());
+        $account->fill(collect($validated)->except(['password', 'avatar'])->all());
         if (!empty($validated['password'])) {
             $account->password = $validated['password'];
+        }
+        if ($request->hasFile('avatar')) {
+            $account->avatar_path = $request->file('avatar')->store('admin-avatars', 'local');
         }
         $account->save();
 

@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Client\ConnectionException;
 use App\Models\Membership;
 use App\Models\User;
+use App\Services\MembershipStatistics;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -611,19 +612,19 @@ class HomeController extends Controller
             ->with('login_success', 'You are signed in to the prototype membership area.');
     }
 
-    public function directory(): View
+    public function directory(MembershipStatistics $statistics): View
     {
-        return view('directory');
+        return view('directory', ['membershipStats' => $statistics->summary()]);
     }
 
-    public function about(Request $request): View
+    public function about(Request $request, MembershipStatistics $statistics): View
     {
         $adminAccount = null;
         if ($adminId = $request->session()->get('admin_account_id')) {
             $adminAccount = \App\Models\AdminAccount::query()->whereKey($adminId)->where('active', true)->first();
         }
 
-        return view('about', compact('adminAccount'));
+        return view('about', ['adminAccount' => $adminAccount, 'membershipStats' => $statistics->summary()]);
     }
 
     public function legal(): View
