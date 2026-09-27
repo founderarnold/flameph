@@ -185,7 +185,7 @@
 Hindi kailangang mag-start at mag-grow ng business nang <span class="text-primary underline decoration-secondary decoration-4 underline-offset-4">mag-isa.</span>
 </h1>
 <p class="font-body-md sm:text-body-lg text-on-surface-variant font-medium max-w-2xl leading-relaxed">
-A community of Filipino entrepreneurs with practical guidance, micro-financing, free learning, and support from Luzon to Mindanao.
+FLAME PH encourages aspiring Filipino entrepreneurs to explore business ownership as an alternative path to employment. Explore business-learning resources and a growing MSME ecosystem built to help today’s and next-generation entrepreneurs find their next step in a changing, AI-shaped economy.
 </p>
 <div class="flex flex-col sm:flex-row sm:items-center gap-3 pt-2">
 <a class="w-full sm:w-auto px-8 h-14 rounded-xl bg-secondary text-on-secondary font-headline-sm text-[18px] font-bold flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(188,0,12,0.28)] hover:bg-secondary-container active:scale-[0.98] transition-all" data-path="membership-registration" href="/membership">

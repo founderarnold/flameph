@@ -3,6 +3,24 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/sitemap.xml', function () {
+    $urls = [
+        'https://www.flameph.org/',
+        'https://www.flameph.org/about',
+        'https://www.flameph.org/learn',
+        'https://www.flameph.org/membership',
+        'https://www.flameph.org/membership/terms',
+        'https://www.flameph.org/events',
+        'https://www.flameph.org/directory',
+        'https://www.flameph.org/legal',
+    ];
+
+    $entries = collect($urls)->map(fn (string $url) => '<url><loc>' . e($url) . '</loc></url>')->implode('');
+
+    return response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . $entries . '</urlset>')
+        ->header('Content-Type', 'application/xml; charset=UTF-8');
+})->name('sitemap');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/learn', [HomeController::class, 'learn'])->name('learn');
 Route::redirect('/community', '/directory', 301)->name('community');
