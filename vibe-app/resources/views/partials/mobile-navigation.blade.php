@@ -277,6 +277,18 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
 </style>
 <script>
 (() => {
+  let favicon = document.querySelector('link[rel~="icon"]');
+  if (!favicon) {
+    favicon = document.createElement('link');
+    favicon.rel = 'icon';
+    document.head.append(favicon);
+  }
+  favicon.type = 'image/png';
+  favicon.sizes = '256x256';
+  favicon.href = '/favicon.png?v=1';
+})();
+
+(() => {
   const previousHeader = document.querySelector('header');
   if (!previousHeader) return;
 
