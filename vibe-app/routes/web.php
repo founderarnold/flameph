@@ -46,8 +46,10 @@ Route::post('/membership/profile', [HomeController::class, 'saveMembershipProfil
 Route::post('/membership/profile/upgrade', [HomeController::class, 'requestMembershipUpgrade'])->name('membership.profile.upgrade');
 Route::post('/membership/profile/contact', [HomeController::class, 'contactFounder'])->middleware('throttle:5,1')->name('membership.profile.contact');
 Route::get('/events', [HomeController::class, 'events'])->name('events');
-Route::post('/membership/register', [HomeController::class, 'registerMembership'])->name('membership.register');
-Route::post('/membership/register/mobile', [HomeController::class, 'registerMobileMembership'])->name('membership.register.mobile');
+Route::post('/membership/register', [HomeController::class, 'registerMembership'])->middleware('throttle:3,10')->name('membership.register');
+Route::post('/membership/register/mobile', [HomeController::class, 'registerMobileMembership'])->middleware('throttle:3,10')->name('membership.register.mobile');
+Route::post('/membership/register/verify', [HomeController::class, 'verifyMembershipEmailOtp'])->middleware('throttle:10,10')->name('membership.register.verify');
+Route::post('/membership/register/resend', [HomeController::class, 'resendMembershipEmailOtp'])->middleware('throttle:3,10')->name('membership.register.resend');
 Route::get('/auth/google/redirect', [HomeController::class, 'redirectToGoogle'])->name('membership.google.redirect');
 Route::get('/auth/google/callback', [HomeController::class, 'handleGoogleCallback'])->name('membership.google.callback');
 Route::get('/auth/facebook/redirect', [HomeController::class, 'redirectToFacebook'])->name('membership.facebook.redirect');

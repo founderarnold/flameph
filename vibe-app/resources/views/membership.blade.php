@@ -164,7 +164,7 @@
 <span class="font-label text-xs font-bold text-secondary uppercase tracking-wider">Step 1 of 2 • Create your FLAME profile</span>
 </div>
 <h2 class="font-headline text-2xl md:text-3xl font-extrabold text-on-surface mb-2">Start your membership</h2>
-<p class="font-body text-sm text-on-surface-variant mb-7">Free members can start with Google or Facebook. You can also use mobile-number or form registration if preferred.</p>
+<p class="font-body text-sm text-on-surface-variant mb-7">Start with Google, verify your email while registering by mobile number, or complete the membership form. Paid-tier requests are recorded for payment verification.</p>
 @if (session('registration_success'))
 <div class="mb-6 rounded-xl bg-green-50 border border-green-200 p-4 text-sm text-green-900" role="status">
 <p class="font-bold">{{ session('registration_success') }}</p>
@@ -195,26 +195,37 @@
 <ul class="mt-1 list-disc pl-5">@foreach (['mobile_number', 'mobile_consent', 'membership_terms_accepted'] as $field) @error($field)<li>{{ $message }}</li>@enderror @endforeach</ul>
 </div>
 @endif
+@if ($errors->hasAny(['name', 'email', 'verification_code', 'password', 'password_confirmation']))
+<div class="mb-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800" role="alert"><p class="font-bold">Please check your registration or verification details.</p><ul class="mt-1 list-disc pl-5">@foreach (['name', 'email', 'verification_code', 'password', 'password_confirmation'] as $field) @error($field)<li>{{ $message }}</li>@enderror @endforeach</ul></div>
+@endif
+@if (session('membership_otp_sent'))
+<div class="mb-5 rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900" role="status">A 6-digit verification code was sent to <strong>{{ session('membership_email_otp.application.email') }}</strong>. Enter it below within 10 minutes. The code verifies your email; your mobile number is recorded but is not SMS-verified.</div>
+@endif
+@if (session()->has('membership_email_otp'))
+<div class="mb-6 rounded-2xl border border-primary/20 bg-primary/[0.04] p-5">
+<h3 class="font-label font-bold text-on-surface">Verify your email to finish registration</h3>
+<p class="mt-1 text-sm text-on-surface-variant">We sent a one-time code to {{ session('membership_email_otp.application.email') }}. It expires in 10 minutes.</p>
+<form action="{{ route('membership.register.verify') }}" method="POST" class="mt-4 grid gap-3 sm:grid-cols-2">@csrf<label class="font-label text-xs font-bold">6-digit email code<input name="verification_code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required class="mt-1.5 block w-full rounded-lg border border-outline-variant/50 bg-white px-3 py-2.5 text-base tracking-[0.3em]" aria-label="Six digit email verification code"></label><label class="font-label text-xs font-bold">Create a password (12+ characters)<input name="password" type="password" minlength="12" autocomplete="new-password" required class="mt-1.5 block w-full rounded-lg border border-outline-variant/50 bg-white px-3 py-2.5 text-sm"></label><label class="font-label text-xs font-bold">Confirm password<input name="password_confirmation" type="password" minlength="12" autocomplete="new-password" required class="mt-1.5 block w-full rounded-lg border border-outline-variant/50 bg-white px-3 py-2.5 text-sm"></label><p class="self-end text-xs text-on-surface-variant">Your password lets you sign in again later. Use a unique password and never share it.</p><button class="rounded-xl bg-secondary px-5 py-3 font-label text-sm font-bold text-white sm:col-span-2 sm:justify-self-start" type="submit">Verify email &amp; create account</button></form>
+<form action="{{ route('membership.register.resend') }}" method="POST" class="mt-3">@csrf<button type="submit" class="text-sm font-bold text-primary underline">Resend code</button><span class="ml-2 text-xs text-on-surface-variant">Resend available after 60 seconds.</span></form>
+@error('verification_code')<p class="mt-2 text-sm text-red-700" role="alert">{{ $message }}</p>@enderror
+</div>
+@endif
 <div class="mb-7 space-y-3">
 <details name="membership-registration-choice" data-google-quick-start class="group rounded-2xl border border-primary/20 bg-primary/[0.04] open:bg-primary/[0.04]" @if ($errors->has('provider')) open @endif>
-<summary class="flex cursor-pointer list-none items-center justify-between gap-4 rounded-2xl p-5 font-label text-sm font-bold text-on-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"><span><span class="mr-2 inline-grid h-7 w-7 place-items-center rounded-full bg-white text-primary">1</span>Continue with Google or Facebook</span><span class="material-symbols-outlined transition-transform group-open:rotate-180" aria-hidden="true">expand_more</span></summary>
+<summary class="flex cursor-pointer list-none items-center justify-between gap-4 rounded-2xl p-5 font-label text-sm font-bold text-on-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"><span><span class="mr-2 inline-grid h-7 w-7 place-items-center rounded-full bg-white text-primary">1</span>Continue with Google</span><span class="material-symbols-outlined transition-transform group-open:rotate-180" aria-hidden="true">expand_more</span></summary>
 <div class="px-5 pb-5">
 <form id="membership-quickstart" action="{{ route('membership.start') }}" method="POST" class="space-y-4">
 @csrf
 <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 <div>
 <p class="font-label text-sm font-bold text-on-surface">Quick start for Free Community</p>
-<p class="mt-1 text-xs leading-relaxed text-on-surface-variant">Use your Google or Facebook account to start. You can add business details later.</p>
+<p class="mt-1 text-xs leading-relaxed text-on-surface-variant">Use your Google account to start. You can add business details later.</p>
 </div>
 <div class="flex w-full shrink-0 flex-col gap-2 sm:w-auto sm:flex-row">
 <button class="inline-flex items-center justify-center gap-2 rounded-xl border border-outline-variant/60 bg-white px-4 py-3 font-label text-sm font-bold text-on-surface shadow-sm transition hover:border-primary hover:text-primary" type="submit" name="provider" value="google">
 <span class="grid h-5 w-5 place-items-center rounded-full bg-white text-sm font-bold text-primary shadow-[0_0_0_1px_#d8dee9]">G</span>
 Google
  </button>
-<button class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#1877f2] px-4 py-3 font-label text-sm font-bold text-white shadow-sm transition hover:bg-[#166fe5]" type="submit" formaction="{{ route('membership.start') }}" name="provider" value="facebook">
-<span class="grid h-5 w-5 place-items-center rounded-full bg-white text-sm font-bold text-[#1877f2]">f</span>
-Facebook
-</button>
 </div>
 </div>
 </form>
@@ -225,16 +236,24 @@ Facebook
 </div>
 </div>
 </details>
-<details name="membership-registration-choice" class="group rounded-2xl border border-primary/20 bg-primary/[0.04]" @if ($errors->hasAny(['mobile_number', 'mobile_consent'])) open @endif>
+<details name="membership-registration-choice" class="group rounded-2xl border border-primary/20 bg-primary/[0.04]" @if ($errors->hasAny(['mobile_number', 'mobile_consent']) || session()->has('membership_email_otp')) open @endif>
 <summary class="flex cursor-pointer list-none items-center justify-between gap-4 rounded-2xl p-5 font-label text-sm font-bold text-on-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"><span><span class="mr-2 inline-grid h-7 w-7 place-items-center rounded-full bg-white text-primary">2</span>Continue with a mobile number</span><span class="material-symbols-outlined transition-transform group-open:rotate-180" aria-hidden="true">expand_more</span></summary>
 <div class="px-5 pb-5">
-<form action="{{ route('membership.register.mobile') }}" class="mt-4 grid gap-3 border-t border-primary/10 pt-4 sm:grid-cols-[1fr_auto] sm:items-end" method="POST">
+<form action="{{ route('membership.register.mobile') }}" class="mt-4 grid gap-3 border-t border-primary/10 pt-4 sm:grid-cols-2" method="POST">
 @csrf
-<label class="font-label text-xs font-bold text-on-surface">Or register with your mobile number
-<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 bg-white px-3 py-2.5 text-sm" name="mobile_number" placeholder="0917 123 4567" required type="tel" inputmode="tel" autocomplete="tel" value="{{ old('mobile_number') }}">
+<label class="font-label text-xs font-bold text-on-surface">Full name
+<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 bg-white px-3 py-2.5 text-sm" name="name" autocomplete="name" required maxlength="120" value="{{ old('name', session('membership_email_otp.application.name')) }}">
 </label>
-<button class="inline-flex items-center justify-center gap-2 rounded-xl bg-on-surface px-4 py-3 font-label text-sm font-bold text-white shadow-sm transition hover:bg-primary" type="submit"><span class="material-symbols-outlined text-[18px]">phone_iphone</span>Use mobile number</button>
-<label class="flex items-start gap-2 text-[11px] font-normal text-on-surface-variant sm:col-span-2"><input class="mt-0.5" name="mobile_consent" required type="checkbox" value="1"><span>I agree to be contacted on this number about my free membership. Mobile verification and remaining profile details may be completed later by the FLAME PH team.</span></label>
+<label class="font-label text-xs font-bold text-on-surface">Email address (we’ll send your OTP here)
+<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 bg-white px-3 py-2.5 text-sm" name="email" type="email" autocomplete="email" required maxlength="255" value="{{ old('email', session('membership_email_otp.application.email')) }}">
+</label>
+<label class="font-label text-xs font-bold text-on-surface">Mobile phone number
+<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 bg-white px-3 py-2.5 text-sm" name="mobile_number" placeholder="0917 123 4567" required type="tel" inputmode="tel" autocomplete="tel" value="{{ old('mobile_number', session('membership_email_otp.application.mobile_number')) }}">
+</label>
+<label class="font-label text-xs font-bold text-on-surface">Business or project name <span class="font-normal">(optional)</span><input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 bg-white px-3 py-2.5 text-sm" name="business_name" maxlength="160" autocomplete="organization" value="{{ old('business_name', session('membership_email_otp.application.business_name')) }}"></label>
+<p class="text-xs text-on-surface-variant sm:col-span-2">We’ll email you a one-time code. This confirms your email address; we do not send SMS codes, so your mobile number is not phone-verified.</p>
+<button class="inline-flex items-center justify-center gap-2 rounded-xl bg-on-surface px-4 py-3 font-label text-sm font-bold text-white shadow-sm transition hover:bg-primary sm:col-span-2 sm:justify-self-start" type="submit"><span class="material-symbols-outlined text-[18px]">mail</span>Email me a verification code</button>
+<label class="flex items-start gap-2 text-[11px] font-normal text-on-surface-variant sm:col-span-2"><input class="mt-0.5" name="mobile_consent" required type="checkbox" value="1"><span>I agree to be contacted on this number about my free membership.</span></label>
 <label class="flex items-start gap-2 text-[11px] font-normal text-on-surface-variant sm:col-span-2"><input class="mt-0.5" name="membership_terms_accepted" required type="checkbox" value="1"><span>I have read and agree to the <a class="font-bold text-primary underline" href="{{ route('membership.terms') }}" target="_blank" rel="noopener">FLAME PH Membership Terms and Conditions</a>.</span></label>
 <label class="flex items-start gap-2 text-[11px] font-normal text-on-surface-variant sm:col-span-2"><input class="mt-0.5" name="marketing_consent" type="checkbox" value="1"><span>Optional: I agree to receive the FLAME PH and partner marketing communications described in the Terms. I may withdraw this consent later.</span></label>
 </form>
@@ -245,13 +264,14 @@ Facebook
 <div class="px-5 pb-5">
 <form action="{{ route('membership.register') }}" class="grid grid-cols-1 md:grid-cols-2 gap-4" method="POST">
 @csrf
-<label class="font-label text-sm font-bold text-on-surface">Full name<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="name" required value="{{ old('name') }}" type="text" autocomplete="name"></label>
-<label class="font-label text-sm font-bold text-on-surface">Email address<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="email" required value="{{ old('email') }}" type="email" autocomplete="email"></label>
-<label class="font-label text-sm font-bold text-on-surface md:col-span-2">Business or project name<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="business_name" required value="{{ old('business_name') }}" type="text" autocomplete="organization"></label>
-<label class="font-label text-sm font-bold text-on-surface">Membership tier<select class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5 bg-white" id="registration-plan" name="plan" required><option value="free">Free Community — ₱0</option><option value="starter">Starter — ₱50/month</option><option value="micro">Micro — ₱100/month</option><option value="neo">Neo — ₱500/month</option><option value="pro">Pro — ₱1,000/month</option><option value="champion">Champion — ₱2,000/month</option></select></label>
-<label class="font-label text-sm font-bold text-on-surface">Billing cycle<select class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5 bg-white" name="billing" required><option value="monthly">Monthly</option><option value="annual">Annual — save 17%</option></select></label>
-<fieldset class="md:col-span-2"><legend class="font-label text-sm font-bold text-on-surface mb-2">Payment handoff <span class="font-normal text-on-surface-variant">(no card details collected)</span></legend><div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm"><label class="flex items-center gap-2 rounded-lg border border-outline-variant/40 p-3"><input checked name="payment_method" type="radio" value="none"> I’m joining the free community</label><label class="flex items-center gap-2 rounded-lg border border-outline-variant/40 p-3"><input name="payment_method" type="radio" value="gcash"> GCash instructions</label><label class="flex items-center gap-2 rounded-lg border border-outline-variant/40 p-3"><input name="payment_method" type="radio" value="maya"> Maya instructions</label><label class="flex items-center gap-2 rounded-lg border border-outline-variant/40 p-3"><input name="payment_method" type="radio" value="bank_transfer"> Bank transfer instructions</label></div></fieldset>
-<label class="md:col-span-2 flex items-start gap-2 text-xs text-on-surface-variant"><input class="mt-0.5" name="consent" required type="checkbox" value="1"><span>I agree to be contacted about my membership request and understand this prototype will send payment instructions rather than collect payment here.</span></label>
+<label class="font-label text-sm font-bold text-on-surface">Full name<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="name" required value="{{ old('name', session('membership_email_otp.application.name')) }}" type="text" autocomplete="name"></label>
+<label class="font-label text-sm font-bold text-on-surface">Email address<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="email" required value="{{ old('email', session('membership_email_otp.application.email')) }}" type="email" autocomplete="email"></label>
+<label class="font-label text-sm font-bold text-on-surface">Mobile phone number<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="mobile_number" required value="{{ old('mobile_number', session('membership_email_otp.application.mobile_number')) }}" type="tel" inputmode="tel" autocomplete="tel" placeholder="0917 123 4567"></label>
+<label class="font-label text-sm font-bold text-on-surface md:col-span-2">Business or project name<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="business_name" required value="{{ old('business_name', session('membership_email_otp.application.business_name')) }}" type="text" autocomplete="organization"></label>
+<label class="font-label text-sm font-bold text-on-surface">Membership tier<select class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5 bg-white" id="registration-plan" name="plan" required><option value="free" @selected(old('plan', session('membership_email_otp.application.plan', 'free')) === 'free')>Free Community — ₱0</option><option value="starter" @selected(old('plan', session('membership_email_otp.application.plan')) === 'starter')>Starter — ₱50/month</option><option value="micro" @selected(old('plan', session('membership_email_otp.application.plan')) === 'micro')>Micro — ₱100/month</option><option value="neo" @selected(old('plan', session('membership_email_otp.application.plan')) === 'neo')>Neo — ₱500/month</option><option value="pro" @selected(old('plan', session('membership_email_otp.application.plan')) === 'pro')>Pro — ₱1,000/month</option><option value="champion" @selected(old('plan', session('membership_email_otp.application.plan')) === 'champion')>Champion — ₱2,000/month</option></select></label>
+<label class="font-label text-sm font-bold text-on-surface">Billing cycle<select class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5 bg-white" name="billing" required><option value="monthly" @selected(old('billing', session('membership_email_otp.application.billing', 'monthly')) === 'monthly')>Monthly</option><option value="annual" @selected(old('billing', session('membership_email_otp.application.billing')) === 'annual')>Annual — save 17%</option></select></label>
+<fieldset class="md:col-span-2"><legend class="font-label text-sm font-bold text-on-surface mb-2">Payment method for paid tiers <span class="font-normal text-on-surface-variant">(payment is not collected by this website)</span></legend><div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm"><label class="flex items-center gap-2 rounded-lg border border-outline-variant/40 p-3"><input @checked(old('payment_method', session('membership_email_otp.application.payment_method', 'none')) === 'none') name="payment_method" type="radio" value="none"> I’m joining the free community</label><label class="flex items-center gap-2 rounded-lg border border-outline-variant/40 p-3"><input @checked(old('payment_method', session('membership_email_otp.application.payment_method')) === 'gcash') name="payment_method" type="radio" value="gcash"> GCash</label><label class="flex items-center gap-2 rounded-lg border border-outline-variant/40 p-3"><input @checked(old('payment_method', session('membership_email_otp.application.payment_method')) === 'maya') name="payment_method" type="radio" value="maya"> Maya</label><label class="flex items-center gap-2 rounded-lg border border-outline-variant/40 p-3"><input @checked(old('payment_method', session('membership_email_otp.application.payment_method')) === 'bank_transfer') name="payment_method" type="radio" value="bank_transfer"> Bank transfer</label></div><p class="mt-2 text-xs text-on-surface-variant">FLAME PH must provide verified payment details separately. Your paid tier stays pending until payment is received and checked.</p></fieldset>
+<label class="md:col-span-2 flex items-start gap-2 text-xs text-on-surface-variant"><input class="mt-0.5" name="consent" required type="checkbox" value="1"><span>I agree to be contacted about my membership request. I understand this form records my selection but does not collect or transfer payment.</span></label>
 <label class="md:col-span-2 flex items-start gap-2 text-xs text-on-surface-variant"><input class="mt-0.5" name="membership_terms_accepted" required type="checkbox" value="1"><span>I have read and agree to the <a class="font-bold text-primary underline" href="{{ route('membership.terms') }}" target="_blank" rel="noopener">FLAME PH Membership Terms and Conditions</a>.</span></label>
 <label class="md:col-span-2 flex items-start gap-2 text-xs text-on-surface-variant"><input class="mt-0.5" name="marketing_consent" type="checkbox" value="1"><span>Optional: I agree to receive the FLAME PH and partner marketing communications described in the Terms. I may withdraw this consent later.</span></label>
 @if ($errors->any())<div class="md:col-span-2 rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-800"><ul class="list-disc pl-5">@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
@@ -269,12 +289,13 @@ Facebook
 <div class="rounded-2xl bg-white p-7 shadow-sm border border-outline-variant/40" id="login">
 <span class="font-label text-xs font-bold text-primary uppercase tracking-wider">Already registered?</span>
 <h2 class="font-headline text-xl font-extrabold text-on-surface mt-2 mb-2">Sign in to continue</h2>
-<p class="font-body text-sm text-on-surface-variant mb-5">Use the email from your membership request to return to the next-step handoff.</p>
+<p class="font-body text-sm text-on-surface-variant mb-5">Use the email address and password you created after verifying your email.</p>
 @if (session('login_success'))<p class="mb-4 rounded-lg bg-green-50 border border-green-200 p-3 text-sm text-green-900" role="status">{{ session('login_success') }}</p>@endif
 <form action="{{ route('membership.login') }}" class="space-y-3" method="POST">
 @csrf
+@if ($errors->hasAny(['login_email', 'login_password']))<div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800" role="alert">@error('login_email'){{ $message }}@enderror @error('login_password'){{ $message }}@enderror</div>@endif
 <label class="block font-label text-sm font-bold text-on-surface">Email<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="login_email" required type="email" autocomplete="email"></label>
-<label class="block font-label text-sm font-bold text-on-surface">Password<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="login_password" required type="password" minlength="6" autocomplete="current-password"></label>
+<label class="block font-label text-sm font-bold text-on-surface">Password<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="login_password" required type="password" minlength="12" autocomplete="current-password"></label>
 <button class="w-full rounded-xl bg-surface-container-high px-5 py-3 font-label text-sm font-bold text-primary hover:bg-surface-container" type="submit">Log in to membership</button>
 </form>
 </div>

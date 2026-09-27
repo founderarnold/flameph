@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -252,11 +253,15 @@ class HomeController extends Controller
 
         $validated = $request->validate([
             'requested_plan' => ['required', 'in:starter,micro,neo,pro,champion'],
+            'billing_cycle' => ['required', 'in:monthly,annual'],
             'payment_method' => ['required', 'in:gcash,maya,bank_transfer,cash'],
             'amount_paid' => ['required', 'numeric', 'min:0', 'max:99999999.99'],
         ]);
 
+        $monthlyPrices = ['starter' => 50, 'micro' => 100, 'neo' => 500, 'pro' => 1000, 'champion' => 2000];
         $membership->requested_plan = $validated['requested_plan'];
+        $membership->billing_cycle = $validated['billing_cycle'];
+        $membership->amount_due = $monthlyPrices[$validated['requested_plan']] * ($validated['billing_cycle'] === 'annual' ? 10 : 1);
         $membership->payment_method = $validated['payment_method'];
         $membership->amount_paid = $validated['amount_paid'];
         $membership->payment_status = (float) $validated['amount_paid'] > 0
@@ -329,26 +334,43 @@ class HomeController extends Controller
             'business_name' => ['required', 'string', 'max:160'],
             'plan' => ['required', 'in:free,starter,micro,neo,pro,champion'],
             'billing' => ['required', 'in:monthly,annual'],
+            'mobile_number' => ['required', 'string', 'max:24', 'regex:/^[+]?[0-9][0-9 ()-]{7,19}$/'],
             'payment_method' => ['required', 'in:none,gcash,maya,bank_transfer'],
             'consent' => ['accepted'],
             'membership_terms_accepted' => ['accepted'],
             'marketing_consent' => ['sometimes', 'accepted'],
+        ], [
+            'mobile_number.regex' => 'Enter a valid mobile number, such as 0917 123 4567 or +63 917 123 4567.',
         ]);
 
-        session(['membership_application' => array_merge($validated, [
+        if (($validated['plan'] === 'free') !== ($validated['payment_method'] === 'none')) {
+            return back()->withInput()->withErrors(['payment_method' => $validated['plan'] === 'free'
+                ? 'Select the free community payment option for a free membership.'
+                : 'Choose a payment method for a paid membership tier.']);
+        }
+
+        return $this->sendMembershipEmailOtp($request, [
+            'name' => trim($validated['name']),
+            'email' => strtolower(trim($validated['email'])),
+            'business_name' => trim($validated['business_name']),
+            'mobile_number' => trim($validated['mobile_number']),
+            'plan' => $validated['plan'],
+            'billing' => $validated['billing'],
+            'payment_method' => $validated['payment_method'],
             'terms_accepted_at' => now()->toIso8601String(),
             'terms_version' => '1.0',
             'marketing_consent_at' => $request->boolean('marketing_consent') ? now()->toIso8601String() : null,
-        ])]);
-
-        return redirect()->to(route('membership') . '#next-steps')
-            ->with('registration_success', 'Your FLAME PH membership request is ready.');
+            'registration_source' => 'membership_form_email_otp',
+        ]);
     }
 
-    public function registerMobileMembership(Request $request)
+    public function registerMobileMembership(Request $request): RedirectResponse
     {
         $validated = $request->validate([
+            'name' => ['required', 'string', 'max:120'],
+            'email' => ['required', 'email', 'max:255'],
             'mobile_number' => ['required', 'string', 'max:24', 'regex:/^[+]?[0-9][0-9 ()-]{7,19}$/'],
+            'business_name' => ['nullable', 'string', 'max:160'],
             'mobile_consent' => ['accepted'],
             'membership_terms_accepted' => ['accepted'],
             'marketing_consent' => ['sometimes', 'accepted'],
@@ -356,28 +378,125 @@ class HomeController extends Controller
             'mobile_number.regex' => 'Enter a valid mobile number, such as 0917 123 4567 or +63 917 123 4567.',
         ]);
 
-        $mobileNumber = trim($validated['mobile_number']);
-
-        session([
-            'membership_application' => [
-                'name' => null,
-                'email' => null,
-                'business_name' => null,
-                'mobile_number' => $mobileNumber,
-                'plan' => 'free',
-                'billing' => 'monthly',
-                'payment_method' => 'none',
-                'consent' => true,
-                'auth_provider' => 'mobile',
-                'profile_completion' => 'pending_owner_assistance',
-                'terms_accepted_at' => now()->toIso8601String(),
-                'terms_version' => '1.0',
-                'marketing_consent_at' => $request->boolean('marketing_consent') ? now()->toIso8601String() : null,
-            ],
+        return $this->sendMembershipEmailOtp($request, [
+            'name' => trim($validated['name']),
+            'email' => strtolower(trim($validated['email'])),
+            'business_name' => trim($validated['business_name'] ?? ''),
+            'mobile_number' => trim($validated['mobile_number']),
+            'plan' => 'free',
+            'billing' => 'monthly',
+            'payment_method' => 'none',
+            'terms_accepted_at' => now()->toIso8601String(),
+            'terms_version' => '1.0',
+            'marketing_consent_at' => $request->boolean('marketing_consent') ? now()->toIso8601String() : null,
+            'registration_source' => 'mobile_email_otp',
         ]);
+    }
 
-        return redirect()->to(route('membership') . '#next-steps')
-            ->with('registration_success', 'Your free FLAME PH profile was started with your mobile number. The FLAME PH team can help verify and complete the remaining details.');
+    private function sendMembershipEmailOtp(Request $request, array $application): RedirectResponse
+    {
+        if (in_array(config('mail.default'), ['log', 'array'], true)) {
+            return back()->withInput()->withErrors(['email' => 'Email delivery is not configured, so we could not send a verification code. Please try again later.']);
+        }
+        if (User::where('email', $application['email'])->whereHas('membership')->exists()) {
+            return back()->withInput()->withErrors(['email' => 'An account already exists for this email. Please use the sign-in option or contact FLAME PH for help.']);
+        }
+
+        $code = (string) random_int(100000, 999999);
+        try {
+            Mail::raw("Your FLAME PH membership verification code is {$code}. It expires in 10 minutes. If you did not request this code, you can ignore this email.", function ($message) use ($application) {
+                $message->to($application['email'], $application['name'])->subject('Your FLAME PH membership verification code');
+            });
+        } catch (\Throwable $exception) {
+            report($exception);
+            return back()->withInput()->withErrors(['email' => 'We could not send the verification email right now. Please check your email address and try again.']);
+        }
+
+        $request->session()->put('membership_email_otp', [
+            'hash' => Hash::make($code), 'application' => $application,
+            'expires_at' => now()->addMinutes(10)->timestamp, 'attempts' => 0, 'sent_at' => now()->timestamp,
+        ]);
+        return redirect()->to(route('membership') . '#registration')->with('membership_otp_sent', true);
+    }
+
+    public function resendMembershipEmailOtp(Request $request): RedirectResponse
+    {
+        $pending = $request->session()->get('membership_email_otp');
+        if (!$pending || empty($pending['application'])) {
+            return redirect()->to(route('membership') . '#registration')->withErrors(['email' => 'Start the membership form again to request a new code.']);
+        }
+        if (now()->timestamp - (int) ($pending['sent_at'] ?? 0) < 60) {
+            return redirect()->to(route('membership') . '#registration')->withErrors(['email' => 'Please wait one minute before requesting another code.']);
+        }
+        return $this->sendMembershipEmailOtp($request, $pending['application']);
+    }
+
+    public function verifyMembershipEmailOtp(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'verification_code' => ['required', 'digits:6'],
+            'password' => ['required', 'string', 'min:12', 'confirmed'],
+        ]);
+        $pending = $request->session()->get('membership_email_otp');
+        if (!$pending || empty($pending['application']) || now()->timestamp > (int) ($pending['expires_at'] ?? 0)) {
+            $request->session()->forget('membership_email_otp');
+            return redirect()->to(route('membership') . '#registration')->withErrors(['verification_code' => 'This code expired. Submit the membership form again to receive a new one.']);
+        }
+        if (($pending['attempts'] ?? 0) >= 5) {
+            $request->session()->forget('membership_email_otp');
+            return redirect()->to(route('membership') . '#registration')->withErrors(['verification_code' => 'Too many incorrect attempts. Please submit the form again for a new code.']);
+        }
+        if (!Hash::check($validated['verification_code'], $pending['hash'])) {
+            $pending['attempts']++;
+            $request->session()->put('membership_email_otp', $pending);
+            return redirect()->to(route('membership') . '#registration')->withErrors(['verification_code' => 'That code does not match. Please check the email and try again.']);
+        }
+
+        $application = $pending['application'];
+        try {
+            $member = DB::transaction(function () use ($application, $validated) {
+                $user = User::firstOrNew(['email' => $application['email']]);
+                if (!$user->exists) {
+                    $user->name = $application['name'];
+                }
+                $user->password = $validated['password'];
+                $user->email_verified_at ??= now();
+                $user->save();
+                $paidPlan = $application['plan'] !== 'free';
+                $monthlyPrices = ['starter' => 50, 'micro' => 100, 'neo' => 500, 'pro' => 1000, 'champion' => 2000];
+                $amountDue = $paidPlan ? $monthlyPrices[$application['plan']] * ($application['billing'] === 'annual' ? 10 : 1) : 0;
+
+                return Membership::create([
+                    'user_id' => $user->id, 'full_name' => $application['name'],
+                    'business_name' => $application['business_name'] ?: 'Not provided',
+                    'mobile_number' => $application['mobile_number'], 'plan' => 'free',
+                    'requested_plan' => $paidPlan ? $application['plan'] : null,
+                    'billing_cycle' => $application['billing'], 'amount_due' => $amountDue, 'amount_paid' => 0,
+                    'payment_method' => $application['payment_method'],
+                    'payment_status' => $paidPlan ? 'awaiting_payment' : 'unpaid',
+                    'status' => 'active', 'registration_source' => $application['registration_source'],
+                    'activated_at' => now(), 'terms_accepted_at' => $application['terms_accepted_at'],
+                    'terms_version' => $application['terms_version'], 'marketing_consent_at' => $application['marketing_consent_at'],
+                ]);
+            });
+        } catch (\Throwable $exception) {
+            report($exception);
+            return redirect()->to(route('membership') . '#registration')->withErrors(['verification_code' => 'We verified your email but could not save the membership yet. Please try again.']);
+        }
+
+        $request->session()->forget('membership_email_otp');
+        $request->session()->regenerate();
+        $request->session()->put('membership_application', [
+            'name' => $application['name'], 'email' => $application['email'], 'business_name' => $application['business_name'],
+            'mobile_number' => $application['mobile_number'], 'plan' => 'free',
+            'requested_plan' => $application['plan'] === 'free' ? null : $application['plan'],
+            'billing' => $application['billing'], 'payment_method' => $application['payment_method'],
+            'auth_provider' => 'email_otp', 'account_status' => 'active', 'profile_completion' => 'pending_member_profile',
+            'membership_id' => $member->id, 'terms_accepted_at' => $application['terms_accepted_at'],
+            'terms_version' => $application['terms_version'], 'marketing_consent_at' => $application['marketing_consent_at'],
+        ]);
+        $request->session()->put('membership_logged_in', true);
+        return redirect()->to(route('membership') . '#next-steps')->with('registration_success', 'Your email is verified and your FLAME PH membership has been saved.');
     }
 
     public function redirectToGoogle(Request $request)
@@ -616,20 +735,38 @@ class HomeController extends Controller
     {
         $validated = $request->validate([
             'login_email' => ['required', 'email', 'max:255'],
-            'login_password' => ['required', 'string', 'min:6'],
+            'login_password' => ['required', 'string', 'min:12'],
         ]);
 
-        $application = session('membership_application');
-
-        if (!$application || empty($application['email']) || strtolower($application['email']) !== strtolower($validated['login_email'])) {
+        $user = User::query()->where('email', strtolower(trim($validated['login_email'])))->with('membership')->first();
+        if (!$user || !$user->membership || $user->membership->status !== 'active' || !Hash::check($validated['login_password'], $user->password)) {
             return redirect()->to(route('membership') . '#login')
-                ->withErrors(['login_email' => 'No prototype account was found for this email. Start with registration first.']);
+                ->withErrors(['login_email' => 'Email or password not recognized. Check your details or contact FLAME PH for account help.']);
         }
 
-        session(['membership_logged_in' => true]);
+        $membership = $user->membership;
+        $request->session()->regenerate();
+        $request->session()->put('membership_application', [
+            'name' => $membership->full_name ?: $user->name,
+            'email' => $user->email,
+            'business_name' => $membership->business_name,
+            'mobile_number' => $membership->mobile_number,
+            'plan' => $membership->plan,
+            'requested_plan' => $membership->requested_plan,
+            'billing' => $membership->billing_cycle ?? 'monthly',
+            'payment_method' => $membership->payment_method,
+            'auth_provider' => 'membership_login',
+            'account_status' => 'active',
+            'profile_completion' => $membership->profile_completed_at ? 'complete' : 'pending_member_profile',
+            'membership_id' => $membership->id,
+            'terms_accepted_at' => $membership->terms_accepted_at?->toIso8601String(),
+            'terms_version' => $membership->terms_version,
+            'marketing_consent_at' => $membership->marketing_consent_at?->toIso8601String(),
+        ]);
+        $request->session()->put('membership_logged_in', true);
 
         return redirect()->to(route('membership') . '#next-steps')
-            ->with('login_success', 'You are signed in to the prototype membership area.');
+            ->with('login_success', 'You are signed in to your FLAME PH member account.');
     }
 
     public function directory(MembershipStatistics $statistics): View

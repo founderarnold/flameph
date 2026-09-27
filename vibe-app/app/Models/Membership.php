@@ -20,7 +20,9 @@ class Membership extends Model
         'requested_plan',
         'payment_status',
         'amount_paid',
+        'amount_due',
         'payment_method',
+        'billing_cycle',
         'status',
         'registration_source',
         'activated_at',
@@ -54,6 +56,7 @@ class Membership extends Model
             'terms_accepted_at' => 'datetime',
             'marketing_consent_at' => 'datetime',
             'amount_paid' => 'decimal:2',
+            'amount_due' => 'decimal:2',
         ];
     }
 }
