@@ -18,9 +18,9 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-    public function index(): View
+    public function index(MembershipStatistics $statistics): View
     {
-        return view('home');
+        return view('home', ['membershipStats' => $statistics->summary()]);
     }
 
     public function learn(): View
