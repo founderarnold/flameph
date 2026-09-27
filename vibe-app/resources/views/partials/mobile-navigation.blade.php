@@ -175,6 +175,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   header[data-site-header] [data-site-mobile-menu] { top: 100%; }
 }
 @media (max-width: 767px) {
+  body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important; }
   header[data-site-header] [data-site-announcement] { min-height: 38px; padding: 5px 10px; }
   header[data-site-header] [data-site-announcement] a { font-size: 11px; line-height: 16px; }
   header[data-site-header] [data-site-row] { height: 64px; padding: 0 12px; gap: 8px; }
@@ -198,6 +199,9 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
     background: transparent;
     color: #131b2e;
   }
+  header[data-site-header] [data-site-login],
+  header[data-site-header] [data-site-join],
+  header[data-site-header] [data-site-menu-toggle] { display: none !important; }
   header[data-site-header] [data-site-mobile-menu] {
     position: absolute;
     top: 100%;
@@ -222,7 +226,43 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
     text-decoration: none;
   }
   header[data-site-header] [data-site-mobile-menu] a[aria-current="page"] { color: #003289; background: #f2f3ff; }
+  #site-bottom-navigation {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 70;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    min-height: 64px;
+    padding: 5px 8px calc(5px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid rgba(195, 198, 214, .55);
+    background: rgba(255, 255, 255, .97);
+    box-shadow: 0 -3px 16px rgba(0, 47, 108, .08);
+    backdrop-filter: blur(16px);
+  }
+  #site-bottom-navigation a {
+    display: flex;
+    min-width: 0;
+    min-height: 52px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    border-radius: 10px;
+    color: #4c5060;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #site-bottom-navigation a[aria-current="page"] { color: #003289; font-weight: 700; }
+  #site-bottom-navigation a:focus-visible { outline: 2px solid #003289; outline-offset: -2px; }
+  #site-bottom-navigation svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 }
+@media (min-width: 768px) { #site-bottom-navigation { display: none; } }
 </style>
 <script>
 (() => {
@@ -237,6 +277,12 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
     { label: 'Resources', href: '/learn' },
     { label: 'Directory', href: '/directory' },
     { label: 'About', href: '/about' },
+  ];
+  const mobilePages = [
+    { label: 'Home', href: '/', icon: '<path d="M3 10.8 12 3l9 7.8"></path><path d="M5.5 9.5V21h13V9.5M9 21v-7h6v7"></path>' },
+    { label: 'Membership', href: '/membership', icon: '<rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18M8 15h4"></path>' },
+    { label: 'Events', href: '/events', icon: '<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"></path>' },
+    { label: 'Join', href: '/membership#registration', icon: '<circle cx="9" cy="8" r="4"></circle><path d="M2.5 21v-2a6.5 6.5 0 0 1 10.8-4.9M19 14v7M15.5 17.5h7"></path>' },
   ];
   const navLink = (page, mobile = false) => {
     const active = pathname === page.href;
@@ -259,9 +305,22 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
         <button data-site-menu-toggle type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-mobile-menu"><span class="material-symbols-outlined" data-site-menu-icon>menu</span></button>
       </div>
     </div>
-    <nav data-site-mobile-menu id="site-mobile-menu" aria-label="Mobile navigation">${pages.map((page) => navLink(page, true)).join('')}</nav>
+    <nav data-site-mobile-menu id="site-mobile-menu" aria-label="Tablet navigation">${mobilePages.map((page) => navLink(page, true)).join('')}</nav>
   `;
   previousHeader.replaceWith(header);
+
+  const mobileNavigation = document.createElement('nav');
+  mobileNavigation.id = 'site-bottom-navigation';
+  mobileNavigation.setAttribute('aria-label', 'Mobile navigation');
+  mobileNavigation.innerHTML = mobilePages.map((page) => {
+    const isActive = page.label === 'Join'
+      ? pathname === '/membership' && window.location.hash === '#registration'
+      : page.label === 'Membership'
+        ? pathname.startsWith('/membership')
+        : pathname === page.href;
+    return `<a href="${page.href}"${isActive ? ' aria-current="page"' : ''}><svg viewBox="0 0 24 24" aria-hidden="true">${page.icon}</svg><span>${page.label}</span></a>`;
+  }).join('');
+  document.body.append(mobileNavigation);
 
   const toggle = header.querySelector('[data-site-menu-toggle]');
   const menu = header.querySelector('[data-site-mobile-menu]');

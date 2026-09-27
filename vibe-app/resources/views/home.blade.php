@@ -858,61 +858,6 @@ Walang credit card na kailangan • 2 minuto lang ang pag-sign up
 </div>
 </footer>
 </main>
-<nav class="md:hidden fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/95 backdrop-blur-xl border-t border-surface-container/80 shadow-[0_-2px_16px_rgba(0,71,186,0.08)]" data-active-classes="text-primary font-bold">
-<div class="flex justify-around items-center h-16 px-space-xs">
-<a aria-current="page" class="flex flex-col items-center justify-center gap-1 w-16 h-12 transition-colors text-primary font-bold" data-path="public-home" href="/">
-<span class="material-symbols-outlined text-[22px]">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
-</a>
-<a class="flex flex-col items-center justify-center gap-1 w-16 h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="msme-directory" href="/directory">
-<span class="material-symbols-outlined text-[22px]">store</span>
-<span class="font-label-sm text-label-sm">Directory</span>
-</a>
-<a class="flex flex-col items-center justify-center gap-1 w-16 h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="learning-hub" href="/learn">
-<span class="material-symbols-outlined text-[22px]">school</span>
-<span class="font-label-sm text-label-sm">Resources</span>
-</a>
-<a class="flex flex-col items-center justify-center gap-1 w-16 h-12 text-on-surface-variant hover:text-primary transition-colors" data-path="about-flame" href="/about">
-<span class="material-symbols-outlined text-[22px]">badge</span>
-<span class="font-label-sm text-label-sm">Sali</span>
-</a>
-</div>
-</nav>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.getElementById('mobile-menu-toggle');
-    const menu = document.getElementById('mobile-menu');
-    const backdrop = document.getElementById('mobile-menu-backdrop');
-
-    if (!toggle || !menu) return;
-
-    const setMenuOpen = (isOpen) => {
-      menu.classList.toggle('hidden', !isOpen);
-      backdrop?.classList.toggle('hidden', !isOpen);
-      document.body.classList.toggle('overflow-hidden', isOpen);
-      toggle.setAttribute('aria-expanded', String(isOpen));
-      toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
-      toggle.querySelector('[data-menu-icon]').textContent = isOpen ? 'close' : 'menu';
-    };
-
-    toggle.addEventListener('click', () => {
-      setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true');
-    });
-
-    backdrop?.addEventListener('click', () => setMenuOpen(false));
-
-    menu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => setMenuOpen(false));
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-        setMenuOpen(false);
-        toggle.focus();
-      }
-    });
-  });
-</script>
 @include('partials.mobile-navigation')
 </body>
 </html>
