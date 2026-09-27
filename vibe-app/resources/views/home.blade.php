@@ -181,7 +181,7 @@
 <span class="text-sm">🔥</span>
 <span class="font-label-sm text-label-sm text-primary uppercase tracking-wider font-bold">FLAME PH • National MSME Community</span>
 </div>
-<h1 class="font-headline-lg-mobile sm:text-4xl lg:text-[46px] sm:leading-[1.15] lg:leading-[1.18] text-on-surface font-extrabold tracking-tight">
+<h1 class="font-headline-lg-mobile text-[40px] leading-[1.12] sm:text-[40px] lg:text-[46px] sm:leading-[1.15] lg:leading-[1.18] text-on-surface font-extrabold tracking-tight">
 Hindi kailangang mag-start at mag-grow ng business nang <span class="text-primary underline decoration-secondary decoration-4 underline-offset-4">mag-isa.</span>
 </h1>
 <p class="font-body-md sm:text-body-lg text-on-surface-variant font-medium max-w-2xl leading-relaxed">

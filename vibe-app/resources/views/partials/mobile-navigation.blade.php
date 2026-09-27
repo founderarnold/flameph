@@ -119,6 +119,7 @@ header[data-site-header] [data-site-search] input {
   color: #131b2e;
   font-size: 14px;
 }
+header[data-site-header] [data-site-search-toggle] { display: none; }
 header[data-site-header] [data-site-login] {
   display: inline-flex;
   align-items: center;
@@ -151,6 +152,7 @@ header[data-site-header] [data-site-join] {
   white-space: nowrap;
   box-shadow: 0 4px 12px rgba(188, 0, 12, .22);
 }
+header[data-site-header] [data-site-join] svg { width: 18px; height: 18px; flex: 0 0 18px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 header[data-site-header] [data-site-menu-toggle] { display: none; }
 header[data-site-header] [data-site-mobile-menu] { display: none; }
 @media (min-width: 1280px) {
@@ -178,19 +180,23 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important; }
   header[data-site-header] [data-site-announcement] { min-height: 38px; padding: 5px 10px; }
   header[data-site-header] [data-site-announcement] a { font-size: 11px; line-height: 16px; }
-  header[data-site-header] [data-site-row] { position: relative; display: grid; grid-template-columns: minmax(88px, 1fr) auto; align-items: start; height: 112px; padding: 10px 12px 48px; gap: 6px; }
+  header[data-site-header] [data-site-row] { position: relative; display: grid; grid-template-columns: minmax(88px, 1fr) auto; align-items: start; height: 64px; padding: 10px 12px; gap: 6px; }
   header[data-site-header] [data-site-brand-nav] { min-width: 0; }
   header[data-site-header] [data-site-logo-link], header[data-site-header] [data-site-logo] { width: 104px; }
   header[data-site-header] [data-site-logo-link] { flex-basis: 104px; }
   header[data-site-header] [data-site-logo] { height: 40px; }
   header[data-site-header] [data-site-primary-nav] { display: none; }
   header[data-site-header] [data-site-actions] { display: flex; align-items: center; gap: 4px; }
-  header[data-site-header] [data-site-search] { position: absolute; right: 12px; bottom: 7px; left: 12px; display: flex; width: auto; height: 36px; }
+  header[data-site-header] [data-site-search] { position: absolute; right: 12px; bottom: 7px; left: 12px; display: none; width: auto; height: 36px; }
+  header[data-site-header][data-search-open="true"] [data-site-row] { height: 112px; padding-bottom: 48px; }
+  header[data-site-header][data-search-open="true"] [data-site-search] { display: flex; }
+  header[data-site-header] [data-site-search-toggle] { display: inline-flex; width: 36px; height: 38px; align-items: center; justify-content: center; border: 0; border-radius: 9px; background: #f2f3ff; color: #003289; }
   header[data-site-header] [data-site-login] { width: 36px; min-height: 38px; padding: 0; border-radius: 9px; background: #f2f3ff; }
   header[data-site-header] [data-site-login] [data-login-label] { display: none; }
   header[data-site-header] [data-site-login] [data-login-icon] { display: inline-block; font-size: 22px; }
   header[data-site-header] [data-site-join] { min-height: 38px; padding: 0 9px; font-size: 12px; }
   header[data-site-header] [data-site-join] .material-symbols-outlined { display: none; }
+  header[data-site-header] [data-site-join] svg { width: 18px; height: 18px; flex: 0 0 18px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
   header[data-site-header] [data-site-menu-toggle] {
     display: inline-flex;
     width: 36px;
@@ -201,6 +207,11 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
     border-radius: 10px;
     background: transparent;
     color: #131b2e;
+  }
+  @media (max-width: 380px) {
+    header[data-site-header] [data-site-logo-link], header[data-site-header] [data-site-logo] { width: 88px; }
+    header[data-site-header] [data-site-logo-link] { flex-basis: 88px; }
+    header[data-site-header] [data-site-join] { gap: 4px; padding: 0 6px; }
   }
   header[data-site-header] [data-site-mobile-menu] {
     position: absolute;
@@ -300,14 +311,25 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
       </div>
       <div data-site-actions>
         <label data-site-search><span class="material-symbols-outlined">search</span><input type="search" placeholder="Search FLAME PH" aria-label="Search FLAME PH"></label>
+        <button data-site-search-toggle type="button" aria-label="Open search" aria-expanded="false"><span class="material-symbols-outlined" aria-hidden="true">search</span></button>
         <a data-site-login href="/membership#login" aria-label="Log in"><span data-login-icon class="material-symbols-outlined" aria-hidden="true">login</span><span data-login-label>Log In</span></a>
-        <a data-site-join href="/membership#registration">Join Free <span class="material-symbols-outlined">arrow_forward</span></a>
+        <a data-site-join href="/membership#registration"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="4"></circle><path d="M2.5 21v-2a6.5 6.5 0 0 1 10.8-4.9M19 14v7M15.5 17.5h7"></path></svg><span>Join</span><span class="material-symbols-outlined">arrow_forward</span></a>
         <button data-site-menu-toggle type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-mobile-menu"><span class="material-symbols-outlined" data-site-menu-icon>menu</span></button>
       </div>
     </div>
     <nav data-site-mobile-menu id="site-mobile-menu" aria-label="Main navigation menu">${pages.map((page) => navLink(page, true)).join('')}</nav>
   `;
   previousHeader.replaceWith(header);
+
+  const searchToggle = header.querySelector('[data-site-search-toggle]');
+  const searchInput = header.querySelector('[data-site-search] input');
+  searchToggle.addEventListener('click', () => {
+    const isOpen = header.getAttribute('data-search-open') === 'true';
+    header.setAttribute('data-search-open', String(!isOpen));
+    searchToggle.setAttribute('aria-expanded', String(!isOpen));
+    searchToggle.setAttribute('aria-label', isOpen ? 'Open search' : 'Close search');
+    if (!isOpen) searchInput.focus();
+  });
 
   const mobileNavigation = document.createElement('nav');
   mobileNavigation.id = 'site-bottom-navigation';
