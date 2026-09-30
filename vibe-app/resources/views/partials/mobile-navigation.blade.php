@@ -194,7 +194,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   header[data-site-header] [data-site-login] { width: 36px; min-height: 38px; padding: 0; border-radius: 9px; background: #f2f3ff; }
   header[data-site-header] [data-site-login] [data-login-label] { display: none; }
   header[data-site-header] [data-site-login] [data-login-icon] { display: inline-block; font-size: 22px; }
-  header[data-site-header] [data-site-join] { min-height: 38px; padding: 0 9px; font-size: 12px; }
+  header[data-site-header] [data-site-join] { display: none; }
   header[data-site-header] [data-site-join] .material-symbols-outlined { display: none; }
   header[data-site-header] [data-site-join] svg { width: 18px; height: 18px; flex: 0 0 18px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
   header[data-site-header] [data-site-menu-toggle] {
