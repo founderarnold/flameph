@@ -194,9 +194,6 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   header[data-site-header] [data-site-login] { width: 36px; min-height: 38px; padding: 0; border-radius: 9px; background: #f2f3ff; }
   header[data-site-header] [data-site-login] [data-login-label] { display: none; }
   header[data-site-header] [data-site-login] [data-login-icon] { display: inline-block; font-size: 22px; }
-  header[data-site-header] [data-site-join] { display: none; }
-  header[data-site-header] [data-site-join] .material-symbols-outlined { display: none; }
-  header[data-site-header] [data-site-join] svg { width: 18px; height: 18px; flex: 0 0 18px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
   header[data-site-header] [data-site-menu-toggle] {
     display: inline-flex;
     width: 36px;
@@ -211,7 +208,6 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   @media (max-width: 380px) {
     header[data-site-header] [data-site-logo-link], header[data-site-header] [data-site-logo] { width: 88px; }
     header[data-site-header] [data-site-logo-link] { flex-basis: 88px; }
-    header[data-site-header] [data-site-join] { gap: 4px; padding: 0 6px; }
   }
   header[data-site-header] [data-site-mobile-menu] {
     position: absolute;
@@ -305,9 +301,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
     { label: 'Home', href: '/', icon: '<path d="M3 10.8 12 3l9 7.8"></path><path d="M5.5 9.5V21h13V9.5M9 21v-7h6v7"></path>' },
     { label: 'Membership', href: '/membership', icon: '<rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18M8 15h4"></path>' },
     { label: 'Events', href: '/events', icon: '<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"></path>' },
-    @if($showMemberShop)
     { label: 'Support Us', href: '/about/merch-shop', icon: '<path d="M3 9h18l-1.5 12h-15L3 9Z"></path><path d="M8 9a4 4 0 0 1 8 0"></path>' },
-    @endif
   ];
   const navLink = (page, mobile = false) => {
     const active = pathname === page.href;
@@ -327,7 +321,6 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
         <label data-site-search><span class="material-symbols-outlined">search</span><input type="search" placeholder="Search FLAME PH" aria-label="Search FLAME PH"></label>
         <button data-site-search-toggle type="button" aria-label="Open search" aria-expanded="false"><span class="material-symbols-outlined" aria-hidden="true">search</span></button>
         <a data-site-login href="/membership#login" aria-label="Log in"><span data-login-icon class="material-symbols-outlined" aria-hidden="true">login</span><span data-login-label>Log In</span></a>
-        <a data-site-join href="/membership#registration"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="4"></circle><path d="M2.5 21v-2a6.5 6.5 0 0 1 10.8-4.9M19 14v7M15.5 17.5h7"></path></svg><span>Join</span><span class="material-symbols-outlined">arrow_forward</span></a>
         <button data-site-menu-toggle type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-mobile-menu"><span class="material-symbols-outlined" data-site-menu-icon>menu</span></button>
       </div>
     </div>
