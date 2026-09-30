@@ -305,7 +305,9 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
     { label: 'Home', href: '/', icon: '<path d="M3 10.8 12 3l9 7.8"></path><path d="M5.5 9.5V21h13V9.5M9 21v-7h6v7"></path>' },
     { label: 'Membership', href: '/membership', icon: '<rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18M8 15h4"></path>' },
     { label: 'Events', href: '/events', icon: '<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"></path>' },
-    { label: 'Join', href: '/membership#registration', icon: '<circle cx="9" cy="8" r="4"></circle><path d="M2.5 21v-2a6.5 6.5 0 0 1 10.8-4.9M19 14v7M15.5 17.5h7"></path>' },
+    @if($showMemberShop)
+    { label: 'Support Us', href: '/about/merch-shop', icon: '<path d="M3 9h18l-1.5 12h-15L3 9Z"></path><path d="M8 9a4 4 0 0 1 8 0"></path>' },
+    @endif
   ];
   const navLink = (page, mobile = false) => {
     const active = pathname === page.href;
@@ -347,9 +349,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   mobileNavigation.id = 'site-bottom-navigation';
   mobileNavigation.setAttribute('aria-label', 'Mobile navigation');
   mobileNavigation.innerHTML = mobilePages.map((page) => {
-    const isActive = page.label === 'Join'
-      ? pathname === '/membership' && window.location.hash === '#registration'
-      : page.label === 'Membership'
+    const isActive = page.label === 'Membership'
         ? pathname.startsWith('/membership')
         : pathname === page.href;
     return `<a href="${page.href}"${isActive ? ' aria-current="page"' : ''}><svg viewBox="0 0 24 24" aria-hidden="true">${page.icon}</svg><span>${page.label}</span></a>`;
