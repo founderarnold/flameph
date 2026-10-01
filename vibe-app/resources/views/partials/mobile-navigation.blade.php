@@ -289,18 +289,20 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   if (!previousHeader) return;
 
   const pathname = window.location.pathname.replace(/\/$/, '') || '/';
+  // Keep the shared header aligned with the current FLAME PH homepage IA.
+  // The homepage itself is not the only place this header is rendered: this
+  // partial replaces the server-rendered header on every public page.
   const pages = [
-    { label: 'Home', href: '/' },
+    { label: 'What We Do', href: '/learn' },
     { label: 'Membership', href: '/membership' },
-    { label: 'Events', href: '/events' },
-    { label: 'Resources', href: '/learn' },
-    { label: 'Directory', href: '/directory' },
-    { label: 'About', href: '/about' },
+    { label: 'Support Us', href: '/about/merch-shop' },
+    { label: 'Get Involved', href: '/events' },
+    { label: 'About Us', href: '/about' },
   ];
   const mobilePages = [
     { label: 'Home', href: '/', icon: '<path d="M3 10.8 12 3l9 7.8"></path><path d="M5.5 9.5V21h13V9.5M9 21v-7h6v7"></path>' },
     { label: 'Membership', href: '/membership', icon: '<rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18M8 15h4"></path>' },
-    { label: 'Events', href: '/events', icon: '<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"></path>' },
+    { label: 'Happenings', href: '/events', icon: '<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"></path>' },
     { label: 'Support Us', href: '/about/merch-shop', icon: '<path d="M3 9h18l-1.5 12h-15L3 9Z"></path><path d="M8 9a4 4 0 0 1 8 0"></path>' },
   ];
   const navLink = (page, mobile = false) => {
@@ -324,7 +326,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
         <button data-site-menu-toggle type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-mobile-menu"><span class="material-symbols-outlined" data-site-menu-icon>menu</span></button>
       </div>
     </div>
-    <nav data-site-mobile-menu id="site-mobile-menu" aria-label="Main navigation menu">${pages.map((page) => navLink(page, true)).join('')}</nav>
+    <nav data-site-mobile-menu id="site-mobile-menu" aria-label="Main navigation menu"><a href="/">Home</a>${pages.map((page) => navLink(page, true)).join('')}</nav>
   `;
   previousHeader.replaceWith(header);
 
