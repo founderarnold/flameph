@@ -90,6 +90,57 @@ header[data-site-header] [data-site-primary-nav] a[aria-current="page"] {
   border-bottom: 2px solid #003289;
   font-weight: 700;
 }
+header[data-site-header] [data-site-nav-item] { position: relative; }
+header[data-site-header] [data-site-nav-trigger] {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #434653;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color .15s, background-color .15s;
+}
+header[data-site-header] [data-site-nav-trigger]:hover,
+header[data-site-header] [data-site-nav-trigger][aria-expanded="true"] { color: #003289; background: #f2f3ff; }
+header[data-site-header] [data-site-nav-trigger] svg { width: 14px; height: 14px; transition: transform .15s; }
+header[data-site-header] [data-site-nav-trigger][aria-expanded="true"] svg { transform: rotate(180deg); }
+header[data-site-header] [data-site-dropdown] {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 80;
+  display: none;
+  min-width: 220px;
+  padding: 8px;
+  border: 1px solid #eaedff;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 14px 28px rgba(19, 27, 46, .16);
+}
+header[data-site-header] [data-site-dropdown][data-open="true"] { display: block; }
+header[data-site-header] [data-site-dropdown] a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 9px;
+  color: #434653;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+header[data-site-header] [data-site-dropdown] a:hover,
+header[data-site-header] [data-site-dropdown] a:focus-visible { color: #003289; background: #f2f3ff; outline: none; }
 header[data-site-header] [data-site-actions] {
   flex: 0 0 auto;
   display: flex;
@@ -233,6 +284,23 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
     text-decoration: none;
   }
   header[data-site-header] [data-site-mobile-menu] a[aria-current="page"] { color: #003289; background: #f2f3ff; }
+  header[data-site-header] [data-site-mobile-menu] [data-site-nav-item] { position: static; }
+  header[data-site-header] [data-site-mobile-menu] [data-site-nav-trigger] {
+    width: 100%;
+    justify-content: space-between;
+    font: inherit;
+    font-weight: 600;
+    text-align: left;
+  }
+  header[data-site-header] [data-site-mobile-menu] [data-site-dropdown] {
+    position: static;
+    min-width: 0;
+    padding: 0 0 4px 14px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  header[data-site-header] [data-site-mobile-menu] [data-site-dropdown] a { font-size: 14px; }
   #site-bottom-navigation {
     position: fixed;
     right: 0;
@@ -293,21 +361,22 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   // The homepage itself is not the only place this header is rendered: this
   // partial replaces the server-rendered header on every public page.
   const pages = [
-    { label: 'What We Do', href: '/learn' },
-    { label: 'Membership', href: '/membership' },
-    { label: 'Support Us', href: '/about/merch-shop' },
-    { label: 'Get Involved', href: '/events' },
-    { label: 'About Us', href: '/about' },
+    { label: 'What We Do', items: [{ label: 'Learning Hub', href: '/learn' }, { label: 'MSME Directory', href: '/directory' }] },
+    { label: 'Membership', items: [{ label: 'Join FLAME PH Free', href: '/membership#registration' }, { label: 'Membership Options', href: '/membership' }, { label: 'Member Login', href: '/membership#login' }] },
+    { label: 'Support Us', items: [{ label: 'Shop / Support Us', href: '/about/merch-shop' }, { label: 'Partner Ecosystem', href: '/about#partners' }, { label: 'Contact FLAME PH', href: '/about#contact' }] },
+    { label: 'Get Involved', items: [{ label: 'Events & Happenings', href: '/events' }, { label: 'Community Hubs', href: '/directory' }, { label: 'Join a Chapter', href: '/events#bring-flame-ph' }] },
+    { label: 'About Us', items: [{ label: 'About FLAME PH', href: '/about' }, { label: 'Our Story', href: '/about' }, { label: 'Legal & Privacy', href: '/legal' }] },
   ];
   const mobilePages = [
     { label: 'Home', href: '/', icon: '<path d="M3 10.8 12 3l9 7.8"></path><path d="M5.5 9.5V21h13V9.5M9 21v-7h6v7"></path>' },
     { label: 'Membership', href: '/membership', icon: '<rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18M8 15h4"></path>' },
-    { label: 'Happenings', href: '/events', icon: '<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"></path>' },
+    { label: 'Get Involved', href: '/events', icon: '<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"></path>' },
     { label: 'Support Us', href: '/about/merch-shop', icon: '<path d="M3 9h18l-1.5 12h-15L3 9Z"></path><path d="M8 9a4 4 0 0 1 8 0"></path>' },
   ];
-  const navLink = (page, mobile = false) => {
-    const active = pathname === page.href;
-    return `<a href="${page.href}"${active ? ' aria-current="page"' : ''}${mobile ? '' : ''}>${page.label}</a>`;
+  const navItem = (page, mobile = false) => {
+    const id = `site-nav-${page.label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}${mobile ? '-mobile' : ''}`;
+    const items = page.items.map((item) => `<a href="${item.href}" role="menuitem">${item.label}</a>`).join('');
+    return `<div data-site-nav-item><button type="button" data-site-nav-trigger aria-expanded="false" aria-controls="${id}">${page.label}<svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div id="${id}" data-site-dropdown role="menu">${items}</div></div>`;
   };
 
   const header = document.createElement('header');
@@ -317,16 +386,17 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
     <div data-site-row>
       <div data-site-brand-nav>
         <a data-site-logo-link href="/"><img data-site-logo alt="FLAME PH logo" src="/assets/images/flameph-logo.png"></a>
-        <nav data-site-primary-nav aria-label="Primary navigation">${pages.map((page) => navLink(page)).join('')}</nav>
+        <nav data-site-primary-nav aria-label="Primary navigation">${pages.map((page) => navItem(page)).join('')}</nav>
       </div>
       <div data-site-actions>
         <label data-site-search><span class="material-symbols-outlined">search</span><input type="search" placeholder="Search FLAME PH" aria-label="Search FLAME PH"></label>
         <button data-site-search-toggle type="button" aria-label="Open search" aria-expanded="false"><span class="material-symbols-outlined" aria-hidden="true">search</span></button>
         <a data-site-login href="/membership#login" aria-label="Log in"><span data-login-icon class="material-symbols-outlined" aria-hidden="true">login</span><span data-login-label>Log In</span></a>
+        <a data-site-join href="/membership#registration"><span>Join Free</span><span aria-hidden="true">→</span></a>
         <button data-site-menu-toggle type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-mobile-menu"><span class="material-symbols-outlined" data-site-menu-icon>menu</span></button>
       </div>
     </div>
-    <nav data-site-mobile-menu id="site-mobile-menu" aria-label="Main navigation menu"><a href="/">Home</a>${pages.map((page) => navLink(page, true)).join('')}</nav>
+    <nav data-site-mobile-menu id="site-mobile-menu" aria-label="Main navigation menu"><a href="/">Home</a>${pages.map((page) => navItem(page, true)).join('')}</nav>
   `;
   previousHeader.replaceWith(header);
 
@@ -353,6 +423,24 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
 
   const toggle = header.querySelector('[data-site-menu-toggle]');
   const menu = header.querySelector('[data-site-mobile-menu]');
+  const closeDropdowns = (except = null) => header.querySelectorAll('[data-site-dropdown][data-open="true"]').forEach((dropdown) => {
+    if (dropdown !== except) {
+      dropdown.dataset.open = 'false';
+      dropdown.parentElement.querySelector('[data-site-nav-trigger]')?.setAttribute('aria-expanded', 'false');
+    }
+  });
+  header.querySelectorAll('[data-site-nav-trigger]').forEach((trigger) => {
+    const dropdown = trigger.parentElement.querySelector('[data-site-dropdown]');
+    trigger.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const open = trigger.getAttribute('aria-expanded') === 'true';
+      closeDropdowns(dropdown);
+      dropdown.dataset.open = String(!open);
+      trigger.setAttribute('aria-expanded', String(!open));
+    });
+  });
+  header.querySelectorAll('[data-site-dropdown] a').forEach((link) => link.addEventListener('click', () => closeDropdowns()));
+  document.addEventListener('click', () => closeDropdowns());
   const setMenuOpen = (open) => {
     menu.dataset.open = String(open);
     toggle.setAttribute('aria-expanded', String(open));
@@ -361,7 +449,10 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
     document.body.classList.toggle('overflow-hidden', open);
   };
   toggle.addEventListener('click', () => setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true'));
-  menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenuOpen(false)));
+  menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+    closeDropdowns();
+    setMenuOpen(false);
+  }));
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') setMenuOpen(false);
   });
