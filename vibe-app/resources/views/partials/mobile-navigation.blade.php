@@ -119,7 +119,8 @@ header[data-site-header] [data-site-dropdown] {
   left: 0;
   z-index: 80;
   display: none;
-  min-width: 220px;
+  min-width: 268px;
+  max-width: min(360px, calc(100vw - 32px));
   padding: 8px;
   border: 1px solid #eaedff;
   border-radius: 14px;
@@ -137,7 +138,7 @@ header[data-site-header] [data-site-dropdown] a {
   line-height: 18px;
   font-weight: 600;
   text-decoration: none;
-  white-space: nowrap;
+  white-space: normal;
 }
 header[data-site-header] [data-site-dropdown] a:hover,
 header[data-site-header] [data-site-dropdown] a:focus-visible { color: #003289; background: #f2f3ff; outline: none; }
@@ -361,11 +362,50 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   // The homepage itself is not the only place this header is rendered: this
   // partial replaces the server-rendered header on every public page.
   const pages = [
-    { label: 'What We Do', items: [{ label: 'Learning Hub', href: '/learn' }, { label: 'MSME Directory', href: '/directory' }] },
-    { label: 'Membership', items: [{ label: 'Join FLAME PH Free', href: '/membership#registration' }, { label: 'Membership Options', href: '/membership' }, { label: 'Member Login', href: '/membership#login' }] },
-    { label: 'Support Us', items: [{ label: 'Shop / Support Us', href: '/about/merch-shop' }, { label: 'Partner Ecosystem', href: '/about#partners' }, { label: 'Contact FLAME PH', href: '/about#contact' }] },
-    { label: 'Get Involved', items: [{ label: 'Events & Happenings', href: '/events' }, { label: 'Community Hubs', href: '/directory' }, { label: 'Join a Chapter', href: '/events#bring-flame-ph' }] },
-    { label: 'About Us', items: [{ label: 'About FLAME PH', href: '/about' }, { label: 'Our Story', href: '/about' }, { label: 'Legal & Privacy', href: '/legal' }] },
+    { label: 'What We Do', items: [
+      { label: 'Programs for MSMEs', href: '/learn' },
+      { label: 'Educational Workshops', href: '/events' },
+      { label: 'Trainings & Webinars', href: '/learn' },
+      { label: 'Expos & Summits', href: '/events' },
+      { label: 'Annual Awards for MSMEs', href: '/events#awards' },
+    ] },
+    { label: 'Membership', items: [
+      { label: 'Benefits', href: '/membership#membership-tiers' },
+      { label: 'Access More Benefits', href: '/membership' },
+      { label: 'Resources', href: '/learn' },
+      { label: 'Advocacy', href: '/about' },
+      { label: 'Chapters Near You', href: '/directory' },
+      { label: 'Featured Members', href: '/directory' },
+      { label: 'Volunteering', href: '/events' },
+      { label: 'Free POS for MSMEs', href: '/learn' },
+      { label: 'Free Business Directory', href: '/directory' },
+      { label: 'Free Consultation @ Flame AI', href: '/about#contact' },
+    ] },
+    { label: 'Support Us', items: [
+      { label: 'FLAME PH Merchs', href: '/about/merch-shop' },
+      { label: 'Flame Signature Brands', href: '/about/merch-shop' },
+      { label: 'Personalized by FLAMEPH', href: '/about/merch-shop' },
+      { label: 'Shop @ MarketplacePH', href: '/about/merch-shop' },
+      { label: 'Start & Grow @ NegosyoDepot', href: '/about/merch-shop' },
+      { label: 'Fulfillment by MSMEs', href: '/about/merch-shop' },
+    ] },
+    { label: 'Get Involved', items: [
+      { label: 'Volunteer as Mentor', href: '/events' },
+      { label: 'Join as Partner', href: '/about#partners' },
+      { label: 'Sponsor an Event', href: '/events' },
+      { label: 'Sponsor a Community', href: '/about#contact' },
+      { label: 'Nominate an MSME Awardee', href: '/events#awards' },
+      { label: 'Support Poverty Alleviation Program', href: '/about#contact' },
+      { label: 'News & Updates', href: '/events' },
+    ] },
+    { label: 'About Us', items: [
+      { label: 'What is FLAME PH', href: '/about' },
+      { label: 'Meet the Founders', href: '/about#founders' },
+      { label: 'Meet the Teams', href: '/about#teams' },
+      { label: 'Featured Chapters', href: '/directory' },
+      { label: 'Featured Members', href: '/directory' },
+      { label: 'Featured Partners', href: '/about#partners' },
+    ] },
   ];
   const mobilePages = [
     { label: 'Home', href: '/', icon: '<path d="M3 10.8 12 3l9 7.8"></path><path d="M5.5 9.5V21h13V9.5M9 21v-7h6v7"></path>' },
