@@ -30,6 +30,21 @@ class HomeController extends Controller
         return view('learn');
     }
 
+    public function programsEcosystem(): View
+    {
+        return view('programs-ecosystem');
+    }
+
+    public function getInvolved(): View
+    {
+        return view('get-involved');
+    }
+
+    public function flamephMerchs(): View
+    {
+        return view('flameph-merchs');
+    }
+
     public function membership(MembershipStatistics $statistics): View
     {
         return view('membership', ['membershipStats' => $statistics->summary()]);

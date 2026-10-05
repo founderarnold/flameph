@@ -363,7 +363,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   // partial replaces the server-rendered header on every public page.
   const pages = [
     { label: 'What We Do', items: [
-      { label: 'Programs for MSMEs', href: '/learn' },
+      { label: 'Programs & MSME Ecosystem', href: '/programs-ecosystem' },
       { label: 'Educational Workshops', href: '/events' },
       { label: 'Trainings & Webinars', href: '/learn' },
       { label: 'Expos & Summits', href: '/events' },
@@ -382,7 +382,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
       { label: 'Free Consultation @ Flame AI', href: '/about#contact' },
     ] },
     { label: 'Support Us', items: [
-      { label: 'FLAME PH Merchs', href: '/about/merch-shop' },
+      { label: 'FLAME PH Merchs', href: '/flameph-merchs' },
       { label: 'Flame Signature Brands', href: '/about/merch-shop' },
       { label: 'Personalized by FLAMEPH', href: '/about/merch-shop' },
       { label: 'Shop or Sell @ MarketplacePH', href: '/about/merch-shop' },
@@ -390,11 +390,11 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
       { label: 'Fulfillment by MSMEs', href: '/about/merch-shop' },
     ] },
     { label: 'Get Involved', items: [
-      { label: 'Volunteer as Mentor', href: '/events' },
-      { label: 'Join as Partner', href: '/about#partners' },
-      { label: 'Sponsor an Event', href: '/events' },
-      { label: 'Sponsor a Community', href: '/about#contact' },
-      { label: 'Nominate an MSME Awardee', href: '/events#awards' },
+      { label: 'Volunteer as Mentor', href: '/get-involved' },
+      { label: 'Join as Partner', href: '/get-involved' },
+      { label: 'Sponsor an Event', href: '/get-involved' },
+      { label: 'Sponsor a Community', href: '/get-involved' },
+      { label: 'Nominate an MSME Awardee', href: '/get-involved' },
       { label: 'Support Poverty Alleviation Program', href: '/about#contact' },
       { label: 'News & Updates', href: '/events' },
     ] },

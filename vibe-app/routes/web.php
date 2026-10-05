@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/sitemap.xml', function () {
     $urls = [
         'https://www.flameph.org/',
+        'https://www.flameph.org/programs-ecosystem',
+        'https://www.flameph.org/get-involved',
         'https://www.flameph.org/about',
         'https://www.flameph.org/learn',
         'https://www.flameph.org/membership',
@@ -33,6 +35,9 @@ Route::get('/favicon.png', function () {
 })->name('favicon');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/programs-ecosystem', [HomeController::class, 'programsEcosystem'])->name('programs.ecosystem');
+Route::get('/get-involved', [HomeController::class, 'getInvolved'])->name('get-involved');
+Route::get('/flameph-merchs', [HomeController::class, 'flamephMerchs'])->name('flameph.merchs');
 Route::get('/learn', [HomeController::class, 'learn'])->name('learn');
 Route::redirect('/community', '/directory', 301)->name('community');
 Route::get('/membership', [HomeController::class, 'membership'])->name('membership');

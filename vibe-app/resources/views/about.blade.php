@@ -4,43 +4,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface": "#faf8ff", "tertiary": "#533200", "inverse-primary": "#b3c5ff", "surface-bright": "#faf8ff", "primary-fixed": "#dbe1ff", "surface-container-high": "#e2e7ff", "surface-container-highest": "#dae2fd", "error": "#ba1a1a", "tertiary-fixed-dim": "#ffb95f", "on-tertiary": "#ffffff", "outline": "#737685", "on-tertiary-fixed-variant": "#653e00", "on-surface-variant": "#434653", "surface-dim": "#d2d9f4", "outline-variant": "#c3c6d6", "on-primary-fixed-variant": "#003ea6", "inverse-on-surface": "#eef0ff", "on-secondary-container": "#fffbff", "on-background": "#131b2e", "on-secondary": "#ffffff", "inverse-surface": "#283044", "background": "#faf8ff", "on-secondary-fixed": "#410001", "on-secondary-fixed-variant": "#930007", "surface-tint": "#2156c9", "on-tertiary-fixed": "#2a1700", "error-container": "#ffdad6", "secondary-fixed-dim": "#ffb4aa", "tertiary-container": "#724700", "surface-container": "#eaedff", "on-primary": "#ffffff", "on-error-container": "#93000a", "surface-container-low": "#f2f3ff", "surface-variant": "#dae2fd", "on-tertiary-container": "#ffb451", "on-error": "#ffffff", "on-surface": "#131b2e", "on-primary-container": "#aec1ff", "primary-container": "#0047ba", "tertiary-fixed": "#ffddb8", "on-primary-fixed": "#00174a", "primary": "#003289", "primary-fixed-dim": "#b3c5ff", "secondary": "#bc000c", "secondary-container": "#e81218", "surface-container-lowest": "#ffffff", "secondary-fixed": "#ffdad5" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "gutter": "1.5rem", "space-sm": "0.5rem", "space-md": "1rem", "gutter-sm": "1rem", "space-xl": "2.5rem", "margin": "2rem" }, "fontFamily": { "label-sm": [ "Plus Jakarta Sans" ], "body-lg": [ "DM Sans" ], "headline-sm": [ "Plus Jakarta Sans" ], "headline-md": [ "Plus Jakarta Sans" ], "headline-lg-mobile": [ "Plus Jakarta Sans" ], "body-md": [ "DM Sans" ], "display-lg": [ "Plus Jakarta Sans" ], "title-md": [ "Plus Jakarta Sans" ], "label-md": [ "Plus Jakarta Sans" ], "headline-lg": [ "Plus Jakarta Sans" ], "body-sm": [ "DM Sans" ] }, "fontSize": { "label-sm": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" } ], "body-lg": [ "18px", { "lineHeight": "28px", "fontWeight": "400" } ], "headline-sm": [ "22px", { "lineHeight": "30px", "fontWeight": "600" } ], "headline-md": [ "28px", { "lineHeight": "36px", "fontWeight": "700" } ], "headline-lg-mobile": [ "30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-md": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "display-lg": [ "56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "800" } ], "title-md": [ "18px", { "lineHeight": "26px", "fontWeight": "600" } ], "label-md": [ "14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" } ], "headline-lg": [ "40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "700" } ], "body-sm": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,71,186,0.06)]"><div class="bg-[#003087] text-white py-2 px-margin-mobile lg:px-margin"><div class="max-w-7xl mx-auto flex items-center justify-center text-center"><a class="font-label-md text-body-sm sm:text-label-md text-white font-bold tracking-wide flex items-center gap-1.5 hover:underline transition-all py-0.5" data-path="membership" href="/membership"><span>Unite Filipino MSMEs • Grow Together • Build a Stronger Philippines → Join FLAME PH Free →</span></a></div></div><div class="h-20 max-w-7xl mx-auto px-margin-mobile lg:px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><a class="flex items-center" data-path="home" href="/"><img alt="FLAME PH Logo" class="h-12 w-44 object-cover object-[center_36%]" src="/assets/images/flameph-logo.png"/></a><nav class="hidden xl:flex items-center gap-2"><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface font-medium transition-colors px-3 py-2" data-path="home" href="/">Home</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface font-medium transition-colors px-3 py-2" data-path="learn" href="/learn">Learn</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface font-medium transition-colors px-3 py-2" data-path="community" href="/community">Community</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface font-medium transition-colors px-3 py-2" data-path="membership" href="/membership">Membership</a><a class="font-body-md text-body-md text-on-surface-variant hover:text-on-surface font-medium transition-colors px-3 py-2" data-path="directory" href="/directory">Directory</a><a class="font-headline-sm text-body-md font-semibold text-[#003893] bg-[#edf2fe] px-4 py-2 rounded-2xl transition-colors" data-path="about" href="/about">About</a></nav></div><div class="flex items-center gap-4 flex-1 justify-end max-w-xl"><div class="relative w-full max-w-xs hidden md:block"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[22px]">search</span><input class="w-full pl-10 pr-4 py-2.5 bg-[#edf2fe] rounded-2xl border-0 font-body-md text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Search FLAME PH" type="text"/></div><a class="font-headline-sm text-body-md font-semibold text-[#003893] hover:text-primary transition-colors whitespace-nowrap px-2 py-2" data-path="login" href="/membership">Log In</a><a class="font-headline-sm text-body-md font-bold text-white bg-[#c80010] hover:bg-secondary px-6 py-2.5 rounded-full transition-all shadow-[0_2px_8px_rgba(188,0,12,0.25)] whitespace-nowrap flex items-center gap-1.5" data-path="membership" href="/membership"><span>Join Free</span><span class="material-symbols-outlined text-[18px]">arrow_forward</span></a></div></div></header><div class="border-b border-outline-variant/20 bg-surface-container-lowest px-4 py-2 text-center text-xs italic text-on-surface-variant">FLAME PH national organization and chapter buildups are a work in progress. This website is a prototype under construction; all information is for presentation purposes only and will be adjusted as FLAME PH advances its organizational and partnership buildup.</div><main class="w-full pt-28 bg-surface"><div class="flex flex-col w-full">
 <!-- HERO SECTION -->
 <section class="relative overflow-hidden bg-gradient-to-b from-surface-container-high/40 via-surface to-surface py-12 lg:py-20">
-<div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin flex flex-col items-center text-center">
-<!-- Category Pill -->
-<div class="inline-flex items-center gap-space-xs bg-surface-container px-space-md py-1.5 rounded-full shadow-sm mb-space-md">
-<span class="w-2 h-2 rounded-full bg-secondary"></span>
-<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">ABOUT FLAME PH • FEDERATION OVERVIEW</span>
+<div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<div class="lg:col-span-8">
+<div class="inline-flex items-center gap-space-xs bg-surface-container px-space-md py-1.5 rounded-full shadow-sm mb-space-md"><span class="w-2 h-2 rounded-full bg-secondary"></span><span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">TRUST, LEADERSHIP &amp; GOVERNANCE • FLAME PH</span></div>
+<h1 class="font-display-lg text-headline-lg-mobile lg:text-display-lg text-on-surface font-extrabold max-w-4xl tracking-tight leading-tight">Building a <span class="relative inline-block text-primary-container">stronger Philippine MSME ecosystem<span class="absolute bottom-0 left-0 h-1 w-full rounded-full bg-secondary"></span></span>, together.</h1>
+<div class="mt-space-md inline-flex items-center gap-2 rounded-lg bg-surface-container-lowest px-3 py-2 text-sm font-semibold text-on-surface shadow-sm"><span class="material-symbols-outlined text-secondary">verified</span>Federation of Leaders Advancing MSME Ecosystem in the Philippines</div>
+<p class="mt-space-md font-body-md text-body-md text-on-surface-variant leading-relaxed">FLAME PH (formerly FAME PH) is a non-profit national organization of founders, MSMEs, entrepreneurs, grassroots innovators, and micro-to-medium enterprise leaders dedicated to modernizing, safeguarding, and connecting local businesses across the 7,641 islands of the Philippine archipelago.</p>
+<p class="mt-space-sm max-w-2xl font-body-md text-body-md text-on-surface-variant leading-relaxed"><span class="text-tertiary-container">♨</span> Build Ecosystem. Fuel Leaders. Empower Entrepreneurs. Our mission is simple and unwavering: help Filipinos learn, connect, earn, start businesses, grow sustainable MSMEs, create jobs, and build brands capable of competing nationally and globally across all 82 provinces.</p>
+<div class="mt-space-lg flex flex-col gap-3 sm:flex-row"><a class="inline-flex items-center justify-center rounded-full bg-secondary px-6 py-3 font-bold text-white shadow-lg hover:bg-secondary-container" href="/membership#registration"><span class="material-symbols-outlined mr-2 text-lg">person_add</span>Join FLAME PH Free →</a><a class="inline-flex items-center justify-center rounded-full bg-surface-container-lowest px-6 py-3 font-bold text-primary shadow-sm hover:bg-surface-container" href="#leadership"><span class="material-symbols-outlined mr-2 text-lg">groups</span>Meet Our Leadership</a><a class="inline-flex items-center justify-center px-2 py-3 font-semibold text-primary hover:underline" href="#impact">Explore Impact Ladder <span class="material-symbols-outlined ml-1 text-lg">south</span></a></div>
 </div>
-<!-- Main Headline -->
-<h1 class="font-display-lg text-headline-lg-mobile lg:text-display-lg text-on-surface font-extrabold max-w-4xl tracking-tight leading-tight">
-        Empowering Filipino Enterprises, Building a <span class="text-primary-container">Unified MSME Ecosystem</span>.
-      </h1>
-<!-- Subtitle -->
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mt-space-md leading-relaxed">
-        FLAME PH (formerly FAME PH) is an official non-profit national alliance of entrepreneurs, grassroots innovators, and micro-to-medium enterprise leaders dedicated to modernizing, safeguarding, and connecting local businesses across the 7,641 islands of the Philippine archipelago.
-      </p>
-<!-- Trust Metrics Strip -->
-<div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-space-md mt-space-xl">
-<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
-<span class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">{{ number_format($membershipStats['registered_members']) }}</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Registered FLAME PH members</span>
-<span class="font-body-sm text-body-sm text-outline mt-1">Current membership database count</span>
-</div>
-<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
-<span class="font-headline-lg text-headline-lg text-secondary font-extrabold tracking-tight">{{ number_format($membershipStats['chapter_locations']) }}</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Provincial chapter locations</span>
-<span class="font-body-sm text-body-sm text-outline mt-1">based on membership database count</span>
-</div>
-<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
-<span class="font-headline-lg text-headline-lg text-tertiary-container font-extrabold tracking-tight">{{ number_format($membershipStats['chapter_locations']) }}</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">City/Municipal Chapters</span>
-<span class="font-body-sm text-body-sm text-outline mt-1">based on membership database count</span>
-</div>
-<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow">
-<span class="font-headline-lg text-headline-lg text-primary font-extrabold tracking-tight">100%</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Grassroots-Led</span>
-<span class="font-body-sm text-body-sm text-outline mt-1">Registration source: Update Soon</span>
-</div>
-</div>
+<div class="lg:col-span-4"><div class="rounded-2xl bg-surface-container-lowest p-space-xl text-center shadow-md ring-1 ring-primary/5"><img src="/assets/images/flameph-logo.png" alt="FLAME PH logo" class="mx-auto h-20 w-auto object-contain"><span class="mt-6 block text-xs font-bold uppercase tracking-widest text-outline">Registered civic umbrella</span><p class="mt-3 text-sm leading-6 text-on-surface-variant">Championing 99.5% of Philippine business establishments through unified leadership.</p></div></div>
 </div>
 </section>
 <!-- ORGANIZATIONAL BACKGROUND & EVOLUTION -->
@@ -115,7 +88,7 @@
 </div>
 </section>
 <!-- MISSION, VISION & STRATEGIC PILLARS -->
-<section class="py-space-xl bg-surface">
+<section id="impact" class="py-space-xl bg-surface">
 <div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin">
 <!-- Section Title -->
 <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-space-xl">
@@ -363,7 +336,7 @@
 </div>
 </section>
 <!-- LEADERSHIP COUNCIL & FEDERATION GOVERNANCE -->
-<section class="py-space-xl bg-surface-container-lowest">
+<section id="leadership" class="py-space-xl bg-surface-container-lowest">
 <div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin">
 <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-space-xl">
 <span class="font-label-md text-label-md text-primary font-bold uppercase tracking-wider">Federation Leadership</span>
@@ -450,84 +423,39 @@
 </div>
 </div>
 </section>
-<!-- INSTITUTIONAL LINKAGES & PARTNERS -->
-<section id="partners" class="py-space-xl bg-surface">
+<!-- CHAIRMAN'S CORNER -->
+<section id="chairmans-corner" class="py-space-xl bg-surface-container-lowest">
 <div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin">
 <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-space-lg">
-<span class="font-label-md text-label-md text-primary font-bold uppercase tracking-wider">Institutional Linkages</span>
-<h2 class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface font-bold tracking-tight mt-space-xs">
-          Grounded in Strong Civic &amp; Regulatory Alliances
-        </h2>
-<p class="font-body-md text-body-md text-on-surface-variant mt-space-xs">
-          FLAME PH partners with government agencies, national development banks, and business confederations to ensure micro-enterprises receive legitimate institutional backing.
-        </p>
+<span class="font-label-md text-label-md text-secondary font-bold uppercase tracking-wider">Chairman’s Corner</span>
+<h2 class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface font-bold tracking-tight mt-space-xs">A Bayanihan commitment to Filipino entrepreneurs</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-space-xs">A message from the founding Chairman during the movement’s earliest chapter.</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-md">
-<!-- Partner 1 -->
-<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
-<div>
-<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-3">
-<span class="material-symbols-outlined text-[24px]">account_balance</span>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<div class="lg:col-span-5"><div class="overflow-hidden rounded-2xl bg-[#111] shadow-xl"><img src="/assets/images/chairman-fame-ph.png" alt="Chairman Joliber Mapiles with the original FAME PH logo" class="w-full object-contain"></div></div>
+<div class="lg:col-span-7">
+<div class="rounded-2xl bg-surface-container-low p-space-lg lg:p-space-xl shadow-sm border-l-4 border-secondary">
+<div class="flex items-center justify-between gap-4 mb-space-md"><div><h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Joliber Mapiles</h3><p class="font-label-sm text-label-sm text-primary font-semibold mt-1">Chairman &amp; Co-Founder</p></div><span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">June 9, 2024</span></div>
+<blockquote class="font-body-lg text-body-lg text-on-surface leading-relaxed">“Dahil sa isang dakilang adhikaing <strong>‘Sugpuin Ang Kahirapan,’</strong> taos sa pusong tinanggap ko po ang pagiging Chairman ng Founders Association of MSMEs and Entrepreneurs in the Philippines (FAME PH). Now with its new name, Federation of Leaders Advancing MSME Ecosystem in the Philippines (FLAME PH).<br><br>Layunin po namin na matulungan ang maraming Pilipino na magkaroon ng matibay na paniniwala na sila man ay may kakayahang mabago ang buhay sa pagkakaroon ng sariling negosyo.<br><br>Minsan lang tayong mabuhay sa mundong ito, gawin nating makabuluhan ito sa pamamagitan ng pagtulong sa maraming tao.<br><br>Let’s live the Pinoy Dream ❤️”</blockquote>
+<div class="mt-space-lg border-t border-outline-variant/30 pt-space-md"><p class="font-body-sm text-body-sm text-on-surface-variant"><strong>Source note:</strong> This message is from the Chairman’s Facebook Account post dated June 9, 2024. At that time, FLAME PH was still known by its former name, FAME PH.</p><div class="mt-3 flex flex-wrap gap-2"><a href="/about#leadership" class="rounded-full bg-surface-container-lowest px-3 py-1.5 text-xs font-bold text-primary hover:bg-primary hover:text-white">Meet the Chairman →</a><a href="/about#partners" class="rounded-full bg-surface-container-lowest px-3 py-1.5 text-xs font-bold text-primary hover:bg-primary hover:text-white">Explore the Growth Ladder →</a></div></div>
 </div>
-<h4 class="font-title-md text-title-md font-bold text-on-surface">DTI Philippines</h4>
-<p class="font-body-sm text-[13px] text-on-surface-variant mt-1 leading-relaxed">
-              Aligned with the MSME Development Plan and municipal Negosyo Center training clinics nationwide.
-            </p>
 </div>
-<span class="font-label-sm text-[11px] text-primary font-bold uppercase mt-space-md tracking-wider">Cooperative Partner</span>
 </div>
-<!-- Partner 2 -->
-<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
-<div>
-<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary mb-3">
-<span class="material-symbols-outlined text-[24px]">fact_check</span>
 </div>
-<h4 class="font-title-md text-title-md font-bold text-on-surface">Organizational status</h4>
-<p class="font-body-sm text-[13px] text-on-surface-variant mt-1 leading-relaxed">
-              Registration and disclosure details are being documented. Official record and review date: Update Soon.
-            </p>
+</section>
+<!-- FIVE-STAGE GROWTH LADDER -->
+<section id="partners" class="py-space-xl bg-surface">
+<div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin">
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<span class="font-label-md text-label-md text-primary font-bold uppercase tracking-wider">The Filipino MSME Journey</span>
+<div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between"><div><h2 class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface font-bold tracking-tight">The 5-Stage Growth Ladder</h2><p class="font-body-md text-body-md text-on-surface-variant mt-space-xs max-w-2xl">We provide structured scaffolding for every micro-entrepreneur — from community sari-sari vendor to global exporter.</p></div><span class="inline-flex w-fit items-center gap-2 rounded-lg bg-primary/10 px-3 py-2 text-xs font-bold text-primary"><span class="material-symbols-outlined text-sm">trending_up</span>Measured Social Mobility</span></div>
 </div>
-<span class="font-label-sm text-[11px] text-secondary font-bold uppercase mt-space-md tracking-wider">Regulatory Compliance</span>
-</div>
-<!-- Partner 3 -->
-<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
-<div>
-<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-tertiary-container mb-3">
-<span class="material-symbols-outlined text-[24px]">savings</span>
-</div>
-<h4 class="font-title-md text-title-md font-bold text-on-surface">Financing pathways</h4>
-<p class="font-body-sm text-[13px] text-on-surface-variant mt-1 leading-relaxed">
-              Educational information about possible financing pathways. Partner confirmation and product terms: Update Soon.
-            </p>
-</div>
-<span class="font-label-sm text-[11px] text-tertiary-container font-bold uppercase mt-space-md tracking-wider">Capital Access</span>
-</div>
-<!-- Partner 4 -->
-<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
-<div>
-<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-3">
-<span class="material-symbols-outlined text-[24px]">hub</span>
-</div>
-<h4 class="font-title-md text-title-md font-bold text-on-surface">Regional Chambers</h4>
-<p class="font-body-sm text-[13px] text-on-surface-variant mt-1 leading-relaxed">
-              Liaison with local PCCI chapters to link village micro-suppliers with tier-1 urban distributors and hotels.
-            </p>
-</div>
-<span class="font-label-sm text-[11px] text-primary font-bold uppercase mt-space-md tracking-wider">Supply Linkage</span>
-</div>
-<!-- Partner 5 -->
-<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
-<div>
-<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary mb-3">
-<span class="material-symbols-outlined text-[24px]">diversity_1</span>
-</div>
-<h4 class="font-title-md text-title-md font-bold text-on-surface">Go Negosyo Alliance</h4>
-<p class="font-body-sm text-[13px] text-on-surface-variant mt-1 leading-relaxed">
-              Active participant in mentoring caravans, young entrepreneur conventions, and grassroots Bayanihan circles.
-            </p>
-</div>
-<span class="font-label-sm text-[11px] text-secondary font-bold uppercase mt-space-md tracking-wider">Mentorship Network</span>
-</div>
+<div class="grid grid-cols-1 gap-space-md sm:grid-cols-2 lg:grid-cols-5">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col hover:shadow-md transition-shadow"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-lg font-bold text-primary">1</span><span class="mt-space-sm text-[11px] font-bold uppercase tracking-wider text-secondary">Foundational</span><h3 class="font-title-md text-title-md font-bold text-on-surface mt-1">From Poverty to Opportunity</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">Grassroots livelihood seed support, basic financial literacy, digital payment setups, and initial safety nets for self-employed mothers and youth.</p></div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col hover:shadow-md transition-shadow"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-lg font-bold text-primary">2</span><span class="mt-space-sm text-[11px] font-bold uppercase tracking-wider text-tertiary-container">Upskilling</span><h3 class="font-title-md text-title-md font-bold text-on-surface mt-1">Learning to Earning</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">Practical entrepreneurship masterclasses, peer mentorship, pricing formulas, and generating reliable daily commercial sales in local barter circles.</p></div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col hover:shadow-md transition-shadow"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-lg font-bold text-primary">3</span><span class="mt-space-sm text-[11px] font-bold uppercase tracking-wider text-primary">Formalization</span><h3 class="font-title-md text-title-md font-bold text-on-surface mt-1">Aspiring to Formal Startup</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">Hassle-free DTI, BIR, and Mayor’s Permit assistance, equipped with Free Cloud POS systems and structured e-commerce cataloging.</p></div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col hover:shadow-md transition-shadow"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-lg font-bold text-primary">4</span><span class="mt-space-sm text-[11px] font-bold uppercase tracking-wider text-primary">Expansion</span><h3 class="font-title-md text-title-md font-bold text-on-surface mt-1">MSME to National Brand</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">Access to co-op bulk raw material buying, regional supermarket shelf placements, multi-branch operations, and inventory credit lines.</p></div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col hover:shadow-md transition-shadow"><span class="flex h-8 w-8 items-center justify-center rounded-lg bg-secondary/10 text-lg font-bold text-secondary">5</span><span class="mt-space-sm text-[11px] font-bold uppercase tracking-wider text-secondary">Sovereignty</span><h3 class="font-title-md text-title-md font-bold text-on-surface mt-1">National to Global Brand</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">FDA export compliance, cross-border B2B digital matchmaking, international trade expo booths, and trademark protection across ASEAN and diaspora markets.</p></div>
 </div>
 </div>
 </section>
@@ -573,9 +501,40 @@
 <p class="font-label-sm text-label-sm uppercase tracking-widest font-bold text-secondary">FLAME PH Advocacy Movement</p>
 <h2 id="poverty-advocacy-title" class="font-headline-md text-headline-md font-extrabold text-on-surface mt-2">Sugpuin ang Kahirapan through Entrepreneurship</h2>
 <p class="font-body-md text-body-md leading-relaxed text-on-surface-variant mt-3">A Poverty Alleviation Advocacy Movement of FLAME PH. We believe entrepreneurship can open pathways to stronger livelihoods and more resilient Filipino communities. Through enterprise support and the FLAME PH community, we champion opportunities that help MSMEs grow.</p>
+<p class="font-body-md text-body-md leading-relaxed text-on-surface-variant mt-3">These are actual images from workshops conducted in cooperation with Local Government Units (LGUs) in Metro Manila, Pampanga, Nueva Ecija, Quirino, and Quezon Provinces. These community programs were made possible through the help of FLAME PH chapter officers and members working alongside local partners.</p>
+<div class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-certificates.png" alt="Workshop participants receiving certificates" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Workshop recognition</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-pampanga.png" alt="FLAME PH community workshop in Pampanga" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Pampanga community workshop</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-quezon-skills.png" alt="Skills and livelihood workshop participants in Quezon" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Quezon skills and livelihood</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-livelihood.png" alt="Livelihood workshop product showcase" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Livelihood product showcase</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-community-certificates.png" alt="Community members holding workshop certificates" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Community completion day</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-pizza-training.png" alt="Participants learning food entrepreneurship skills" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Food entrepreneurship training</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-community-kitchen.png" alt="Community members preparing food together" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Hands-on community learning</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-chapter-day.png" alt="FLAME PH chapter workshop participants" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Chapter-led workshop</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm sm:col-span-2 lg:col-span-2"><img src="/assets/images/advocacy-workshop-metro-manila.png" alt="FLAME PH workshop with Metro Manila community partners" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Metro Manila community partnership</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-community-dialogue.jpg" alt="FLAME PH community dialogue with local partners" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Community dialogue</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-lgu-meeting.jpg" alt="FLAME PH team meeting with local government partners" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">LGU partnership meeting</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-partner-introductions.jpg" alt="FLAME PH chapter and partner introductions at a workshop" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Partner introductions</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-pizza-skills.jpg" alt="Participants in a FLAME PH pizza skills training workshop" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Pizza skills training</figcaption></figure>
+<figure class="group overflow-hidden rounded-xl bg-surface-container-low shadow-sm"><img src="/assets/images/advocacy-workshop-pasay-community.jpg" alt="FLAME PH community workshop in Pasay City" loading="lazy" class="h-44 w-full object-cover transition duration-300 group-hover:scale-105"><figcaption class="p-3 text-xs font-semibold text-on-surface-variant">Pasay City community workshop</figcaption></figure>
+</div>
 </div>
 </div>
 </section>
+<!-- TRUST, ETHICS & LEGAL FRAMEWORK -->
+<section id="trust-ethics-legal" class="w-full bg-surface-container-low border-t border-outline-variant/30 py-12 sm:py-16" aria-labelledby="trust-ethics-title">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+<div class="flex flex-col gap-2 mb-8"><span class="font-label-sm text-label-sm uppercase tracking-widest font-bold text-primary">Policy &amp; Protection</span><div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between"><div><h2 id="trust-ethics-title" class="font-headline-lg text-headline-md lg:text-headline-lg font-extrabold text-on-surface">Trust, Ethics &amp; Legal Framework</h2><p class="font-body-md text-body-md text-on-surface-variant mt-1">Plain-English policies crafted to protect every Filipino business and stakeholder.</p></div><span class="inline-flex w-fit items-center gap-2 rounded-lg bg-primary/10 px-3 py-2 text-xs font-bold text-primary"><span class="material-symbols-outlined text-sm">verified_user</span>Data Privacy Act of 2012 Certified</span></div></div>
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+<a href="/legal#disclaimer" class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-outline-variant/20 transition hover:-translate-y-1 hover:shadow-md"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">policy</span><h3 class="font-title-md text-title-md font-bold">Legal Disclaimer</h3></div><p class="mt-3 text-sm leading-6 text-on-surface-variant">Clarifies non-guaranteed sales, independent ownership of member micro-businesses, third-party partner agreements, and educational intentions.</p><span class="mt-4 inline-flex text-xs font-bold text-primary">Read Summary →</span></a>
+<a href="/legal#terms" class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-outline-variant/20 transition hover:-translate-y-1 hover:shadow-md"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">rule</span><h3 class="font-title-md text-title-md font-bold">Terms of Use</h3></div><p class="mt-3 text-sm leading-6 text-on-surface-variant">Code of conduct within member forums, chapter meetups, supplier directory integrity, fair community trading, and zero spam policy.</p><span class="mt-4 inline-flex text-xs font-bold text-primary">Read Summary →</span></a>
+<a href="/legal#disclaimer" class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-outline-variant/20 transition hover:-translate-y-1 hover:shadow-md"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">shield</span><h3 class="font-title-md text-title-md font-bold">Limitation of Liability</h3></div><p class="mt-3 text-sm leading-6 text-on-surface-variant">Clear liability terms regarding B2B member transactions, third-party logistics fulfillment, and cloud software tool continuous availability.</p><span class="mt-4 inline-flex text-xs font-bold text-primary">Read Summary →</span></a>
+<a href="/legal#disclaimer" class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-outline-variant/20 transition hover:-translate-y-1 hover:shadow-md"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">copyright</span><h3 class="font-title-md text-title-md font-bold">Copyright Policy</h3></div><p class="mt-3 text-sm leading-6 text-on-surface-variant">Protection of FLAME PH trademarks, training curricula, research papers, alongside strict respect for member intellectual property rights.</p><span class="mt-4 inline-flex text-xs font-bold text-primary">Read Summary →</span></a>
+<a href="/legal#privacy" class="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-outline-variant/20 transition hover:-translate-y-1 hover:shadow-md md:col-span-2"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary">lock</span><h3 class="font-title-md text-title-md font-bold">Privacy Notice &amp; Data Ethics</h3></div><p class="mt-3 text-sm leading-6 text-on-surface-variant">Full compliance with the Republic Act No. 10173 (Data Privacy Act of 2012). We enforce a strict zero data-selling mandate. Your registration records, sales catalog information, and membership data remain private, secure, and used solely for federation services.</p><span class="mt-4 inline-flex text-xs font-bold text-primary">View Full Privacy Charter →</span></a>
+</div></div>
+</section>
+<section id="about-cta" class="w-full bg-surface px-4 py-6 sm:px-6 lg:px-8"><div class="mx-auto max-w-7xl rounded-3xl bg-gradient-to-br from-[#061b3b] via-primary to-primary-container p-8 text-white shadow-xl sm:p-10"><span class="inline-flex rounded-full bg-tertiary-fixed/15 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-tertiary-fixed">♡ Bayanihan para sa negosyong Pilipino</span><h2 class="mt-5 max-w-2xl font-headline text-4xl font-extrabold leading-tight sm:text-5xl">Ready to champion the backbone of our economy?</h2><p class="mt-4 font-headline text-lg font-bold text-tertiary-fixed">Hindi mo kailangang mag-isa. Sama-sama tayong umunlad.</p><p class="mt-2 max-w-2xl text-base leading-7 text-white/75">Join thousands of small business champions nationwide. Register your enterprise for free, access practical tools, and help drive our nation forward.</p><div class="mt-7 flex flex-col gap-3 sm:flex-row"><a href="/membership#registration" class="inline-flex items-center justify-center rounded-full bg-secondary px-6 py-3 font-bold text-white shadow-lg hover:bg-secondary-container"><span class="material-symbols-outlined mr-2 text-lg">person_add</span>Join FLAME PH Free</a><a href="/about#contact" class="inline-flex items-center justify-center rounded-full bg-white/10 px-6 py-3 font-bold text-white ring-1 ring-white/10 hover:bg-white/20"><span class="material-symbols-outlined mr-2 text-lg">mail</span>Contact the Secretariat</a></div></div></section>
+<!-- ADMIN ACCESS -->
 <section id="admin-access" class="w-full bg-surface-container-low border-t border-outline-variant/30 py-12 sm:py-16" aria-labelledby="admin-access-title">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
 <div class="max-w-3xl mx-auto rounded-2xl bg-white border border-outline-variant/40 p-6 sm:p-8 shadow-sm">
