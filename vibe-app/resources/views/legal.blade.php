@@ -40,6 +40,7 @@
 <footer class="border-t border-slate-200 bg-white">
 <div class="mx-auto max-w-6xl px-6 py-8 text-sm text-slate-600"><nav aria-label="Website sitemap" class="flex flex-wrap gap-x-5 gap-y-2"><a href="/">Home</a><a href="/learn">Learn</a><a href="/community">Community</a><a href="/membership">Membership</a><a href="/directory">Directory</a><a href="/about">About</a><a href="#terms">Terms</a><a href="#privacy">Privacy</a><a href="#disclaimer">Disclaimer</a></nav><p class="mt-5">© 2025 FLAME PH</p></div>
 </footer>
+@include('partials.home-footer')
 @include('partials.mobile-navigation')
 </body>
 </html>

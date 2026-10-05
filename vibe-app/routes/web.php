@@ -55,8 +55,19 @@ Route::get('/auth/google/callback', [HomeController::class, 'handleGoogleCallbac
 Route::get('/auth/facebook/redirect', [HomeController::class, 'redirectToFacebook'])->name('membership.facebook.redirect');
 Route::get('/auth/facebook/callback', [HomeController::class, 'handleFacebookCallback'])->name('membership.facebook.callback');
 Route::post('/membership/login', [HomeController::class, 'login'])->name('membership.login');
+Route::post('/membership/password/email', [HomeController::class, 'sendMembershipPasswordResetLink'])->middleware('throttle:3,10')->name('membership.password.email');
+Route::get('/membership/password/reset/{token}', [HomeController::class, 'showMembershipPasswordResetForm'])->name('password.reset');
+Route::post('/membership/password/reset', [HomeController::class, 'resetMembershipPassword'])->middleware('throttle:5,10')->name('membership.password.reset');
 Route::get('/directory', [HomeController::class, 'directory'])->name('directory');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::middleware('membership.member')->prefix('/about/merch-shop')->name('merch-shop.')->group(function () {
+    Route::get('/', function (\Illuminate\Http\Request $request) {
+        $application = $request->session()->get('membership_application', []);
+
+        return view('merch-shop', ['memberName' => $application['name'] ?? 'Member']);
+    })->name('index');
+    Route::get('/{path}', fn () => abort(404))->where('path', '.*')->name('subpage');
+});
 Route::get('/legal', [HomeController::class, 'legal'])->name('legal');
 Route::get('/admin/login', fn () => redirect()->to('/about#admin-access'))->name('admin.login.form');
 Route::post('/admin/login', [AdminController::class, 'login'])->middleware('throttle:5,1')->name('admin.login');

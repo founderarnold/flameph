@@ -1141,4 +1141,4 @@
   </script>
 
 
-<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div>@include('partials.mobile-navigation')</body></html>
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div>@include('partials.home-footer')@include('partials.mobile-navigation')</body></html>

@@ -184,7 +184,6 @@
         </div>
     </main>
 
-    @include('partials.home-footer')
     @include('partials.mobile-navigation')
     <script>
         const idUploadInput = document.getElementById('id-document-upload');
@@ -194,5 +193,5 @@
             if (!idUploadConsent.required) idUploadConsent.checked = false;
         });
     </script>
-</body>
+@include('partials.home-footer')</body>
 </html>

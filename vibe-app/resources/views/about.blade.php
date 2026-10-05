@@ -567,6 +567,15 @@
 </div>
 </section>
 </div>
+<section id="poverty-alleviation-advocacy" class="w-full bg-surface-container-lowest py-12 sm:py-16" aria-labelledby="poverty-advocacy-title">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+<div class="max-w-4xl mx-auto rounded-2xl border border-outline-variant/40 bg-white p-6 sm:p-9 shadow-sm">
+<p class="font-label-sm text-label-sm uppercase tracking-widest font-bold text-secondary">FLAME PH Advocacy Movement</p>
+<h2 id="poverty-advocacy-title" class="font-headline-md text-headline-md font-extrabold text-on-surface mt-2">Sugpuin ang Kahirapan through Entrepreneurship</h2>
+<p class="font-body-md text-body-md leading-relaxed text-on-surface-variant mt-3">A Poverty Alleviation Advocacy Movement of FLAME PH. We believe entrepreneurship can open pathways to stronger livelihoods and more resilient Filipino communities. Through enterprise support and the FLAME PH community, we champion opportunities that help MSMEs grow.</p>
+</div>
+</div>
+</section>
 <section id="admin-access" class="w-full bg-surface-container-low border-t border-outline-variant/30 py-12 sm:py-16" aria-labelledby="admin-access-title">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
 <div class="max-w-3xl mx-auto rounded-2xl bg-white border border-outline-variant/40 p-6 sm:p-8 shadow-sm">
@@ -625,7 +634,7 @@
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/learn">Webinars &amp; Workshops</a>
 </div>
 <div class="flex flex-col gap-3">
-<h3 class="font-label-md text-label-md text-on-surface font-bold">Community</h3>
+<h3 class="font-label-md text-label-md text-on-surface font-bold"><a href="/about/merch-shop" class="text-inherit no-underline hover:text-primary">Shop/Support Us</a></h3>
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/community">Regional Chapters</a>
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/directory">MSME Directory</a>
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/community">Bayanihan Circles</a>
@@ -656,5 +665,6 @@
 </div>
 </div>
 </footer>
+@include('partials.home-footer')
 @include('partials.mobile-navigation')
 </body></html>

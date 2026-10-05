@@ -81,6 +81,7 @@
             </nav>
         </div>
     </footer>
+    @include('partials.home-footer')
     @include('partials.mobile-navigation')
 </body>
 </html>

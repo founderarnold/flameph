@@ -15,13 +15,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->trimStrings(except: ['login_password']);
         $middleware->web(append: [AddSeoMetadata::class]);
         $middleware->alias([
             'admin.session' => RequireAdminSession::class,
             'admin.role' => RequireAdminRole::class,
+            'membership.member' => \App\Http\Middleware\RequireMembershipMember::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        $exceptions->dontFlash(['login_password']);
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );

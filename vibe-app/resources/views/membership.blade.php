@@ -287,17 +287,33 @@ Google
 <p class="mt-5 border-t border-white/20 pt-4 text-xs text-white/75">You can start with an idea and fill in more details as your business develops.</p>
 </div>
 <div class="rounded-2xl bg-white p-7 shadow-sm border border-outline-variant/40" id="login">
+@if (session('merch_login_notice'))<p class="mb-4 rounded-lg border border-primary/20 bg-surface-container-low p-3 text-sm text-primary" role="status">{{ session('merch_login_notice') }}</p>@endif
 <span class="font-label text-xs font-bold text-primary uppercase tracking-wider">Already registered?</span>
 <h2 class="font-headline text-xl font-extrabold text-on-surface mt-2 mb-2">Sign in to continue</h2>
 <p class="font-body text-sm text-on-surface-variant mb-5">Use the email address and password you created after verifying your email.</p>
 @if (session('login_success'))<p class="mb-4 rounded-lg bg-green-50 border border-green-200 p-3 text-sm text-green-900" role="status">{{ session('login_success') }}</p>@endif
+@if (session('password_reset_success'))<p class="mb-4 rounded-lg bg-green-50 border border-green-200 p-3 text-sm text-green-900" role="status">{{ session('password_reset_success') }}</p>@endif
 <form action="{{ route('membership.login') }}" class="space-y-3" method="POST">
 @csrf
 @if ($errors->hasAny(['login_email', 'login_password']))<div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800" role="alert">@error('login_email'){{ $message }}@enderror @error('login_password'){{ $message }}@enderror</div>@endif
-<label class="block font-label text-sm font-bold text-on-surface">Email<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="login_email" required type="email" autocomplete="email"></label>
-<label class="block font-label text-sm font-bold text-on-surface">Password<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="login_password" required type="password" minlength="12" autocomplete="current-password"></label>
+<label class="block font-label text-sm font-bold text-on-surface">Email<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="login_email" required type="email" autocomplete="email" value="{{ old('login_email') }}"></label>
+<label class="block font-label text-sm font-bold text-on-surface">Password<input class="mt-1.5 w-full rounded-lg border border-outline-variant/50 px-3 py-2.5" name="login_password" required type="password" autocomplete="current-password"></label>
 <button class="w-full rounded-xl bg-surface-container-high px-5 py-3 font-label text-sm font-bold text-primary hover:bg-surface-container" type="submit">Log in to membership</button>
 </form>
+<a class="mt-4 inline-flex font-label text-sm font-semibold text-primary underline hover:text-primary-container" href="#forgot-password">Forgot password?</a>
+<div id="forgot-password" class="mt-5 border-t border-outline-variant/30 pt-5">
+<h3 class="font-headline text-lg font-bold text-on-surface">Reset your password</h3>
+<p class="mt-1 text-sm text-on-surface-variant">If you joined through Google or Facebook and have not set a FLAME PH password, use this email link to create one.</p>
+<p class="mt-1 text-sm text-on-surface-variant">Enter the email address on your FLAME PH membership. If it matches an account, we’ll email you a secure link to choose a new password.</p>
+@if (session('password_reset_link_sent'))<p role="status" class="mt-3 rounded-lg border border-green-200 bg-green-50 p-3 text-sm text-green-900">{{ session('password_reset_link_sent') }}</p>@endif
+@if ($errors->has('email'))<p role="alert" class="mt-3 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">@error('email'){{ $message }}@enderror</p>@endif
+<form action="{{ route('membership.password.email') }}" class="mt-3 flex flex-col gap-3 sm:flex-row" method="POST">
+@csrf
+<label class="sr-only" for="reset-email">Membership email</label>
+<input id="reset-email" class="min-h-11 flex-1 rounded-lg border border-outline-variant/50 px-3 py-2.5" name="email" required type="email" autocomplete="email" placeholder="Email address" value="{{ old('email') }}">
+<button class="min-h-11 rounded-lg border border-primary px-4 py-2 font-label text-sm font-bold text-primary hover:bg-surface-container-low" type="submit">Email reset link</button>
+</form>
+</div>
 </div>
 </div>
 </div>
@@ -1042,6 +1058,15 @@ Google
 </div>
 </main>
 <!-- Exact Footer -->
+<section id="poverty-alleviation-advocacy" class="w-full bg-surface-container-low py-12 sm:py-16" aria-labelledby="poverty-advocacy-title">
+<div class="mx-auto max-w-7xl px-6 lg:px-12"><div class="mx-auto max-w-4xl rounded-2xl border border-outline-variant/40 bg-white p-6 shadow-sm sm:p-9">
+<p class="font-label text-xs font-bold uppercase tracking-widest text-secondary">FLAME PH Advocacy Movement</p>
+<h2 id="poverty-advocacy-title" class="mt-2 font-headline text-2xl font-extrabold text-on-surface sm:text-3xl">Sugpuin ang Kahirapan through Entrepreneurship</h2>
+<p class="mt-3 leading-relaxed text-on-surface-variant">A Poverty Alleviation Advocacy Movement of FLAME PH. We believe entrepreneurship can open pathways to stronger livelihoods and more resilient Filipino communities.</p>
+<a href="{{ route('merch-shop.index') }}" class="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 font-label text-sm font-bold text-white transition-colors hover:bg-primary-container">Support this advocacy — shop FLAME PH merch<span class="material-symbols-outlined text-[18px]" aria-hidden="true">arrow_forward</span></a>
+<p class="mt-3 text-sm text-on-surface-variant">The merch shop is available to active FLAME PH members. <a class="font-semibold text-primary underline" href="{{ route('membership') }}#registration">Register</a> or <a class="font-semibold text-primary underline" href="{{ route('membership') }}#login">log in</a> to continue.</p>
+</div></div>
+</section>
 <footer class="w-full bg-white shadow-[0_-1px_12px_rgba(15,23,42,0.04)] border-t border-slate-100"><div class="max-w-7xl mx-auto px-6 lg:px-12 py-16">
 <!-- 4-Column Layout -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16">
@@ -1094,7 +1119,7 @@ Google
 <!-- Column 3: Community -->
 <div>
 <h3 class="font-headline text-base font-bold text-slate-900 mb-4">
-        Community
+        <a href="/about/merch-shop" class="text-inherit no-underline hover:text-primary">Shop/Support Us</a>
       </h3>
 <ul class="space-y-3 font-body text-sm text-slate-600">
 <li class=""><a class="hover:text-primary hover:underline transition-colors" data-path="community" href="/community">Regional Chapters</a></li>
@@ -1261,5 +1286,6 @@ Google
     })();
   </script>
 
+@include('partials.home-footer')
 @include('partials.mobile-navigation')
 </body></html>

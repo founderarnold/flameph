@@ -385,7 +385,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
       { label: 'FLAME PH Merchs', href: '/about/merch-shop' },
       { label: 'Flame Signature Brands', href: '/about/merch-shop' },
       { label: 'Personalized by FLAMEPH', href: '/about/merch-shop' },
-      { label: 'Shop @ MarketplacePH', href: '/about/merch-shop' },
+      { label: 'Shop or Sell @ MarketplacePH', href: '/about/merch-shop' },
       { label: 'Start & Grow @ NegosyoDepot', href: '/about/merch-shop' },
       { label: 'Fulfillment by MSMEs', href: '/about/merch-shop' },
     ] },

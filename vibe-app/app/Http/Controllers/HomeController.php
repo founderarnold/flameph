@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Client\ConnectionException;
@@ -735,13 +736,14 @@ class HomeController extends Controller
     {
         $validated = $request->validate([
             'login_email' => ['required', 'email', 'max:255'],
-            'login_password' => ['required', 'string', 'min:12'],
+            'login_password' => ['required', 'string', 'max:4096'],
         ]);
 
         $user = User::query()->where('email', strtolower(trim($validated['login_email'])))->with('membership')->first();
         if (!$user || !$user->membership || $user->membership->status !== 'active' || !Hash::check($validated['login_password'], $user->password)) {
             return redirect()->to(route('membership') . '#login')
-                ->withErrors(['login_email' => 'Email or password not recognized. Check your details or contact FLAME PH for account help.']);
+                ->withInput($request->only('login_email'))
+                ->withErrors(['login_email' => 'Email or password not recognized. Try again or use Forgot password below to recover your account.']);
         }
 
         $membership = $user->membership;
@@ -767,6 +769,65 @@ class HomeController extends Controller
 
         return redirect()->to(route('membership') . '#next-steps')
             ->with('login_success', 'You are signed in to your FLAME PH member account.');
+    }
+
+    public function sendMembershipPasswordResetLink(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'email' => ['required', 'email', 'max:255'],
+        ]);
+
+        Password::sendResetLink(['email' => strtolower(trim($validated['email']))]);
+
+        return redirect()->to(route('membership') . '#forgot-password')->with(
+            'password_reset_link_sent',
+            'If that email belongs to a FLAME PH account, a secure password reset link will arrive shortly.',
+        );
+    }
+
+    public function showMembershipPasswordResetForm(Request $request, string $token): View
+    {
+        return view('membership-password-reset', [
+            'token' => $token,
+            'email' => $request->query('email', ''),
+        ]);
+    }
+
+    public function resetMembershipPassword(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'token' => ['required', 'string'],
+            'email' => ['required', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:12', 'confirmed'],
+            'password_confirmation' => ['required', 'string'],
+        ]);
+
+        $status = Password::reset(
+            [
+                'email' => strtolower(trim($validated['email'])),
+                'password' => $validated['password'],
+                'password_confirmation' => $validated['password_confirmation'],
+                'token' => $validated['token'],
+            ],
+            function (User $user, string $password): void {
+                $user->forceFill([
+                    'password' => $password,
+                    'remember_token' => Str::random(60),
+                ])->save();
+                event(new \Illuminate\Auth\Events\PasswordReset($user));
+            },
+        );
+
+        if ($status === Password::PASSWORD_RESET) {
+            return redirect()->to(route('membership') . '#login')->with(
+                'password_reset_success',
+                'Your password has been reset. You can now log in with your new password.',
+            );
+        }
+
+        return back()->withErrors([
+            'email' => 'This password reset link is invalid or has expired. Request a new link and try again.',
+        ])->withInput($request->only('email'));
     }
 
     public function directory(MembershipStatistics $statistics): View

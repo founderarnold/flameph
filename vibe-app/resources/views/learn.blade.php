@@ -905,7 +905,7 @@
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/learn">Webinars &amp; Workshops</a>
 </div>
 <div class="flex flex-col gap-3">
-<h3 class="font-label-md text-label-md text-on-surface font-bold">Community</h3>
+<h3 class="font-label-md text-label-md text-on-surface font-bold"><a href="/about/merch-shop" class="text-inherit no-underline hover:text-primary">Shop/Support Us</a></h3>
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/community#regional-chapters">Regional Chapters</a>
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/directory">MSME Directory</a>
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/community#regional-chapters">Bayanihan Circles</a>
@@ -936,6 +936,7 @@
 </div>
 </div>
 </footer>
+@include('partials.home-footer')
 @include('partials.mobile-navigation')
 </body>
 </html>
