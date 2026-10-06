@@ -59,7 +59,7 @@
 <!-- Top Announcement Bar -->
 <div class="w-full h-10 bg-primary text-white px-4 text-center text-xs md:text-sm font-label shadow-sm flex items-center">
 <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
-<span class="inline-flex items-center gap-1.5 font-bold tracking-wide">Unite Filipino MSMEs • Grow Together • Build a Stronger Philippines →</span><a class="underline text-amber-300 hover:text-white transition-colors inline-flex items-center gap-1 font-bold ml-1" data-path="membership" href="/membership">Join FLAME PH Free →</a>
+<span style="font-family:'Arial Narrow', Arial, sans-serif; font-weight:400; text-decoration:none">Disclaimer: FLAME PH is a work in progress; its content, features, and ecosystem is evolving over time, with updates reflected on this website. Founders & Leaders: Join us in building the FLAMEPH ecosystem and FLAMEPH chapters nationwide.</span>
 </div>
 </div>
 <!-- Main Navigation Bar -->
@@ -74,7 +74,7 @@
 <a class="px-3.5 py-2 text-on-surface-variant font-label text-sm font-semibold hover:text-primary transition-colors rounded-lg" data-path="home" href="/">Home</a><a class="px-3.5 py-2 text-on-surface-variant font-label text-sm font-semibold hover:text-primary transition-colors rounded-lg" data-path="learn" href="/learn">Learn</a>
 <a class="px-3.5 py-2 text-on-surface-variant font-label text-sm font-semibold hover:text-primary transition-colors rounded-lg" data-path="community" href="/community">Community</a>
 <!-- Active State: Membership -->
-<a class="px-3.5 py-2 text-primary font-label text-sm font-bold bg-surface-container-low border-b-2 border-primary rounded-lg shadow-xs" data-path="membership" href="/membership">Membership</a>
+<a class="px-3.5 py-2 text-primary font-label text-sm font-bold bg-surface-container-low border-b-2 border-primary rounded-lg shadow-xs" data-path="membership" href="/membership/free-benefits">Membership</a>
 <a class="px-3.5 py-2 text-on-surface-variant font-label text-sm font-semibold hover:text-primary transition-colors rounded-lg" data-path="directory" href="/directory">Directory</a>
 <a class="px-3.5 py-2 text-on-surface-variant font-label text-sm font-semibold hover:text-primary transition-colors rounded-lg" data-path="about" href="/about">About</a>
 </nav><!-- Search Bar -->
@@ -1099,7 +1099,7 @@ Google
 <ul class="space-y-3 font-body text-sm text-slate-600">
 <li><a class="hover:text-primary hover:underline transition-colors" href="/">Home</a></li>
 <li><a class="hover:text-primary hover:underline transition-colors" href="/about">About FLAME PH</a></li>
-<li><a class="hover:text-primary hover:underline transition-colors" href="/membership">Membership Plans</a></li>
+<li><a class="hover:text-primary hover:underline transition-colors" href="/membership/free-benefits">Membership Plans</a></li>
 <li><a class="hover:text-primary hover:underline transition-colors" href="/directory">MSME Directory</a></li>
 <li><a class="hover:text-primary hover:underline transition-colors" href="/community">Community Hubs</a></li>
 </ul>
@@ -1119,7 +1119,7 @@ Google
 <!-- Column 3: Community -->
 <div>
 <h3 class="font-headline text-base font-bold text-slate-900 mb-4">
-        <a href="/about/merch-shop" class="text-inherit no-underline hover:text-primary">Shop/Support Us</a>
+        <a href="/flameph-merchs" class="text-inherit no-underline hover:text-primary">Shop/Support Us</a>
       </h3>
 <ul class="space-y-3 font-body text-sm text-slate-600">
 <li class=""><a class="hover:text-primary hover:underline transition-colors" data-path="community" href="/community">Regional Chapters</a></li>

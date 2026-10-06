@@ -370,8 +370,8 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
       { label: 'Annual Awards for MSMEs', href: '/events#awards' },
     ] },
     { label: 'Membership', items: [
-      { label: 'Benefits', href: '/membership#membership-tiers' },
-      { label: 'Access More Benefits', href: '/membership' },
+      { label: 'Avail Free MSME Benefits', href: '/membership/free-benefits' },
+      { label: 'Get More MSME Benefits', href: '/membership/more-benefits' },
       { label: 'Resources', href: '/learn' },
       { label: 'Advocacy', href: '/about' },
       { label: 'Chapters Near You', href: '/directory' },
@@ -397,6 +397,10 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
       { label: 'Nominate an MSME Awardee', href: '/get-involved' },
       { label: 'Support Poverty Alleviation Program', href: '/about#contact' },
       { label: 'News & Updates', href: '/events' },
+      { label: 'Become an Affiliate Marketer', href: '/flameph-merchs' },
+      { label: 'Become a Chapter Leader', href: '/get-involved#community' },
+      { label: 'Volunteer as a Resource Speaker', href: '/get-involved#mentor' },
+      { label: 'Volunteer Professional Services', href: '/get-involved#partners' },
     ] },
     { label: 'About Us', items: [
       { label: 'What is FLAME PH', href: '/about' },
@@ -409,9 +413,9 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   ];
   const mobilePages = [
     { label: 'Home', href: '/', icon: '<path d="M3 10.8 12 3l9 7.8"></path><path d="M5.5 9.5V21h13V9.5M9 21v-7h6v7"></path>' },
-    { label: 'Membership', href: '/membership', icon: '<rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18M8 15h4"></path>' },
-    { label: 'Get Involved', href: '/events', icon: '<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"></path>' },
-    { label: 'Support Us', href: '/about/merch-shop', icon: '<path d="M3 9h18l-1.5 12h-15L3 9Z"></path><path d="M8 9a4 4 0 0 1 8 0"></path>' },
+    { label: 'Membership', href: '/membership/free-benefits', icon: '<rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18M8 15h4"></path>' },
+    { label: 'Get Involved', href: '/get-involved', icon: '<rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"></path>' },
+    { label: 'Support Us', href: '/flameph-merchs', icon: '<path d="M3 9h18l-1.5 12h-15L3 9Z"></path><path d="M8 9a4 4 0 0 1 8 0"></path>' },
   ];
   const navItem = (page, mobile = false) => {
     const id = `site-nav-${page.label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}${mobile ? '-mobile' : ''}`;
@@ -422,7 +426,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   const header = document.createElement('header');
   header.dataset.siteHeader = 'true';
   header.innerHTML = `
-    <div data-site-announcement><a href="/membership#registration">Unite Filipino MSMEs • Grow Together • Build a Stronger Philippines → <span>Join FLAME PH Free →</span></a></div>
+    <div data-site-announcement><span style="font-family:'Arial Narrow', Arial, sans-serif; font-weight:400; text-decoration:none">Disclaimer: FLAME PH is a work in progress; its content, features, and ecosystem is evolving over time, with updates reflected on this website. Founders & Leaders: Join us in building the FLAMEPH ecosystem and FLAMEPH chapters nationwide.</span></div>
     <div data-site-row>
       <div data-site-brand-nav>
         <a data-site-logo-link href="/"><img data-site-logo alt="FLAME PH logo" src="/assets/images/flameph-logo.png"></a>

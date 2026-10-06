@@ -50,6 +50,16 @@ class HomeController extends Controller
         return view('membership', ['membershipStats' => $statistics->summary()]);
     }
 
+    public function freeBenefits(): View
+    {
+        return view('free-benefits');
+    }
+
+    public function moreBenefits(): View
+    {
+        return view('more-benefits');
+    }
+
     public function membershipTerms(): View
     {
         return view('membership-terms');

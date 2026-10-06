@@ -51,8 +51,7 @@
 <header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
 <!-- Top Announcement Banner -->
 <div class="w-full bg-[#003893] text-white py-2 px-4 text-center text-xs md:text-sm font-medium tracking-wide">
-<span class="">Unite Filipino MSMEs • Grow Together • Build a Stronger Philippines → </span>
-<a class="underline hover:text-brand-yellow font-semibold transition-colors" href="/membership">Join FLAME PH Free →</a>
+<span style="font-family:'Arial Narrow', Arial, sans-serif; font-weight:400; text-decoration:none">Disclaimer: FLAME PH is a work in progress; its content, features, and ecosystem is evolving over time, with updates reflected on this website. Founders & Leaders: Join us in building the FLAMEPH ecosystem and FLAMEPH chapters nationwide.</span>
 </div>
 <!-- Main Navigation Bar -->
 <div class="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,7 +63,7 @@
 <!-- Main Nav Links -->
 <nav class="hidden lg:flex items-center gap-1 xl:gap-2 text-[15px] font-medium text-gray-700">
 <a class="px-4 py-2 rounded-full bg-blue-50/80 text-brand-blue font-semibold hover:bg-blue-100 transition-colors" href="/">Home</a>
-<a class="px-4 py-2 rounded-full hover:text-brand-blue hover:bg-gray-50 transition-colors" href="/membership">Membership</a>
+<a class="px-4 py-2 rounded-full hover:text-brand-blue hover:bg-gray-50 transition-colors" href="/membership/free-benefits">Membership</a>
 <a class="px-4 py-2 rounded-full hover:text-brand-blue hover:bg-gray-50 transition-colors" href="/events">Events</a>
 <a class="px-4 py-2 rounded-full hover:text-brand-blue hover:bg-gray-50 transition-colors" href="/learn">Resources</a>
 <a class="px-4 py-2 rounded-full hover:text-brand-blue hover:bg-gray-50 transition-colors" href="/directory">Directory</a>
@@ -1041,7 +1040,7 @@
 <ul class="flex flex-col gap-2 text-xs text-gray-600">
 <li class=""><a class="hover:text-brand-blue transition-colors" href="/">Home</a></li>
 <li class=""><a class="hover:text-brand-blue transition-colors" href="/about">About FLAME PH</a></li>
-<li class=""><a class="hover:text-brand-blue transition-colors" href="/membership">Membership Plans</a></li>
+<li class=""><a class="hover:text-brand-blue transition-colors" href="/membership/free-benefits">Membership Plans</a></li>
 <li class=""><a class="hover:text-brand-blue transition-colors" href="/directory">MSME Directory</a></li>
 <li class="">Support Us/Shop</li>
 </ul>
@@ -1059,7 +1058,7 @@
 </div>
 <!-- Col 4: Community / Merch Shop -->
 <div class="lg:col-span-2 flex flex-col gap-3">
-<h4 class="font-display text-sm font-bold text-gray-900"><a href="/about/merch-shop" class="text-inherit no-underline hover:text-primary">Shop/Support Us</a></h4>
+<h4 class="font-display text-sm font-bold text-gray-900"><a href="/flameph-merchs" class="text-inherit no-underline hover:text-primary">Shop/Support Us</a></h4>
 <ul class="flex flex-col gap-2 text-xs text-gray-600">
 <li class=""><a class="hover:text-brand-blue transition-colors" href="#">Regional Chapters</a></li>
 <li class=""><a class="hover:text-brand-blue transition-colors" href="#">MSME Directory</a></li>

@@ -9,16 +9,19 @@ Route::get('/sitemap.xml', function () {
         'https://www.flameph.org/',
         'https://www.flameph.org/programs-ecosystem',
         'https://www.flameph.org/get-involved',
+        'https://www.flameph.org/flameph-merchs',
         'https://www.flameph.org/about',
         'https://www.flameph.org/learn',
         'https://www.flameph.org/membership',
+        'https://www.flameph.org/membership/free-benefits',
+        'https://www.flameph.org/membership/more-benefits',
         'https://www.flameph.org/membership/terms',
         'https://www.flameph.org/events',
         'https://www.flameph.org/directory',
         'https://www.flameph.org/legal',
     ];
 
-    $entries = collect($urls)->map(fn (string $url) => '<url><loc>' . e($url) . '</loc></url>')->implode('');
+    $entries = collect($urls)->map(fn (string $url) => '<url><loc>' . e($url) . '</loc><changefreq>weekly</changefreq></url>')->implode('');
 
     return response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . $entries . '</urlset>')
         ->header('Content-Type', 'application/xml; charset=UTF-8');
@@ -41,6 +44,8 @@ Route::get('/flameph-merchs', [HomeController::class, 'flamephMerchs'])->name('f
 Route::get('/learn', [HomeController::class, 'learn'])->name('learn');
 Route::redirect('/community', '/directory', 301)->name('community');
 Route::get('/membership', [HomeController::class, 'membership'])->name('membership');
+Route::get('/membership/free-benefits', [HomeController::class, 'freeBenefits'])->name('membership.free-benefits');
+Route::get('/membership/more-benefits', [HomeController::class, 'moreBenefits'])->name('membership.more-benefits');
 Route::get('/membership/terms', [HomeController::class, 'membershipTerms'])->name('membership.terms');
 Route::get('/membership/terms/download', [HomeController::class, 'downloadMembershipTerms'])->name('membership.terms.download');
 Route::post('/membership/start', [HomeController::class, 'startMembership'])->name('membership.start');

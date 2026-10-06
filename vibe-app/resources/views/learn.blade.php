@@ -18,7 +18,7 @@
 <body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
 <header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,71,186,0.06)]">
 <div class="w-full bg-primary text-white py-1.5 px-4 text-center text-xs md:text-sm font-semibold">
-  <strong>Unite Filipino MSMEs • Grow Together • Build a Stronger Philippines</strong> → <a class="underline text-amber-300 hover:text-white ml-1 font-bold" href="/membership">Join FLAME PH Free →</a>
+  <span style="font-family:'Arial Narrow', Arial, sans-serif; font-weight:400; text-decoration:none">Disclaimer: FLAME PH is a work in progress; its content, features, and ecosystem is evolving over time, with updates reflected on this website. Founders & Leaders: Join us in building the FLAMEPH ecosystem and FLAMEPH chapters nationwide.</span>
 </div>
 <div class="h-20 max-w-[1280px] mx-auto px-margin-mobile md:px-margin flex items-center justify-between gap-space-md">
 <div class="flex items-center gap-space-lg shrink-0">
@@ -30,7 +30,7 @@
 <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors px-space-sm py-space-xs" data-path="home" href="/">Home</a>
 <a aria-current="page" class="transition-colors text-primary font-bold bg-surface-container-low border-b-2 border-primary rounded-lg px-space-sm py-space-xs" data-path="learn" href="/learn">Learn</a>
 <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors px-space-sm py-space-xs" data-path="community" href="/community">Community</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors px-space-sm py-space-xs" data-path="membership" href="/membership">Membership</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors px-space-sm py-space-xs" data-path="membership" href="/membership/free-benefits">Membership</a>
 <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors px-space-sm py-space-xs" data-path="directory" href="/directory">Directory</a>
 <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors px-space-sm py-space-xs" data-path="about" href="/about">About</a>
 </nav>
@@ -895,7 +895,7 @@
 <a aria-label="FLAME PH website" class="hover:text-primary transition-colors" href="/"><span class="material-symbols-outlined">public</span></a>
 </div>
 </div>
-<div class="flex flex-col gap-3"><h3 class="font-label-md text-label-md text-on-surface font-bold">Explore FLAME PH</h3><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/">Home</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/about">About FLAME PH</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/membership">Membership Plans</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/directory">MSME Directory</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/community">Community Hubs</a></div>
+<div class="flex flex-col gap-3"><h3 class="font-label-md text-label-md text-on-surface font-bold">Explore FLAME PH</h3><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/">Home</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/about">About FLAME PH</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/membership/free-benefits">Membership Plans</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/directory">MSME Directory</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/community">Community Hubs</a></div>
 <div class="flex flex-col gap-3">
 <h3 class="font-label-md text-label-md text-on-surface font-bold">Resources / Learn</h3>
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/learn">Negosyo Starter Kits</a>
@@ -905,7 +905,7 @@
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/learn">Webinars &amp; Workshops</a>
 </div>
 <div class="flex flex-col gap-3">
-<h3 class="font-label-md text-label-md text-on-surface font-bold"><a href="/about/merch-shop" class="text-inherit no-underline hover:text-primary">Shop/Support Us</a></h3>
+<h3 class="font-label-md text-label-md text-on-surface font-bold"><a href="/flameph-merchs" class="text-inherit no-underline hover:text-primary">Shop/Support Us</a></h3>
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/community#regional-chapters">Regional Chapters</a>
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/directory">MSME Directory</a>
 <a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="/community#regional-chapters">Bayanihan Circles</a>

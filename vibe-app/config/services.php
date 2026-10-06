@@ -49,4 +49,9 @@ return [
         'graph_version' => env('FACEBOOK_GRAPH_VERSION', 'v23.0'),
     ],
 
+    'seo' => [
+        'google_site_verification' => env('GOOGLE_SITE_VERIFICATION'),
+        'ga4_measurement_id' => env('GA4_MEASUREMENT_ID'),
+    ],
+
 ];

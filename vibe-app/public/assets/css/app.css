@@ -123,3 +123,9 @@ body {
         opacity: 0.35;
     }
 }
+
+/* Keep the four homepage help-card artworks fully visible at every width. */
+main section[aria-labelledby="business-help-heading"] img {
+    height: auto;
+    object-fit: contain;
+}
