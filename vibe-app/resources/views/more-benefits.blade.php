@@ -8,7 +8,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"background":"#f8f9fa","error-container":"#ffdad6","on-tertiary-fixed-variant":"#653e00","secondary-fixed":"#dce2f7","on-primary":"#ffffff","outline":"#916f6b","tertiary-container":"#a06500","inverse-on-surface":"#f0f1f2","tertiary-fixed-dim":"#ffb95f","surface-container-highest":"#e1e3e4","secondary-container":"#d9dff5","surface-dim":"#d9dadb","on-primary-fixed":"#410002","on-error":"#ffffff","on-tertiary-fixed":"#2a1700","on-secondary":"#ffffff","inverse-surface":"#2e3132","surface":"#f8f9fa","primary-fixed":"#ffdad6","secondary-fixed-dim":"#c0c6db","surface-container-high":"#e7e8e9","on-background":"#191c1d","on-secondary-container":"#5c6274","secondary":"#575e70","error":"#ba1a1a","primary-container":"#dc2626","surface-container":"#edeeef","primary-fixed-dim":"#ffb4ab","surface-variant":"#e1e3e4","on-tertiary":"#ffffff","on-secondary-fixed":"#141b2b","surface-container-lowest":"#ffffff","outline-variant":"#e6bdb8","on-surface-variant":"#5c403c","on-primary-fixed-variant":"#93000b","on-secondary-fixed-variant":"#404758","on-error-container":"#93000a","on-tertiary-container":"#fff7f1","surface-tint":"#bf0715","on-primary-container":"#fff6f5","inverse-primary":"#ffb4ab","surface-bright":"#f8f9fa","tertiary-fixed":"#ffddb8","tertiary":"#7f4f00","on-surface":"#191c1d","surface-container-low":"#f3f4f5","primary":"#b70011"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-desktop":"3rem","gutter":"1rem","space-sm":"0.5rem","margin":"1rem","space-md":"1rem","space-xl":"2.5rem","margin-tablet":"2rem","space-xs":"0.25rem","space-lg":"1.5rem","gutter-desktop":"1.5rem"},"fontFamily":{"headline-md":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"display":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"display-mobile":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"]},"fontSize":{"headline-md":["22px",{"lineHeight":"30px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.015em","fontWeight":"700"}],"display":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"800"}],"headline-lg":["30px",{"lineHeight":"38px","letterSpacing":"-0.015em","fontWeight":"700"}],"display-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"800"}],"headline-sm":["18px",{"lineHeight":"26px","fontWeight":"600"}],"label-lg":["16px",{"lineHeight":"24px","letterSpacing":"0.01em","fontWeight":"600"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}]}}}}</script>
-<style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style>
+<style>
+@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}
+::-webkit-scrollbar{display:none;}
+
+/* Keep the pricing cards tactile on mouse/trackpad devices without making
+   touch users fight a sticky hover state. */
+@media (hover: hover) and (pointer: fine) {
+  .benefits-tier {
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .benefits-tier:hover,
+  .benefits-tier:focus-within {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 42px rgba(25, 28, 29, 0.16);
+  }
+
+  .benefits-tier:not(.benefits-tier-featured):hover,
+  .benefits-tier:not(.benefits-tier-featured):focus-within {
+    border-color: rgba(183, 0, 17, 0.28);
+  }
+
+  .benefits-tier-featured:hover,
+  .benefits-tier-featured:focus-within {
+    box-shadow: 0 24px 48px rgba(183, 0, 17, 0.24);
+  }
+}
+</style>
 </head>
 <body class="bg-surface font-body-md text-on-surface antialiased">
 @include('partials.home-header')
@@ -37,7 +64,7 @@
 <section class="w-full pb-space-xl px-6 lg:px-12 bg-surface">
 <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-md items-stretch">
 <!-- TIER 1: STARTER -->
-<div class="flex flex-col justify-between p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all relative">
+<div class="benefits-tier flex flex-col justify-between p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm transition-all relative border border-transparent">
 <div>
 <div class="flex items-center justify-between mb-space-xs">
 <span class="px-3 py-1 rounded-full bg-surface-container text-secondary font-label-sm text-label-sm font-bold uppercase tracking-wider">
@@ -89,7 +116,7 @@ px-4 rounded-xl bg-surface-container-high hover:bg-surface-container-highest tex
 </div>
 </div>
 <!-- TIER 2: MICRO -->
-<div class="flex flex-col justify-between p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all relative">
+<div class="benefits-tier flex flex-col justify-between p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm transition-all relative border border-transparent">
 <div>
 <div class="flex items-center justify-between mb-space-xs">
 <span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold uppercase tracking-wider">
@@ -140,7 +167,7 @@ px-4 rounded-xl bg-surface-container-high hover:bg-surface-container-highest tex
 </div>
 </div>
 <!-- TIER 3: NEO (FEATURED / MOST POPULAR) -->
-<div class="flex flex-col justify-between p-space-lg rounded-2xl bg-surface-container-lowest shadow-xl ring-2 ring-primary-container relative lg:-mt-4 lg:mb-[-1rem] z-10">
+<div class="benefits-tier benefits-tier-featured flex flex-col justify-between p-space-lg rounded-2xl bg-surface-container-lowest shadow-xl ring-2 ring-primary-container relative lg:-mt-4 lg:mb-[-1rem] z-10 border border-transparent">
 <!-- Floating Red Ribbon -->
 <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary-container text-on-primary px-4 py-1 rounded-full font-label-sm text-label-sm uppercase tracking-wider font-extrabold shadow-md whitespace-nowrap flex items-center gap-1">
 <span class="material-symbols-outlined text-[16px]">star</span> MOST POPULAR • BEST VALUE
@@ -195,7 +222,7 @@ px-4 rounded-xl bg-surface-container-high hover:bg-surface-container-highest tex
 </div>
 </div>
 <!-- TIER 4: PRO -->
-<div class="flex flex-col justify-between p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all relative">
+<div class="benefits-tier flex flex-col justify-between p-space-lg rounded-2xl bg-surface-container-lowest shadow-sm transition-all relative border border-transparent">
 <div>
 <div class="flex items-center justify-between mb-space-xs">
 <span class="px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold uppercase tracking-wider">
@@ -247,7 +274,7 @@ on-surface">
 </div>
 </div>
 <!-- TIER 5: CHAMPION (Dark Navy Premium Card) -->
-<div class="flex flex-col justify-between p-space-lg rounded-2xl bg-on-secondary-fixed text-on-primary shadow-xl relative">
+<div class="benefits-tier flex flex-col justify-between p-space-lg rounded-2xl bg-on-secondary-fixed text-on-primary shadow-xl relative border border-transparent">
 <div class="absolute -top-3 right-4 bg-tertiary-fixed text-on-tertiary-fixed px-3 py-0.5 rounded-full font-label-sm text-label-sm uppercase tracking-wider font-bold">
           VIP TIER
         </div>
@@ -668,8 +695,7 @@ y mb-2">
   // Billing cycle toggle logic
   const monthlyBtn = document.getElementById('monthly-btn');
   const annualBtn = document.getElementById('annual-btn');
-  const priceElements = d
-ocument.querySelectorAll('.tier-price');
+  const priceElements = document.querySelectorAll('.tier-price');
   const cycleElements = document.querySelectorAll('.tier-cycle');
   const saveElements = document.querySelectorAll('.tier-save');
 
