@@ -1,13 +1,18 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PartnerInvolvementController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', function () {
     $urls = [
         'https://www.flameph.org/',
         'https://www.flameph.org/programs-ecosystem',
+        'https://www.flameph.org/academy',
+        'https://www.flameph.org/negosyo-talks',
+        'https://www.flameph.org/bizconsult-ai',
         'https://www.flameph.org/get-involved',
         'https://www.flameph.org/flameph-merchs',
         'https://www.flameph.org/about',
@@ -21,9 +26,9 @@ Route::get('/sitemap.xml', function () {
         'https://www.flameph.org/legal',
     ];
 
-    $entries = collect($urls)->map(fn (string $url) => '<url><loc>' . e($url) . '</loc><changefreq>weekly</changefreq></url>')->implode('');
+    $entries = collect($urls)->map(fn (string $url) => '<url><loc>'.e($url).'</loc><changefreq>weekly</changefreq></url>')->implode('');
 
-    return response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . $entries . '</urlset>')
+    return response('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'.$entries.'</urlset>')
         ->header('Content-Type', 'application/xml; charset=UTF-8');
 })->name('sitemap');
 
@@ -38,8 +43,15 @@ Route::get('/favicon.png', function () {
 })->name('favicon');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::view('/academy', 'program-preview', ['program' => 'academy'])->name('academy');
+Route::view('/negosyo-talks', 'program-preview', ['program' => 'negosyo-talks'])->name('negosyo-talks');
+Route::view('/bizconsult-ai', 'program-preview', ['program' => 'bizconsult-ai'])->name('bizconsult-ai');
+Route::redirect('/negosyo-talk', '/negosyo-talks', 301);
 Route::get('/programs-ecosystem', [HomeController::class, 'programsEcosystem'])->name('programs.ecosystem');
 Route::get('/get-involved', [HomeController::class, 'getInvolved'])->name('get-involved');
+Route::post('/get-involved/partner-intent', [PartnerInvolvementController::class, 'store'])->middleware('throttle:5,10')->name('partner-intents.store');
+Route::get('/get-involved/partner-intent/confirmation/{reference}', [PartnerInvolvementController::class, 'confirmation'])->name('partner-intents.confirmation');
+Route::get('/partner-intents/{intent}/files/{file}', [PartnerInvolvementController::class, 'download'])->name('partner-intents.download');
 Route::get('/flameph-merchs', [HomeController::class, 'flamephMerchs'])->name('flameph.merchs');
 Route::get('/learn', [HomeController::class, 'learn'])->name('learn');
 Route::redirect('/community', '/directory', 301)->name('community');
@@ -71,7 +83,7 @@ Route::post('/membership/password/reset', [HomeController::class, 'resetMembersh
 Route::get('/directory', [HomeController::class, 'directory'])->name('directory');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::middleware('membership.member')->prefix('/about/merch-shop')->name('merch-shop.')->group(function () {
-    Route::get('/', function (\Illuminate\Http\Request $request) {
+    Route::get('/', function (Request $request) {
         $application = $request->session()->get('membership_application', []);
 
         return view('merch-shop', ['memberName' => $application['name'] ?? 'Member']);
@@ -84,6 +96,7 @@ Route::post('/admin/login', [AdminController::class, 'login'])->middleware('thro
 Route::middleware('admin.session')->prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/partner-intents', [PartnerInvolvementController::class, 'adminIndex'])->name('partner-intents.index');
     Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
     Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
     Route::post('/profile', [AdminController::class, 'updateProfile'])->name('profile.update');

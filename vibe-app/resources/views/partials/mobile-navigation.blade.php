@@ -260,6 +260,8 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   @media (max-width: 380px) {
     header[data-site-header] [data-site-logo-link], header[data-site-header] [data-site-logo] { width: 88px; }
     header[data-site-header] [data-site-logo-link] { flex-basis: 88px; }
+    header[data-site-header] [data-site-join] { padding: 10px 8px; font-size: 12px; }
+    header[data-site-header] [data-site-join] span[aria-hidden] { display: none; }
   }
   header[data-site-header] [data-site-mobile-menu] {
     position: absolute;
@@ -364,10 +366,12 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   const pages = [
     { label: 'What We Do', items: [
       { label: 'Programs & MSME Ecosystem', href: '/programs-ecosystem' },
+      { label: 'FLAME PH Academy', href: '/academy' },
+      { label: 'FLAME PH NegosyoTalks', href: '/negosyo-talks' },
       { label: 'Educational Workshops', href: '/events' },
       { label: 'Trainings & Webinars', href: '/learn' },
       { label: 'Expos & Summits', href: '/events' },
-      { label: 'Annual Awards for MSMEs', href: '/events#awards' },
+      { label: 'Annual Awards for MSMEs', href: '/events#events-calendar' },
     ] },
     { label: 'Membership', items: [
       { label: 'Avail Free MSME Benefits', href: '/membership/free-benefits' },
@@ -379,7 +383,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
       { label: 'Volunteering', href: '/events' },
       { label: 'Free POS for MSMEs', href: '/learn' },
       { label: 'Free Business Directory', href: '/directory' },
-      { label: 'Free Consultation @ Flame AI', href: '/about#contact' },
+      { label: 'FLAME PH BizConsult AI', href: '/bizconsult-ai' },
     ] },
     { label: 'Support Us', items: [
       { label: 'FLAME PH Merchs', href: '/flameph-merchs' },
@@ -404,8 +408,8 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
     ] },
     { label: 'About Us', items: [
       { label: 'What is FLAME PH', href: '/about' },
-      { label: 'Meet the Founders', href: '/about#founders' },
-      { label: 'Meet the Teams', href: '/about#teams' },
+      { label: 'Meet the Founders', href: '/about#leadership' },
+      { label: 'Meet the Teams', href: '/about#leadership' },
       { label: 'Featured Chapters', href: '/directory' },
       { label: 'Featured Members', href: '/directory' },
       { label: 'Featured Partners', href: '/about#partners' },

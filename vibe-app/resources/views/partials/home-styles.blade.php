@@ -1,0 +1,6 @@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#003289','primary-container':'#0047ba',secondary:'#bc000c','secondary-container':'#e81218',surface:'#faf8ff','surface-container-low':'#f2f3ff','surface-container-high':'#e2e7ff','on-surface':'#131b2e','on-surface-variant':'#434653','tertiary-fixed':'#ffddb8','tertiary-container':'#724700'},fontFamily:{body:['Inter'],headline:['Plus Jakarta Sans']}}}};</script>
+    <style>html{scroll-behavior:smooth}body{margin:0;overflow-x:hidden}.font-headline{font-family:'Plus Jakarta Sans',sans-serif}.font-body{font-family:Inter,sans-serif}.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24}main section[aria-labelledby="business-help-heading"] img{height:auto!important;object-fit:contain}</style>
