@@ -379,7 +379,6 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
       { label: 'Resources', href: '/learn' },
       { label: 'Advocacy', href: '/about' },
       { label: 'Chapters Near You', href: '/directory' },
-      { label: 'Featured Members', href: '/directory' },
       { label: 'Volunteering', href: '/events' },
       { label: 'Free POS for MSMEs', href: '/learn' },
       { label: 'Free Business Directory', href: '/directory' },
@@ -389,8 +388,8 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
       { label: 'FLAME PH Merchs', href: '/flameph-merchs' },
       { label: 'Flame Signature Brands', href: '/about/merch-shop' },
       { label: 'Personalized by FLAMEPH', href: '/about/merch-shop' },
-      { label: 'Shop or Sell @ MarketplacePH', href: '/about/merch-shop' },
-      { label: 'Start & Grow @ NegosyoDepot', href: '/about/merch-shop' },
+      { label: 'Shop/Sell/Jobs @ MarketplacePH', href: 'https://www.marketplaceph.com' },
+      { label: 'Start/Grow/ScaleUp @ NegosyoDepot', href: 'https://www.negosyodepot.com' },
       { label: 'Fulfillment by MSMEs', href: '/about/merch-shop' },
     ] },
     { label: 'Get Involved', items: [
@@ -411,7 +410,7 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
       { label: 'Meet the Founders', href: '/about#leadership' },
       { label: 'Meet the Teams', href: '/about#leadership' },
       { label: 'Featured Chapters', href: '/directory' },
-      { label: 'Featured Members', href: '/directory' },
+      { label: 'Featured Mentors', href: '/get-involved#mentor' },
       { label: 'Featured Partners', href: '/about#partners' },
     ] },
   ];
