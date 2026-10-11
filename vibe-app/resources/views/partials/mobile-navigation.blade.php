@@ -11,7 +11,7 @@ header[data-site-header] {
   box-shadow: 0 1px 8px rgba(0, 71, 186, .06) !important;
   border-bottom: 1px solid rgba(218, 226, 253, .6);
 }
-header[data-site-header] [data-site-announcement] {
+.site-announcement {
   min-height: 44px;
   padding: 6px 16px;
   display: flex;
@@ -21,7 +21,7 @@ header[data-site-header] [data-site-announcement] {
   color: #fff;
   text-align: center;
 }
-header[data-site-header] [data-site-announcement] a {
+.site-announcement a {
   color: inherit;
   font-size: 14px;
   line-height: 20px;
@@ -29,7 +29,7 @@ header[data-site-header] [data-site-announcement] a {
   letter-spacing: .01em;
   text-decoration: none;
 }
-header[data-site-header] [data-site-announcement] span { color: #ffddb8; text-decoration: underline; }
+.site-announcement span { color: #ffddb8; text-decoration: underline; }
 header[data-site-header] [data-site-row] {
   box-sizing: border-box;
   width: 100%;
@@ -230,8 +230,8 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
 }
 @media (max-width: 767px) {
   body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important; }
-  header[data-site-header] [data-site-announcement] { min-height: 38px; padding: 5px 10px; }
-  header[data-site-header] [data-site-announcement] a { font-size: 11px; line-height: 16px; }
+  .site-announcement { min-height: 38px; padding: 5px 10px; }
+  .site-announcement a { font-size: 11px; line-height: 16px; }
   header[data-site-header] [data-site-row] { position: relative; display: grid; grid-template-columns: minmax(88px, 1fr) auto; align-items: start; height: 64px; padding: 10px 12px; gap: 6px; }
   header[data-site-header] [data-site-brand-nav] { min-width: 0; }
   header[data-site-header] [data-site-logo-link], header[data-site-header] [data-site-logo] { width: 104px; }
@@ -429,7 +429,6 @@ header[data-site-header] [data-site-mobile-menu] { display: none; }
   const header = document.createElement('header');
   header.dataset.siteHeader = 'true';
   header.innerHTML = `
-    <div data-site-announcement><span style="font-family:'Arial Narrow', Arial, sans-serif; font-weight:400; text-decoration:none">Disclaimer: FLAME PH is a work in progress; its content, features, and ecosystem is evolving over time, with updates reflected on this website. Founders & Leaders: Join us in building the FLAMEPH ecosystem and FLAMEPH chapters nationwide.</span></div>
     <div data-site-row>
       <div data-site-brand-nav>
         <a data-site-logo-link href="/"><img data-site-logo alt="FLAME PH logo" src="/assets/images/flameph-logo.png"></a>

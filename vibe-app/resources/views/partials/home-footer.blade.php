@@ -24,3 +24,4 @@
         <div class="mt-6 border-t border-white/10 pt-4 text-left text-[11px] leading-relaxed text-white/45"><p>FLAME PH is a prototype platform under active development. Information is provided for general educational and community purposes; verify legal, tax, financing, and regulatory requirements with the relevant official source.</p></div>
     </div>
 </footer>
+<div class="site-announcement" data-site-announcement><span style="font-family:'Arial Narrow', Arial, sans-serif; font-weight:400; text-decoration:none">Disclaimer: FLAME PH is a work in progress; its content, features, and ecosystem is evolving over time, with updates reflected on this website. Founders &amp; Leaders: Join us in building the FLAMEPH ecosystem and FLAMEPH chapters nationwide.</span></div>
